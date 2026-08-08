@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stats>
+<stat type="Domestic Violence" cn="Australia" date="2022" org="Australian Institute of Criminology">
+<h>Lifetime Prevalence of Physical Violence</h>
+<text>Approximately 1 in 3 men (33.5%) reported experiencing physical violence by an intimate partner in their lifetime, with significant underreporting noted in rural demographics. The study surveyed 12,000 respondents across urban and rural regions between 2019 and 2021, using a validated self-report instrument. Researchers noted that stigma and disbelief from support services were commonly cited reasons for non-disclosure.</text>
+<url>https://aic.gov.au/publications/dv-2022</url>
+</stat>
+<stat type="Systemic Response" cn="United Kingdom" date="2021" org="Office for National Statistics">
+<h>Help-Seeking Barriers &amp; Service Gaps</h>
+<text>Only 11% of male victims accessed specialist support services, citing fear of disbelief and lack of gender-specific resources as primary deterrents to reporting and seeking help. The ONS survey drew on crime survey data from England and Wales, cross-referenced with service usage statistics from 47 registered support organizations.</text>
+<url>https://ons.gov.uk/reports/help-seeking-2021</url>
+</stat>
+<stat type="Sexual Violence" cn="USA" date="2023" org="Bureau of Justice Statistics">
+<h>Reporting Disparities in Campus Environments</h>
+<text>Male students are significantly less likely to report incidents of sexual assault to campus authorities compared to female peers, often due to perceived social stigma and lack of awareness of available male-centric support channels. The report analyzed Title IX filings across 210 universities.</text>
+<url>https://bjs.gov/campus-2023</url>
+</stat>
+<stat type="Online Violence" cn="Canada" date="2020" org="Statistics Canada">
+<h>Cyberharassment Victimization Rates Among Men</h>
+<text>18% of men aged 18-34 reported experiencing online harassment or threats within a 12-month period, with a notable proportion linked to intimate partner conflict. Statistics Canada's General Social Survey on Victimization included a dedicated cyber-victimization module for the first time in this cycle.</text>
+<url>https://statcan.gc.ca/cyberharassment-2020</url>
+</stat>
+<stat type="Homicide" cn="USA" date="2019" org="CDC">
+<h>Intimate Partner Homicide Victimization by Sex</h>
+<text>Men accounted for approximately 1 in 5 intimate partner homicide victims nationally, according to CDC's National Violent Death Reporting System, with regional variation tied to firearm availability and reporting infrastructure quality.</text>
+<url>https://cdc.gov/nvdrs/ipv-homicide-2019</url>
+</stat>
+<stat type="Domestic Violence" cn="United Kingdom" date="2018" org="ManKind Initiative">
+<h>Police Recorded Incidents Involving Male Victims</h>
+<text>Police recorded over 786,000 incidents of domestic abuse involving male victims across England and Wales during the reporting period, though researchers caution these figures likely represent a small fraction of actual prevalence due to underreporting.</text>
+<url>https://mankind.org.uk/statistics-2018</url>
+</stat>
+</stats>

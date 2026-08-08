@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faq>
+<cat name="Methodology &amp; Data Sources">
+<q>What primary data sources feed into the archive?
+<ans>The archive aggregates peer-reviewed academic journals, official governmental statistics (e.g., national crime victimization surveys), verified NGO reports, and established legal databases. All primary sources are subjected to a rigorous vetting process to ensure institutional credibility and methodological soundness before inclusion.</ans>
+</q>
+<q>How frequently is the statistical data updated?
+<ans>Core statistical dashboards are updated quarterly to align with major publication cycles of national statistics agencies. Specific academic papers and legal precedents are added on a rolling bi-weekly basis as they pass our internal review board.</ans>
+</q>
+</cat>
+<cat name="Scope &amp; Coverage">
+<q>What is the geographic coverage of the legal policy database?
+<ans>Currently, the database maintains comprehensive coverage across North America, the European Union, the UK, and Australia. We are actively expanding our scope to include rigorous legal analyses and policy frameworks from South Asia and Latin America, collaborating with regional academic institutions to ensure translation and contextual accuracy.</ans>
+</q>
+<q>Does the archive track historical trends or only current data?
+<ans>The archive prioritizes longitudinal data to establish historical context. Where available, statistical models extend back to 1990 to provide researchers with robust datasets capable of identifying long-term sociological and legislative trends.</ans>
+</q>
+</cat>
+<cat name="Editorial Process">
+<q>What constitutes the peer-review process for independent submissions?
+<ans>Independent submissions undergo a double-blind peer review by at least two domain experts from our academic advisory board. The review focuses strictly on methodological integrity, absence of ideological bias, and reproducible data practices. Submissions failing to meet academic publishing standards are rejected.</ans>
+</q>
+</cat>
+</faq>
