@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <stats>
 <stat type="Domestic Violence" cn="United Kingdom" date="blank" org="Erin Pizzey/TheTinMen">
 <h>Founder of First Women's Refuge Accuses Sector of Neglecting Male Victims</h>
@@ -15,331 +14,404 @@
 <text>The influential Duluth Model was created in 1981, gendering all perpetrators as male and all victims as female. The creators held Bachelor's degrees in Arts, not in sociology or psychology. In 1999, Ellen Pence doubted her own model, stating it did not fit the lived experience of many men and women, and that they found what they had predetermined to find.</text>
 <url>blank</url>
 </stat>
-<stat type="Online &amp; In-Person Abuse" cn="Australia" date="2022" org="blank">
-<h>Dating App Abuse: Prevalence by Gender and Sexual Orientation</h>
-<text>Survey of 10,000 Australian dating app users. Online abuse: 61.5% heterosexual men, 79.1% heterosexual women, 79.2% LGB+ men, 86.6% LGB+ women. In-person abuse: 26.6%, 35.4%, 45.5%, 49.5% respectively. Detailed breakdown includes sexual harassment, stalking, threats, image-based abuse, sexual assault, reproductive abuse, and condom coercion, with rates often higher for LGB+ individuals and women, though men also report substantial rates in many categories (e.g., online stalking: 26% men vs. 26% women; threats: 16% men vs. 17% women).</text>
-<url>https://tinyurl.com/2rucwsb7</url>
+<stat type="Online Violence" cn="Australia" date="2022" org="blank">
+<h>2022 Dating App Survey: Online and In-Person Abuse Rates by Gender and Orientation</h>
+<text>A 2022 survey of 10,000 Australian adults who had used dating apps found 61.5% of heterosexual men, 79.1% of heterosexual women, 79.2% of LGB+ men and 86.6% of LGB+ women had experienced online abuse. In-person abuse from a dating app contact was reported by 26.6% of heterosexual men, 35.4% of heterosexual women, 45.5% of LGB+ men and 49.5% of LGB+ women. Loitering, following, or showing up at home, school, or workplace was reported by 12.3% of heterosexual men and 12.8% of heterosexual women. After an incident, perpetrators unmatched, blocked, or deleted accounts to remove conversation history in 39% (heterosexual men), 36% (heterosexual women), 47% (LGB+ men), and 46% (LGB+ women) of online abuse cases, and 54%, 42%, 55%, and 50% respectively of in-person abuse cases. A detailed breakdown by abuse type (percentages of heterosexual men, heterosexual women, LGB+ men, LGB+ women respectively) found: any online sexual harassment 57/77/78/85; pressured to send a sexually explicit message 27/43/52/61; pressured to send a sexually explicit photo or video 26/42/53/60; continued contact after saying not interested 42/49/53/61; received unwanted sexually explicit message 30/58/53/72; received unwanted sexually explicit image or video 28/49/53/60; online stalking 26/26/33/36; pressured to provide location or schedule 23/24/30/34; account accessed without permission 14/7/16/13; abusive or threatening language 38/47/53/60; threatened in any way 16/17/27/29; offensive comments posted online 16/11/21/19; threatened with sharing of sexually explicit images 13/10/20/21; sexually explicit images shared without consent 12/8/19/17; images taken of sexual acts without knowledge 11/8/18/14; any sexual assault or coercion 21.2/27.9/36.3/42.1; attempted sex act without consent 13/14/23/27; verbally pressured into unwanted sexual acts 16/23/31/36; threatened or physically forced into sexual acts 12/11/21/20; drink spiked to coerce sexual acts 10/7/16/15; any reproductive abuse 15.2/17.7/31.8/27; condom removed or refused without consent 11/14/24/21; lied to about sexual health status 12/10/24/17.</text>
+<url>tinyurl.com/2rucwsb7</url>
 </stat>
-<stat type="Homicide" cn="United Kingdom" date="blank" org="National Police Chiefs' Council">
-<h>Male Domestic Homicide Deaths Overlooked in Five-Year Report</h>
-<text>MP Jesse Phillips opened the National Police Chiefs' Council's five-year report into domestic abuse-related deaths and overlooked nearly 400 male deaths by not mentioning them at all.</text>
+<stat type="Domestic Violence" cn="United Kingdom" date="blank" org="National Police Chiefs Council">
+<h>Jess Phillips MP Overlooks Nearly 400 Male Deaths in Domestic Abuse Report</h>
+<text>Jess Phillips MP, opening the National Police Chiefs Council's five-year report into domestic abuse related deaths, overlooked nearly 400 male deaths by not mentioning them at all.</text>
 <url>blank</url>
 </stat>
 <stat type="Systemic Response" cn="United Kingdom" date="2022" org="Home Office">
-<h>VAWG Framework: Unfulfilled Promise to Safeguard Male Victims</h>
-<text>In 2022, the Home Office promised to safeguard male victims within the VAWG framework. As of four years later, this promise remains unfulfilled.</text>
+<h>Home Office's 2022 Promise to Safeguard Male Victims Within VAWG Remains Unfulfilled</h>
+<text>In 2022, the Home Office promised to safeguard male victims of abuse within the Violence Against Women and Girls (VAWG) framework. Four years later, that promise has not been fulfilled.</text>
 <url>blank</url>
 </stat>
 <stat type="Systemic Response" cn="United Kingdom" date="2025" org="Association of Male Health and Wellbeing">
-<h>VAWG Strategy Mentions Male Victims Once in Footnote</h>
-<text>In December 2025, the VAWG strategy claimed to 'recognise' male victims, but mentions them only once in a footnote. The Association of Male Health and Wellbeing stated that male victims are reduced to a literal footnote in a strategy that has excluded them from the very first words.</text>
+<h>VAWG Strategy Mentions Male Victims Only Once, in a Footnote</h>
+<text>The December 2025 VAWG strategy claimed to 'recognise' male victims, but mentions 'male victims' only once, in a footnote. The Association of Male Health and Wellbeing states male victims and survivors are reduced to a literal footnote in a strategy that already excludes them from its very first words.</text>
 <url>blank</url>
 </stat>
 <stat type="Systemic Response" cn="United Kingdom" date="2024" org="blank">
-<h>Study: 88% of Male Victims Believe Government Does Not Care</h>
-<text>A 2024 study, 'The Survivorship Experience of Men and Boys of Crimes Categorised as Crimes of VAWG', found that 88% of male victims believed the government does not care about them, 89% said the policy made it harder to get help, and 90% were made to feel invisible.</text>
-<url>https://tinyurl.com/mtnxuhrt</url>
+<h>Study Finds Male Victims Feel Government Doesn't Care, Feel Invisible Under VAWG Framework</h>
+<text>A 2024 study titled "The Survivorship Experience of Men and Boys of Crimes Categorised as Crimes of VAWG" found 88% of male victims believed the government does not care about them, 89% said the policy made it harder for them to get help, and 90% were made to feel invisible.</text>
+<url>tinyurl.com/mtnxuhrt</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="blank">
-<h>Bilateral Violence Causes More Injury Than Unilateral Male Violence</h>
-<text>Bilaterally violent relationships cause more injury than unilaterally male-perpetrated violence. Bilateral: Men Against Women - 31.4%, Women Against Men - 25.3%. Unilateral: Men against women - 20%, Women against men - 8.1%. 'Severe male violence' accounts for only about 5% of all partner abuse.</text>
-<url>https://tinyurl.com/38r6fy6n</url>
+<h>Bilaterally Violent Relationships Cause More Injury Than Unilateral Male-Perpetrated Violence</h>
+<text>Data shows bilaterally violent relationships cause more injury than unilaterally male-perpetrated violence. In bilateral violence, injury rates are 31.4% for men against women and 25.3% for women against men. In unilateral violence, injury rates are 20% for men against women and 8.1% for women against men. This implies focus on 'severe male violence' ignores bilateral violence, even though severe male violence makes up only about 5% of all partner abuse.</text>
+<url>tinyurl.com/38r6fy6n</url>
 </stat>
 <stat type="Systemic Response" cn="blank" date="blank" org="blank">
-<h>Police Arrest Male Partner in 85% of Bilateral Violence Cases</h>
-<text>In cases of bilateral violence, police arrest only the male partner 85% of the time, both partners 9% of the time, and only the female partner 6% of the time, highlighting biased police training and domestic violence sector practices.</text>
-<url>https://tinyurl.com/4wdxpxn3</url>
+<h>Police Arrest Only Male Partner 85% of the Time in Bilateral Violence Cases</h>
+<text>In cases of bilateral violence, police arrest only the male partner 85% of the time, both partners 9% of the time, and only the female partner 6% of the time, highlighting biased police training and a biased domestic violence sector.</text>
+<url>tinyurl.com/4wdxpxn3</url>
 </stat>
-<stat type="Domestic Violence" cn="blank" date="1995" org="Prof. Michael Johnson / Murray Straus">
-<h>Intimate Terrorism: Flawed Data and Gender Symmetry Findings</h>
-<text>Prof. Michael Johnson coined 'Intimate Terrorism' based on data from men in DV courts and women in shelters, criticized for flawed sampling. Murray Straus found 24% of male and 31.4% of female students perpetrated physical violence. Situational violence was most common. Mutual intimate terrorism was the most common form. Injury rate is 5x higher in mutual/bidirectional violence, with little gender difference.</text>
-<url>https://tinyurl.com/5bfw3yj4</url>
+<stat type="Domestic Violence" cn="USA" date="1995" org="Michael Johnson/Murray Straus">
+<h>Flawed 'Intimate Terrorism' Model Challenged by Larger Student Sample</h>
+<text>Professor Michael Johnson coined 'Intimate Terrorism' in 1995, arguing men's abuse is distinct due to power, control, intent and intimidation, but his data came from men in domestic violence courts and women recruited from shelters, drawing criticism for flawed sampling. Using a larger sample of 13,877 university students, Murray Straus found 24% of male and 31.4% of female students reported perpetrating physical violence, with situational violence the most common form and mutual intimate terrorism the most common form of intimate terrorism; little difference was found in the rate of sole intimate terrorists. Women were much more likely to be injured than men in unilateral violence, but in mutual/bidirectional violence, injury rates were five times higher with little difference between men and women.</text>
+<url>tinyurl.com/5bfw3yj4</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="blank">
-<h>Intimate Terrorism: Higher Rates in Women Than Men</h>
-<text>A study of 1,339 university students and staff using Johnson's criteria found 13% women and 9% men were intimate terrorists. A second analysis found 23% women and 7% men.</text>
-<url>https://tinyurl.com/yv8hczch</url>
+<h>University Study Finds More Female Than Male 'Intimate Terrorists'</h>
+<text>A study of 1,339 university students and staff, using Prof. Michael Johnson's criteria, found 13% of women and 9% of men were intimate terrorists. A second mode of analysis of the same data found 23% of women and 7% of men were intimate terrorists.</text>
+<url>tinyurl.com/yv8hczch</url>
 </stat>
 <stat type="Domestic Violence" cn="Canada" date="blank" org="blank">
-<h>Intimate Terrorism: 26% Women vs. 19% Men in National Sample</h>
+<h>Canadian National Sample: More Female Than Male 'Intimate Terrorists'</h>
 <text>A Canadian national sample found 26% of women and 19% of men could be categorised as 'intimate terrorists'.</text>
-<url>https://tinyurl.com/2mxjbtup</url>
+<url>tinyurl.com/2mxjbtup</url>
 </stat>
 <stat type="Online Violence" cn="United Kingdom" date="2025" org="Report Remove">
-<h>98% of Sextortion Victims Are Boys Aged 14-17</h>
-<text>In 2025, there were 394 reports of children being blackmailed after sending sexual images. Boys aged 14-17 accounted for 98% of these statistics. These crimes are typically conducted by organized gangs from West Africa.</text>
-<url>https://tinyurl.com/3rz48e2k</url>
+<h>Boys Accounted for 98% of Sextortion Reports in 2025</h>
+<text>Report Remove's 2025 data states there were 394 reports of children being blackmailed after sending sexual images of themselves to predators, with boys aged 14-17 accounting for 98% of the statistic. These crimes are typically conducted by organized gangs from West Africa.</text>
+<url>tinyurl.com/3rz48e2k</url>
 </stat>
-<stat type="Domestic Violence" cn="Germany" date="2026" org="German Government">
-<h>IPV Victimization Rates by Gender (5-Year Survey)</h>
-<text>Physical Violence: 6.1% men, 5.2% women. Psychological: 23.3% men, 23.8% women. Emotional: 17.9% men, 20.2% women. Threats: 5.0% men, 5.9% women. Economic: 6.6% men, 5.5% women. Controlling: 8.7% men, 7.1% women. Sexual assault: 1.4% men, 4.0% women. False allegations: 1.4% men, 0.9% women. Stalking: 7.0% men, 10.6% women. Consequences: Fear (2.4% men, 4.7% women), Perceived Seriousness (3.7% men, 5.5% women), Life in danger (4.7% men, 21.4% women), Physical injuries (32.5% men, 54.5% women).</text>
-<url>https://tinyurl.com/3f7nn5c5</url>
+<stat type="Domestic Violence" cn="Germany" date="2026" org="Germany Government">
+<h>German Government Survey: Gender Breakdown of Intimate Partner Violence Victimization</h>
+<text>February 2026 data from a German Government survey on intimate partner violence over the last 5 years lists victimization (percentage of men:women) as: physical violence 6.1:5.2; psychological violence 23.3:23.8; emotional violence 17.9:20.2; threats 5.0:5.9; economic violence 6.6:5.5; controlling violence 8.7:7.1; sexual assault 1.4:4.0; false allegations 1.4:0.9; stalking 7.0:10.6. Consequences (men:women) included: felt fear 2.4:4.7; perceived seriousness 3.7:5.5; felt life was in danger 4.7:21.4; physical injuries 32.5:54.5.</text>
+<url>tinyurl.com/3f7nn5c5</url>
 </stat>
-<stat type="Homicide" cn="blank" date="blank" org="Prof. Don Dutton">
-<h>Domestic Violence Rarely Precedes Partner Homicide</h>
-<text>Study of 6,321 partner homicides found only 6.5% of female victims experienced domestic violence in the preceding month. 5% of male victims were perpetrators in the month before, indicating women do not kill male partners mostly in self-defence.</text>
-<url>https://tinyurl.com/3a487efz</url>
+<stat type="Domestic Violence" cn="blank" date="blank" org="Prof. Don Dutton">
+<h>Study of 6,321 Partner Homicides Finds Prior DV Rare, Challenging Self-Defence Narrative</h>
+<text>A study by Prof. Don Dutton of 6,321 partner homicides found domestic violence often did not precede intimate partner homicide. Only 6.5% of female victims had experienced domestic violence in the preceding month, and 5% of heterosexual male victims were perpetrators of violence in the month preceding the homicide, indicating women mostly do not kill male partners in self-defence.</text>
+<url>tinyurl.com/3a487efz</url>
 </stat>
-<stat type="Homicide" cn="USA" date="2019" org="US NVDRS / Dutton &amp; Kerry / Eliason">
-<h>Male Perpetrators Often Attempt Suicide; Acknowledging Male Pain Alleviates Female Suffering</h>
-<text>US NVDRS found 46.5% of male perpetrators also attempted suicide (Velopulos et al. 2019). One in three had attempted suicide post-homicide (Dutton and Kerry, 1999). Perpetrators of murder-suicide had profiles consistent with suicidal people, not murderers, with history of suicide attempts but not aggression (Eliason, 2009). Acknowledging male pain can indirectly alleviate female suffering.</text>
+<stat type="Domestic Violence" cn="USA" date="blank" org="Velopulos et al./Dutton and Kerry/Eliason">
+<h>Studies Link Male Perpetrated Intimate Partner Homicide to Suicide Attempts</h>
+<text>A list of studies shows most male perpetrators of intimate partner homicide also attempt suicide, suggesting acknowledging male pain could indirectly help reduce female suffering. The US NVDRS found 46.5% of male perpetrators also attempted suicide (Velopulos et al., 2019). One in three had attempted suicide post-homicide (Dutton and Kerry, 1999). Perpetrators of murder-suicide had profiles consistent with suicidal people, not murderers, with a history of suicide attempts but not aggression (Eliason, 2009).</text>
 <url>blank</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="blank">
-<h>Lesbian Women Have Higher Partner Abuse Rates Than Heterosexual Women</h>
-<text>Lesbian women are more likely to be victims of partner abuse (22%) than heterosexual women. Arguments that this is due to combined rates are flawed, as the study measures individuals. Gay men have far lower rates than lesbians, debunking the assumption that lesbians date violent men.</text>
-<url>https://tinyurl.com/4489jrac</url>
+<h>Lesbian Women Show Higher Partner Abuse Victimization Rates Than Heterosexual Women</h>
+<text>Lesbian women are more likely to be victims of partner abuse (22% higher) than heterosexual women. This is not explained by combined rates of both partners, as the study measures individuals, nor by lesbians dating violent men, since gay men have far lower violence rates than lesbians, which would otherwise illogically imply lesbians date men more than gay men do.</text>
+<url>tinyurl.com/4489jrac</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="Prof. Don Dutton">
-<h>Injury Difference by Sex Is Small; Motivation and Weapons Matter</h>
-<text>Women are injured at a rate higher than men, but the difference is 1/6 of a standard deviation, which is small. According to Prof. Don Dutton: 'Injury doesn't depend on who's bigger; it depends on who's more motivated and angrier', as weapons exist.</text>
-<url>https://tinyurl.com/47hkfy9b</url>
-</stat>
-<stat type="Homicide" cn="blank" date="blank" org="blank">
-<h>IPV Deaths: Women 75% of Homicides, Men Higher in All Other Categories</h>
-<text>Women are about 75% of all IPV homicide victims, but homicide accounts for only 39% of all IPV-related deaths. Male victims are significantly higher in: IPV Corollary Deaths (77%), IPV Suicides (81%), Death by Law Intervention (90%), IPV Homicide-Suicide (95%).</text>
-<url>https://tinyurl.com/42v63jzr</url>
+<h>Gender Gap in Partner Violence Injury Rates Is Small</h>
+<text>Women are injured at a higher rate than men in partner violence, but the difference is only 1/6 of a standard deviation. Prof. Don Dutton notes injury depends on who is more motivated and angrier rather than who is bigger, given the presence of guns, knives and other objects.</text>
+<url>tinyurl.com/47hkfy9b</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="blank">
-<h>Motives for Partner Violence: Women Report Anger and Retaliation More Often</h>
-<text>Analysis of 16,463 perpetrators found motives (Men:Women): Anger (47:68), Retaliation (28:49), Control (27:35), Jealousy (25:37), Gaining Attention (55:53), Inability to express verbally (36:32), Self Defence (13:9).</text>
-<url>https://tinyurl.com/48p7a6sf</url>
+<h>Men Dominate Non-Homicide IPV Death Categories Despite Women Being Majority of Homicide Victims</h>
+<text>Women account for about 75% of intimate partner violence (IPV) homicide victims, but homicide makes up only about 39% of all IPV-related deaths. In other categories, male victims are significantly higher: IPV corollary deaths (77%), IPV suicides (81%), death by law enforcement intervention (90%), and IPV homicide-suicide (95%).</text>
+<url>tinyurl.com/42v63jzr</url>
+</stat>
+<stat type="Domestic Violence" cn="blank" date="blank" org="blank">
+<h>Analysis of 16,463 Perpetrators Finds Similar Motives for Violence Across Genders</h>
+<text>An analysis of 16,463 perpetrators of partner abuse found motives behind violence (percentage of men:women) as: anger 47:68; retaliation 28:49; control 27:35; jealousy 25:37; gaining attention 55:53; inability to express verbally 36:32; self-defence 13:9.</text>
+<url>tinyurl.com/48p7a6sf</url>
 </stat>
 <stat type="Domestic Violence" cn="USA" date="blank" org="National Violence Against Women Survey">
-<h>IPV Has Significant Health Consequences for Both Male and Female Victims</h>
-<text>A study of thousands of abuse victims found both physical and psychological IPV are associated with significant mental and physical health consequences for both male and female victims. Health status plotted against types of abuse showed almost similar health issues for both genders.</text>
-<url>https://tinyurl.com/5ap2pe6v</url>
+<h>IPV Health Consequences Found Similar for Male and Female Victims</h>
+<text>A study of thousands of abuse victims from the National Violence Against Women Survey found both physical and psychological intimate partner violence are associated with significant mental and physical health consequences for both male and female victims, with health status plotted against abuse type showing almost similar health issues for both genders.</text>
+<url>tinyurl.com/5ap2pe6v</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="blank">
-<h>75% of Male Survivors Were Afraid of Their Abuser</h>
+<h>75% of Male Survivors Reported Fear of Their Abuser</h>
 <text>A study of 1,347 men found 75% of male survivors were afraid of their abuser.</text>
-<url>https://tinyurl.com/mvhkspns</url>
+<url>tinyurl.com/mvhkspns</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="blank">
-<h>Court-Referred Abusers: Power and Control Motives Similar for Men and Women</h>
-<text>Of court-referred abusers, reason for violence was Power and Control: Men (16.1%) and Women (17.8%), showing both genders have similar motives.</text>
-<url>https://tinyurl.com/59yssdeh</url>
+<h>Court-Referred Abusers Show Similar Power-and-Control Motives Across Genders</h>
+<text>A study of court-referred abusers found reasons for violence related to power and control were similar across genders: men (16.1%) and women (17.8%).</text>
+<url>tinyurl.com/59yssdeh</url>
 </stat>
 <stat type="Domestic Violence" cn="United Kingdom" date="2025" org="Office for National Statistics">
-<h>ONS 2025: 1.5M Men and 2.2M Women Victims; 111% Increase in Male Victims</h>
-<text>ONS Nov 2025 estimated 1.5 million men and 2.2 million women victims of domestic abuse. 425k men (51%) and 409k women are victims of current partner abuse. Breakdown: Emotional abuse (55% men, 45% women), Economic (56%, 42%), Health (75%, 25%), Threats (56%, 44%), Physical (50%, 50%), Sexual assault (14%, 86%), Stalking (33%, 67%). Methodological changes resulted in a 42% increase in female victims and a 111% increase in male victims compared to last data.</text>
-<url>https://www.ons.gov.uk</url>
+<h>ONS: 1.5 Million Men and 2.2 Million Women Victims of Domestic Abuse, With Breakdown by Type</h>
+<text>An ONS survey published in November 2025 estimated 1.5 million men and 2.2 million women were victims of domestic abuse in England and Wales in the previous year. Of these, 425,000 (51%) men and 409,000 women were victims of current partner abuse. Breakdown by abuse type (percentage of men:women) included: emotional abuse 55:45; economic abuse 56:42; health abuse 75:25; threats 56:44; physical abuse 50:50; sexual assault 14:86; stalking 33:67. Prior to this release, methodological changes led to a 42% increase in recorded female victims and a 111% increase in recorded male victims compared to previous data.</text>
+<url>blank</url>
 </stat>
-<stat type="Domestic Violence" cn="United Kingdom" date="1999" org="Home Office">
-<h>95% of Perpetrators Against Male Victims Were Female</h>
-<text>According to the 1999 UK Home Office Study, 95% of perpetrators of male victims were female.</text>
-<url>https://tinyurl.com/yc4a6rhz</url>
+<stat type="Domestic Violence" cn="United Kingdom" date="1999" org="UK Home Office">
+<h>1999 Home Office Study: 95% of Male Victims' Abusers Were Female</h>
+<text>According to a 1999 UK Home Office study, 95% of perpetrators of male victims were female.</text>
+<url>tinyurl.com/yc4a6rhz</url>
 </stat>
-<stat type="Domestic Violence" cn="United Kingdom" date="2008/09" org="Home Office">
-<h>95.6% of Abusers of Men Were Women</h>
+<stat type="Domestic Violence" cn="United Kingdom" date="2009" org="Home Office">
+<h>2008/09 Home Office Bulletin: 95.6% of Male Victims' Abusers Were Female</h>
 <text>The 2008/09 Home Office Statistical Bulletin found 95.6% of abusers of men were women.</text>
-<url>https://tinyurl.com/bj64h6sh</url>
+<url>tinyurl.com/bj64h6sh</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="blank">
-<h>12-Year Police Report Study: 92-94% of Abusers of Men Were Women</h>
+<h>12-Year Police Report Study: 92-94% of Male Victims' Abusers Were Female</h>
 <text>A 12-year study of police reports found 92-94% of abusers of men were women.</text>
-<url>https://tinyurl.com/mvdnm3zb</url>
+<url>tinyurl.com/mvdnm3zb</url>
 </stat>
-<stat type="Domestic Violence" cn="United Kingdom" date="2015-2018" org="Crime Survey for England and Wales">
-<h>CSEW: 84-94% of Abusers of Men Were Women</h>
-<text>The 2015 and 2018 Crime Surveys of England and Wales found abusers of 84-94% of men were women.</text>
-<url>https://tinyurl.com/2e4yxabh</url>
+<stat type="Domestic Violence" cn="United Kingdom" date="2018" org="Crime Survey of England and Wales">
+<h>2015 &amp; 2018 Crime Surveys: 84-94% of Male Victims' Abusers Were Female</h>
+<text>The 2015 and 2018 studies of the Crime Surveys of England and Wales found abusers of 84-94% of men were women.</text>
+<url>tinyurl.com/2e4yxabh; tinyurl.com/yfd8k8kf</url>
 </stat>
-<stat type="Domestic Violence" cn="United Kingdom" date="2022" org="blank">
-<h>Male Helpline: 95% of Callers Reported Abusive Women</h>
-<text>A 2022 study of callers to a male abuse helpline noted that 95% of men calling reported abusive women.</text>
-<url>https://tinyurl.com/2u4mbjfp</url>
+<stat type="Domestic Violence" cn="blank" date="2022" org="blank">
+<h>2022 Study of Male Abuse Helpline Callers: 95% Reported Female Abusers</h>
+<text>A 2022 study of callers to a male abuse helpline found 95% of men calling reported abusive women.</text>
+<url>tinyurl.com/2u4mbjfp</url>
 </stat>
-<stat type="Domestic Violence" cn="Scotland" date="2017/18" org="blank">
-<h>89% of Abused Men Reported Female Perpetrators</h>
+<stat type="Domestic Violence" cn="Scotland" date="2018" org="blank">
+<h>2017/18 Scottish Data: 89% of Abused Men Reported Female Perpetrators</h>
 <text>The 2017/18 Scottish data found 89% of abused men reported female perpetrators.</text>
-<url>https://tinyurl.com/43ax3286</url>
+<url>tinyurl.com/43ax3286</url>
 </stat>
-<stat type="Domestic Violence" cn="Scotland" date="2017/18" org="Scottish Crime Survey">
-<h>88% of All Male Victims Had Female Perpetrators</h>
+<stat type="Domestic Violence" cn="Scotland" date="2018" org="Scottish Crime Survey">
+<h>2017/18 Scottish Crime Survey: 88% of Male Victims Had Female Perpetrators</h>
 <text>The 2017/18 Scottish Crime Survey found 88% of all male victims had female perpetrators.</text>
-<url>https://tinyurl.com/mv4ek6mj</url>
+<url>tinyurl.com/mv4ek6mj</url>
 </stat>
 <stat type="Domestic Violence" cn="USA" date="blank" org="CDC">
-<h>94% of Male IPV Victims in Heterosexual Relationships</h>
-<text>According to CDC findings, 94% of male victims of intimate partner violence were in heterosexual relationships, 4% were gay, and 2% bisexual.</text>
-<url>https://tinyurl.com/yc4p6ykd</url>
+<h>CDC: 94% of Male IPV Victims Were in Heterosexual Relationships</h>
+<text>According to CDC findings, 94% of male victims of intimate partner violence were in heterosexual relationships, 4% were gay, and 2% were bisexual.</text>
+<url>tinyurl.com/yc4p6ykd</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="Prof. Martin Fiebert">
-<h>Meta-Study (343 Studies): Women as Physically Aggressive as Men</h>
-<text>Meta-study by Prof. Martin Fiebert found women are as physically aggressive as men in relationships with spouses or opposite-sex partners.</text>
-<url>https://tinyurl.com/48r6c5up</url>
+<h>Meta-Study of 343 Studies Finds Women as Physically Aggressive as Men in Relationships</h>
+<text>A meta-study of 343 studies carried out by Prof. Martin Fiebert found women are as physically aggressive as men in their relationships with spouses or opposite-sex partners.</text>
+<url>tinyurl.com/48r6c5up</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="Prof. Murray Straus">
-<h>Meta-Study (200+ Studies): Gender Symmetry in Perpetration and Motives</h>
-<text>Meta-study by Prof. Murray Straus found gender symmetry in perpetrators and in risk factors and motives for physical violence in marital and dating relationships.</text>
-<url>https://tinyurl.com/2hf7scxf</url>
+<h>Meta-Study of 200+ Studies Finds Gender Symmetry in Partner Violence</h>
+<text>A meta-study of over 200 studies carried out by Prof. Murray Straus found gender symmetry in perpetrators and in risk factors and motives for physical violence in marital and dating relationships.</text>
+<url>tinyurl.com/2hf7scxf</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="Prof. Sarah Desmarais">
-<h>Meta-Study (272 Datasets): 28.3% Women, 21.6% Men Perpetrated Physical Violence</h>
-<text>Meta-study by Prof. Sarah Desmarais found 28.3% of women and 21.6% of men reported perpetrating physical violence in an intimate relationship.</text>
-<url>https://tinyurl.com/4c6hnzrc</url>
+<h>Meta-Study of 272 Data Sets Finds More Female Than Male Self-Reported Perpetration</h>
+<text>A meta-study of 272 data sets carried out by Prof. Sarah Desmarais found 28.3% of women and 21.6% of men reported perpetrating physical violence in an intimate relationship.</text>
+<url>tinyurl.com/4c6hnzrc</url>
 </stat>
 <stat type="Domestic Violence" cn="USA" date="blank" org="blank">
-<h>4609 Violent Relationships: 50% Bilateral, 35% Unilateral Female, 15% Unilateral Male</h>
-<text>Study of 4,609 violent relationships in the US found 50% bilateral, 35% unilateral from women, 15% unilateral from men. Breakdown by demographics and countries provided (US: 51% bilateral, 35% female, 16% male; Canada: 48%, 32%, 30%; UK: 57%, 28%, 17%; Australia/New Zealand: 56%, 22%, 27%; Other: 71%, 19%, 15%).</text>
-<url>https://tinyurl.com/yc8exfu5</url>
+<h>Study of 4,609 Violent Relationships: Breakdown of Bilateral and Unilateral Violence</h>
+<text>A study of 4,609 violent relationships in the US found 50% were bilateral, 35% unilateral from women, and 15% unilateral from men (percentages may not total 100 due to data pooled from multiple studies). Breakdown by demographic (percentage bilateral:unilateral female-perpetrated:unilateral male-perpetrated): large population studies 51:34:18; small community studies 49:34:17; middle/high school students 45:34:13; university/college students 60:27:14; clinical samples 59:29:22. Breakdown by country: United States 51:35:16; Canada 48:32:30; United Kingdom 57:28:17; Australia and New Zealand 56:22:27; other 71:19:15.</text>
+<url>tinyurl.com/yc8exfu5</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="Partner Abuse State of Knowledge (PASK)">
-<h>PASK Grand Study: Near Gender Symmetry Found Across 12,000 Studies</h>
-<text>PASK study by 42 scholars over two years, summarising 1,700 studies. Lifetime prevalence: 23% women, 19.3% men. Perpetration: 28.3% women, 21.6% men. Violence: 57.9% bidirectional, 28.3% unidirectional female-to-male, 13.8% unidirectional male-to-female. Motives similar for both genders.</text>
+<h>PASK Project: Large-Scale Review Finds Near Gender Symmetry in Partner Abuse</h>
+<text>The Partner Abuse State of Knowledge (PASK) project, conducted by 42 scholars and 70 research assistants across 20 institutions over two years, reviewed 12,000 studies and summarised 1,700 in tables, finding near gender symmetry. Lifetime prevalence of partner abuse was 23% for women and 19.3% for men; perpetration rates were 28.3% for women and 21.6% for men. Of total violence, 57.9% was bidirectional, 28.3% unidirectional female-to-male, and 13.8% unidirectional male-to-female. Motives behind violence were found similar across genders: anger, jealousy, emotional hurt, difficulty expressing verbally, and seeking partner's attention.</text>
 <url>https://domesticviolenceresearch.org/</url>
 </stat>
-<stat type="Sexual Violence" cn="USA" date="2011" org="CDC (NISVS)">
-<h>1.92M Men Made to Sexually Penetrate vs. 1.93M Women Raped; 82.6% of Perpetrators Against Men Were Women</h>
-<text>Each year, 1.92 million men are made to sexually penetrate, compared to 1.93 million women who are victims of rape. 82.6% of perpetrators against men were women.</text>
-<url>https://tinyurl.com/27cunk4p</url>
+<stat type="Sexual Violence" cn="USA" date="2011" org="CDC/NISVS">
+<h>CDC NISVS 2011: Comparable Numbers of Men Made to Penetrate and Women Raped</h>
+<text>According to the U.S. Centre for Disease Control's National Intimate Partner and Sexual Violence Survey (2011), each year 1.92 million men are made to sexually penetrate, compared to a nearly identical 1.93 million women who are victims of rape. 82.6% of perpetrators against men were women.</text>
+<url>tinyurl.com/27cunk4p</url>
 </stat>
-<stat type="Systemic Response" cn="United Kingdom" date="2010-11" org="Home Office">
-<h>Reporting Rates: 27% of Women vs. 10% of Men Reported to Police</h>
-<text>The Home Office Report 2010-11 found 27% of women who experienced IPV reported to police compared to 10% of men. Also, 44% of women reported to a professional organisation vs. 19% of men.</text>
-<url>https://tinyurl.com/3hwds975</url>
+<stat type="Domestic Violence" cn="United Kingdom" date="2011" org="Home Office">
+<h>Home Office Report 2010-11: Women More Likely to Report IPV Than Men</h>
+<text>The Home Office Report (UK) for 2010-11 found 27% of women who experienced intimate partner violence reported it to police, compared to 10% of men. Additionally, 44% of women reported to a professional organisation compared to 19% of men.</text>
+<url>tinyurl.com/3hwds975</url>
 </stat>
 <stat type="Online Violence" cn="blank" date="blank" org="Women's Media Centre">
-<h>Online Harassment Perpetrators: 48% Men, 52% Women</h>
+<h>Analysis of 100k+ Online Harassment Posts: 52% of Perpetrators Were Women</h>
 <text>The Women's Media Centre analysed over 100,000 online harassment posts worldwide, concluding 48% of perpetrators were men and 52% were women.</text>
 <url>blank</url>
 </stat>
 <stat type="Online Violence" cn="blank" date="blank" org="Demos">
-<h>Demos Study: Half of Tweets Using 'Whore' or 'Slut' Sent by Women</h>
-<text>A Demos study examined 200,000 tweets using the word 'whore' or 'slut' and found about half of them were sent by women.</text>
-<url>https://tinyurl.com/3ekcphtk</url>
+<h>Demos Study: About Half of Misogynistic Slur Tweets Sent by Women</h>
+<text>A Demos study examined 200,000 tweets using the words 'whore' and 'slut', finding about half of them were sent by women.</text>
+<url>tinyurl.com/3ekcphtk</url>
 </stat>
-<stat type="Online Violence" cn="USA" date="2021" org="Pew Research">
-<h>Pew 2021: 43% Men, 38% Women Reported Online Harassment</h>
+<stat type="Online Violence" cn="blank" date="2021" org="Pew Research">
+<h>Pew Research 2021: 43% of Men and 38% of Women Report Online Harassment</h>
 <text>A 2021 Pew Research poll found 43% of men and 38% of women reported being harassed online.</text>
-<url>https://tinyurl.com/s8k3ak94</url>
+<url>tinyurl.com/s8k3ak94</url>
 </stat>
 <stat type="Online Violence" cn="blank" date="blank" org="Norton">
-<h>Norton: 54% Men, 50% Women Targeted by Online Abuse</h>
-<text>Digital Security Firm Norton found 54% of men and 50% of women reported being targeted by some form of online abuse or harassment.</text>
-<url>https://tinyurl.com/yxzruuxc</url>
+<h>Norton: 54% of Men and 50% of Women Targeted by Online Abuse</h>
+<text>Digital security firm Norton found 54% of men and 50% of women reported being targeted by some form of online abuse or harassment.</text>
+<url>tinyurl.com/yxzruuxc</url>
 </stat>
 <stat type="Online Violence" cn="Australia" date="blank" org="Anastasia Powell">
-<h>Men and Women Equally Likely to Experience Digital Harassment</h>
-<text>A survey of 3,000 adults in Australia concluded that men and women were just as likely to report experiencing digital harassment or abuse.</text>
-<url>https://tinyurl.com/2btfjcfk</url>
+<h>Survey of 3,000 Australians Finds Equal Rates of Digital Harassment by Gender</h>
+<text>A survey of 3,000 adults in Australia by Anastasia Powell concluded men and women were just as likely to report experiencing digital harassment or abuse.</text>
+<url>tinyurl.com/2btfjcfk</url>
 </stat>
 <stat type="Domestic Violence" cn="Australia" date="blank" org="Medical Journal of Australia">
-<h>45.5% of IPV Victims Are Men (Higher Than ABS Reports)</h>
-<text>With a sample of 8,503 Australians, the Medical Journal of Australia found 45.5% of IPV victims are men. Breakdown: Hit with fist/object (50.4% male victims), Harassed by phone/text/social media (44.8%), Turned family/friends against them (44.6%), Kept from talking to family/friends (43.7%), Use/threat of weapon (42.6%), Told you're crazy/stupid (42.4%).</text>
-<url>https://tinyurl.com/y6cst2dt</url>
+<h>Study of 8,503 Australians Finds 45.5% of IPV Victims Are Men</h>
+<text>A study of 8,503 Australians by the Medical Journal of Australia found 45.5% of victims of intimate partner violence are men, substantially higher than reported by the Australian Bureau of Statistics. Breakdown by abuse type (percentage of male victims): hit with fist or object, kicked or bit 50.4%; harassed by phone, text, email or social media 44.8%; convinced family or friends victim was crazy or turned them against him 44.6%; kept from talking to family or friends 43.7%; use of or threat with a knife, gun or other weapon 42.6%; told they were crazy, stupid or not good enough 42.4%.</text>
+<url>tinyurl.com/y6cst2dt</url>
 </stat>
 <stat type="Systemic Response" cn="blank" date="blank" org="blank">
-<h>Discrimination in Availability of Help (TODO)</h>
-<text>blank</text>
+<h>Discrimination in Availability of Help</h>
+<text>TODO</text>
 <url>blank</url>
 </stat>
-<stat type="Systemic Response" cn="blank" date="blank" org="Murray Straus">
-<h>Methods Used to Hide Gender Symmetry in Research</h>
-<text>Murray Straus documented methods to hide the truth: conceal evidence, avoid obtaining evidence on female perpetrators, selective citation, conclusions contradicting data, blocking publication of gender symmetry research, preventing funding, and harassing researchers.</text>
-<url>https://tinyurl.com/2hf7scxf</url>
-</stat>
-<stat type="Systemic Response" cn="blank" date="blank" org="Erin Pizzey">
-<h>Erin Pizzey: Targeted with Abuse, Death Threats, and Dog Shot for Opposing Feminist Hijacking</h>
-<text>Erin Pizzey recounts being targeted with abusive phone calls, death threats, bomb scares, and having her dog shot on Christmas Day for opposing the hijacking of the refuge movement by gender feminists.</text>
-<url>https://tinyurl.com/mt9p45rk</url>
-</stat>
-<stat type="Systemic Response" cn="blank" date="blank" org="Prof. Richard Gelles">
-<h>Gelles: Received Death Threats, Bomb Threats, and Became 'Non-Person' for Finding Gender Symmetry</h>
-<text>Prof. Gelles received death threats, bomb threats to conference centres, and became a 'non-person' among DV advocates. Suzanne Steinmetz had a bomb threat at her daughter's wedding and faced campaigns to deny her tenure. Murray Straus was prevented from speaking and falsely accused of being a wife-beater.</text>
-<url>https://breakingthescience.org/RichardGelles_MissingPersonsOfDV.php</url>
-</stat>
-<stat type="Systemic Response" cn="Australia" date="2016" org="Australian Bureau of Statistics">
-<h>97.2% of Men Do Not Report DV vs. 82.1% of Women</h>
-<text>The Australian Bureau of Statistics in 2016 found that 97.2% of men do not report domestic violence to police compared to 82.1% of women.</text>
-<url>https://tinyurl.com/yn2ctt2t</url>
-</stat>
-<stat type="Systemic Response" cn="Ireland" date="2005" org="National Crime Council">
-<h>5% of Men vs. 29% of Women Reported Violence to Authorities</h>
-<text>In a 2005 report by the National Crime Council in the Republic of Ireland, it was estimated that 5% of men who had experienced violence reported it to authorities, compared to 29% of women.</text>
-<url>https://tinyurl.com/4c8ntznd</url>
-</stat>
-<stat type="Domestic Violence" cn="USA" date="1990-92" org="National Comorbidity Study">
-<h>IPV Rates: 18.4% Men, 17.4% Women (Minor); 5.5% Men, 6.5% Women (Severe)</h>
-<text>The National Comorbidity Study of 1990-1992 found 18.4% of men and 17.4% of women had experienced minor IPV, and 5.5% of men and 6.5% of women had experienced severe IPV.</text>
-<url>https://tinyurl.com/ae379rm5</url>
+<stat type="Domestic Violence" cn="blank" date="blank" org="Prof. Murray Straus">
+<h>Straus Paper Outlines Methods Used to Conceal Evidence of Female Perpetration</h>
+<text>Research by Prof. Murray Straus documents bias against men extending to hiding truth at the research level itself, listing methods including: concealing evidence, avoiding obtaining evidence on female perpetrators, selective citation of research, stating conclusions that contradict the data, blocking publication of articles reporting gender symmetry, preventing funding of research into female partner violence, and harassing, threatening or penalizing researchers who publish evidence of gender symmetry in female partner violence.</text>
+<url>tinyurl.com/2hf7scxf</url>
 </stat>
 <stat type="Domestic Violence" cn="United Kingdom" date="blank" org="Erin Pizzey">
-<h>62 of First 100 Women Admitted to Refuge Were as Violent as Men They Were Leaving</h>
-<text>Erin Pizzey found that 62 out of the first 100 women admitted to the centre were as violent as the men they were leaving.</text>
-<url>https://tinyurl.com/543jc24d</url>
+<h>Erin Pizzey Describes Harassment, Death Threats, and Bomb Scares for Opposing Refuge Movement</h>
+<text>Erin Pizzey describes becoming a target of abuse for opposing the "hijacking" of the refuge movement, including heckling by feminist groups at speaking events, abusive phone calls, death threats and bomb scares directed at her home and family, being required to have mail delivered to a bomb squad headquarters, continued disruption of her lectures and workshops, and the shooting of one of her dogs on Christmas Day, which led her to leave.</text>
+<url>tinyurl.com/mt9p45rk</url>
 </stat>
-<stat type="Domestic Violence" cn="32 Nations" date="2006" org="International Dating Violence Study">
-<h>32-Nation Study: 68.6% Bidirectional Violence; Women More Often Sole Perpetrators</h>
-<text>Any physical violence rate: 31.2%. Breakdown: 68.6% bidirectional, 9.9% male-only, 21.4% female-only. Severe assault: 10.8% rate, 54.8% bidirectional, 15.7% male-only, 29.4% female-only.</text>
-<url>https://tinyurl.com/czf36c7k</url>
+<stat type="Domestic Violence" cn="USA" date="blank" org="Professor Richard Gelles">
+<h>Professor Gelles Describes Death Threats and Career Retaliation for Finding Gender Symmetry in Family Violence</h>
+<text>Professor Richard Gelles describes intense personal attacks following findings that female-to-male family violence rates equaled male-to-female rates, including death threats, bomb threats phoned into conference venues, campaigns urging denial of tenure and grant funding for colleague Suzanne Steinmetz, being treated as "non persons" among domestic violence advocates, and librarians publicly refusing to shelve their books.</text>
+<url>https://breakingthescience.org/RichardGelles_MissingPersonsOfDV.php</url>
+</stat>
+<stat type="Domestic Violence" cn="USA" date="blank" org="Professor Murray Straus">
+<h>Professor Straus Describes Bomb Threats, Career Sabotage, and Public Discrediting Over Gender-Symmetry Research</h>
+<text>Professor Murray Straus describes retaliation following publication of research on near-equal rates of partner violence perpetration by men and women, including a bomb threat at Suzanne Steinmetz's daughter's wedding, a letter-writing campaign against her tenure at the University of Delaware, a graduate student being warned her career would suffer for working with Straus, Straus being prevented from speaking at a conference through shouting and stomping, and public statements by a Canadian Commission on Violence against Women chairperson that his publications could not be believed due to personal accusations against him.</text>
+<url>tinyurl.com/4ausprtj</url>
+</stat>
+<stat type="Domestic Violence" cn="Australia" date="2016" org="Australian Bureau of Statistics">
+<h>ABS 2016: 97.2% of Men Do Not Report Domestic Violence to Police</h>
+<text>The Australian Bureau of Statistics found in 2016 that 97.2% of men do not report domestic violence to police, compared to 82.1% of women.</text>
+<url>tinyurl.com/yn2ctt2t</url>
+</stat>
+<stat type="Domestic Violence" cn="Republic of Ireland" date="2005" org="National Crime Council">
+<h>2005 Irish Report: Only 5% of Male Victims Reported Violence to Authorities</h>
+<text>A 2005 report by the National Crime Council in the Republic of Ireland estimated that 5% of men who had experienced violence reported it to authorities, compared to 29% of women.</text>
+<url>tinyurl.com/4c8ntznd</url>
+</stat>
+<stat type="Domestic Violence" cn="USA" date="1992" org="National Comorbidity Study">
+<h>National Comorbidity Study (1990-1992): Comparable Rates of Minor and Severe IPV by Gender</h>
+<text>The National Comorbidity Study of 1990-1992 found 18.4% of men and 17.4% of women had experienced minor intimate partner violence, and 5.5% of men and 6.5% of women had experienced severe intimate partner violence.</text>
+<url>tinyurl.com/ae379rm5</url>
+</stat>
+<stat type="Domestic Violence" cn="United Kingdom" date="blank" org="Erin Pizzey">
+<h>Erin Pizzey: 62 of First 100 Refuge Residents Were as Violent as Partners They Left</h>
+<text>Erin Pizzey found that 62 out of the first 100 women admitted to her refuge were as violent as the men they were leaving.</text>
+<url>tinyurl.com/543jc24d</url>
+</stat>
+<stat type="Domestic Violence" cn="blank" date="2006" org="International Dating Violence Study">
+<h>32-Nation International Dating Violence Study: Bidirectional Violence Dominates</h>
+<text>The 2006 thirty-two nation International Dating Violence Study found "any physical violence" occurred at a rate of 31.2%, of which 68.6% was bidirectional, 9.9% perpetrated by men only, and 21.4% by women only. For severe assault, a rate of 10.8% was found, of which 54.8% was bidirectional, 15.7% perpetrated by men only, and 29.4% by women only.</text>
+<url>tinyurl.com/czf36c7k</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="blank">
-<h>Only 14% of Men Self-Identify as Victims; Under-Reporting Across Abuse Types</h>
-<text>Only 14% of studied men self-identified as victims of partner abuse. Further research found 24% were victims of sexual abuse, 70% of psychological abuse, and 20% of physical abuse.</text>
-<url>https://tinyurl.com/pw2ty9zv</url>
+<h>Only 14% of Studied Men Self-Identified as Partner Abuse Victims Despite High Abuse Rates</h>
+<text>Only 14% of studied men self-identified as victims of partner abuse. Further research found 24% were victims of sexual abuse, 70% victims of psychological abuse, and 20% victims of physical abuse.</text>
+<url>tinyurl.com/pw2ty9zv</url>
 </stat>
 <stat type="Domestic Violence" cn="blank" date="blank" org="blank">
-<h>49% of Male Victims Told No One vs. 19% of Female Victims</h>
-<text>In one study, 19% of female victims told no one about the abuse compared to 49% of male victims.</text>
-<url>https://tinyurl.com/55p7kvfr</url>
+<h>Male Victims Far More Likely Than Female Victims to Tell No One</h>
+<text>One study found 19% of female victims told no one about their abuse, compared to 49% of male victims.</text>
+<url>tinyurl.com/55p7kvfr</url>
+</stat>
+<stat type="Domestic Violence" cn="blank" date="blank" org="blank">
+<h>Female Victims' Reports to Police Recorded at Higher Rate Than Male Victims'</h>
+<text>73% of cases reported by female victims to the police were recorded, compared to just 48% for male victims.</text>
+<url>tinyurl.com/275bwwvw</url>
+</stat>
+<stat type="Domestic Violence" cn="blank" date="blank" org="blank">
+<h>Suspects More Likely to Be Charged When Victim Is Female</h>
+<text>In domestic abuse cases, if the victim was female, it was 45.77% more likely for the suspect to be charged or summoned compared to cases with male victims.</text>
+<url>tinyurl.com/mwzsjbr2</url>
 </stat>
 <stat type="Systemic Response" cn="blank" date="blank" org="blank">
-<h>Police Recorded 73% of Female Reports vs. 48% of Male Reports</h>
-<text>73% of cases reported by female victims to police were recorded, compared to just 48% for male victims.</text>
-<url>https://tinyurl.com/275bwwvw</url>
-</stat>
-<stat type="Systemic Response" cn="blank" date="blank" org="blank">
-<h>Female Victims 45.77% More Likely to Have Suspect Charged</h>
-<text>In domestic abuse cases, if the victim was female, it was 45.77% more likely for the suspect to be charged or summoned compared to male victims.</text>
-<url>https://tinyurl.com/mwzsjbr2</url>
-</stat>
-<stat type="Systemic Response" cn="blank" date="blank" org="blank">
-<h>Mock Jurors More Likely to Find Male Defendant Guilty</h>
-<text>Mock jurors were more likely to find a male defendant guilty compared to female defendants.</text>
-<url>https://tinyurl.com/2c5zu7t8</url>
+<h>Mock Jurors More Likely to Find Male Defendants Guilty</h>
+<text>Mock jurors were more likely to find male defendants guilty compared to female defendants.</text>
+<url>tinyurl.com/2c5zu7t8</url>
 </stat>
 <stat type="Sexual Violence" cn="USA" date="blank" org="American Psychological Association">
-<h>43% of High School/College Men Had Unwanted Sexual Experience; 95% Female Acquaintance</h>
-<text>A study published by the American Psychological Association found that 43% of high school boys and young college men reported they had an unwanted sexual experience. In 95% of cases, a female acquaintance was the aggressor.</text>
-<url>https://tinyurl.com/ms2nv2nb</url>
+<h>43% of High School Boys and Young College Men Report Unwanted Sexual Experience</h>
+<text>A study published by the American Psychological Association found that 43% of high school boys and young college men reported an unwanted sexual experience. In 95% of these cases, a female acquaintance was the aggressor.</text>
+<url>tinyurl.com/ms2nv2nb</url>
 </stat>
 <stat type="Domestic Violence" cn="United Kingdom" date="blank" org="blank">
-<h>4.3% of White Men and 4.2% of White Women Assaulted by Partner</h>
-<text>In the UK, 4.3% of white men and 4.2% of white women reported they had been assaulted by an intimate partner.</text>
-<url>https://tinyurl.com/3jjabaj4</url>
+<h>Comparable Rates of Intimate Partner Assault Reported by White Men and Women</h>
+<text>In the UK, 4.3% of white men and 4.2% of white women report having been assaulted by an intimate partner.</text>
+<url>tinyurl.com/3jjabaj4</url>
 </stat>
-<stat type="Homicide" cn="Australia" date="2022/23" org="blank">
-<h>46 Female and 38 Male Domestic Homicide Victims; 45% of Male Victims Were Children</h>
-<text>In 2022/23 in Australia, there were 46 female domestic homicide victims and 38 male domestic homicide victims. 45% of male homicide victims were children, indicating this was not self-defence.</text>
-<url>https://tinyurl.com/mr4d2m6u</url>
+<stat type="Domestic Violence" cn="Australia" date="2023" org="blank">
+<h>2022/23 Australian Domestic Homicide Data: Nearly Half of Male Victims Were Children</h>
+<text>In 2022/23 in Australia there were 46 female and 38 male domestic homicide victims. An age breakdown shows 45% of male homicide victims were children, indicating this was not a case of self-defence.</text>
+<url>tinyurl.com/mr4d2m6u</url>
 </stat>
 <stat type="Domestic Violence" cn="United Kingdom" date="2024" org="blank">
-<h>Teen Dating Abuse: 57% of Boys vs. 41% of Girls Experienced Violence/Control</h>
-<text>A 2024 UK report on teenage (13-17) dating abuse found 57% of boys experienced at least one violent or controlling behaviour vs. 41% girls. 31% boys and 20% girls were afraid to break up. 27% boys vs. 12% girls were hit/kicked. 25% boys vs. 15% girls pressured sexually. 32% boys vs. 21% girls afraid to disagree. 25% boys vs. 10% girls had explicit images shared online.</text>
-<url>https://tinyurl.com/24z96ew3</url>
-</stat>
-<stat type="Sexual Violence" cn="USA" date="2003" org="Bureau of Justice Statistics">
-<h>Female Staff Overrepresented in Prison Staff Sexual Misconduct</h>
-<text>BJS data in response to the 2003 Prison Rape Elimination Act found female staff members are overrepresented among perpetrators of staff sexual misconduct in prisons, jails, and juvenile facilities.</text>
-<url>https://tinyurl.com/4a54rz6r</url>
+<h>2024 UK Teen Dating Abuse Report: Boys Report Higher Rates of Violent and Controlling Behaviour</h>
+<text>A 2024 UK report on teenage (13-17) dating abuse found 57% of boys in relationships reported experiencing at least one violent or controlling behaviour from their partner, compared to 41% of girls. 31% of boys and 20% of girls were afraid to break up with their partners. 27% of boys and 12% of girls were hit, kicked or shoved by partners. 25% of boys and 15% of girls were forced or pressured into anything sexual. 32% of boys and 21% of girls were afraid of disagreeing with their partner. 25% of boys and 10% of girls had explicit images or videos shared online.</text>
+<url>tinyurl.com/24z96ew3</url>
 </stat>
 <stat type="Sexual Violence" cn="USA" date="blank" org="Bureau of Justice Statistics">
-<h>83% of Children in Prison Are Male; 89% of Juvenile Staff Misconduct Reports by Boys Abused by Female Staff</h>
-<text>83% of all children in prison are male in the USA. Of all juveniles reporting staff misconduct, 89% were boys reporting abuse by female staff.</text>
+<h>Female Staff Overrepresented Among Perpetrators of Prison Sexual Misconduct</h>
+<text>A survey by the Bureau of Justice Statistics, conducted over the last decade in response to the 2003 Prison Rape Elimination Act, found female staff members are overrepresented among perpetrators of staff sexual misconduct in prisons, jails and juvenile facilities.</text>
+<url>tinyurl.com/4a54rz6r</url>
+</stat>
+<stat type="Sexual Violence" cn="USA" date="blank" org="Framing Health Matters">
+<h>89% of Juvenile Staff-Misconduct Reports Involve Boys Abused by Female Staff</h>
+<text>83% of all children in prison in the USA are male. Of juveniles reporting staff misconduct, 89% were boys reporting abuse by female staff.</text>
 <url>blank</url>
 </stat>
 <stat type="Sexual Violence" cn="USA" date="blank" org="Bureau of Justice Statistics">
-<h>62% of Staff Sexual Misconduct Cases Involved Female Staff Abusing Male Inmates</h>
-<text>The BJS found about 62% of staff sexual misconduct cases involved female staff abusing male inmates, while only 8% involved male staff abusing female inmates. 86% of male victims and 91% of female victims reported abuse outside of a search context.</text>
-<url>https://tinyurl.com/dhpcrf9j</url>
+<h>62% of Prison Staff Sexual Misconduct Involves Female Staff Abusing Male Inmates</h>
+<text>The Bureau of Justice Statistics found about 62% of staff sexual misconduct cases involved female staff abusing male inmates, versus only 8% involving male staff abusing female inmates. The second National Inmate Survey found 86% of male victims and 91% of female victims reported abuse occurring outside of any search context.</text>
+<url>tinyurl.com/dhpcrf9j</url>
 </stat>
 <stat type="Sexual Violence" cn="blank" date="2018" org="blank">
-<h>Juvenile Centres: 6.1% Males vs. 2.9% Females Reported Staff Sexual Misconduct</h>
-<text>A 2018 study in juvenile centres found 6.1% of males vs. 2.9% of females reported staff sexual misconduct. 91% of staff misconduct involved only female perpetrators.</text>
-<url>https://tinyurl.com/2ywf4vvr</url>
+<h>2018 Juvenile Centre Study: Female Staff Dominate Sexual Misconduct Perpetration</h>
+<text>A 2018 study in juvenile centres found 6.1% of male versus 2.9% of female youth reported staff sexual misconduct, and 4.7% of female versus 1.6% of male youth reported youth-on-youth victimization. Of staff sexual misconduct, 91% involved only female perpetrators and 6% involved only male perpetrators.</text>
+<url>tinyurl.com/2ywf4vvr</url>
 </stat>
 <stat type="Sexual Violence" cn="blank" date="2019" org="JAMA Psychiatry">
-<h>63% of Female Victims Report Rape vs. 12% of Male Victims</h>
-<text>JAMA Psychiatry 2019 found 63% of female victims report rape compared to 12%
+<h>Female Rape Victims Report at Higher Rate Than Male Victims</h>
+<text>63% of female rape victims report the crime, compared to 12% of male victims.</text>
+<url>tinyurl.com/daxz4cj6</url>
+</stat>
+<stat type="Sexual Violence" cn="blank" date="blank" org="blank">
+<h>Men More Likely Assaulted by Strangers; Less Likely to Perceive Incident as Crime</h>
+<text>Males (25%) are more likely to be sexually assaulted by a stranger than females (14%). Men are three times more likely than women to report they didn't think the incident was a "crime."</text>
+<url>tinyurl.com/mr44xbj</url>
+</stat>
+<stat type="Sexual Violence" cn="Brazil" date="blank" org="blank">
+<h>Brazilian Studies: Girls Report Adolescent Sexual Violence at Higher Rate Than Boys</h>
+<text>Studies in Brazil indicate 46% of girls reported an incident of sexual violence as adolescents, compared to 9% of boys, among all victims.</text>
+<url>tinyurl.com/5e5cspx4</url>
+</stat>
+<stat type="Sexual Violence" cn="blank" date="2023" org="blank">
+<h>Review of 60 Studies: Heterosexual Male Sexual Coercion Victims Make Up 43% of Total</h>
+<text>A 2023 study reviewing 60 studies found the number of heterosexual male victims is 74.8% of heterosexual female victims, implying 43% of all sexual coercion victims are male and 57% female. It also found male heterosexual perpetration at 27.0% and female heterosexual perpetration at 16.7%.</text>
+<url>tinyurl.com/mww272h9</url>
+</stat>
+<stat type="Sexual Violence" cn="United Kingdom" date="2018" org="ONS">
+<h>ONS 2018: 39% of Men Report Rape or Assault by Penetration from a Partner</h>
+<text>ONS (2018) found 39% of men reported experiencing rape or assault by penetration (including attempts) from a partner or ex-partner.</text>
+<url>https://mankind.org.uk/wp-content/uploads/2021/11/ManKind-Conference-2021.pdf</url>
+</stat>
+<stat type="Domestic Violence" cn="United Kingdom" date="2019" org="ManKind Initiative">
+<h>Majority of ManKind Helpline Callers Had Never Disclosed Abuse Before</h>
+<text>The ManKind Initiative receives approximately 2,000 calls a year through its anonymous helpline (Oakbook, advocacy). Data from 2018-19 revealed 59% of men who called had never disclosed before, and 70% of callers would not have called if the helpline was not anonymous.</text>
+<url>https://mankind.org.uk/wp-content/uploads/2021/11/ManKind-Conference-2021.pdf</url>
+</stat>
+<stat type="Systemic Response" cn="United Kingdom" date="2019" org="Donovan/ONS">
+<h>Men Underrepresented in MARAC Cases and IDVA Services</h>
+<text>Only 5% of cases discussed at MARAC (Multi-Agency Risk Assessment Conference) were men, and less than 1% of referrals to MARAC involve men or women from same-sex relationships (Donovan, 2010). ONS (2019b) found clients working with an IDVA (Independent Domestic Violence Advisor) service were overwhelmingly women (96%).</text>
+<url>https://mankind.org.uk/wp-content/uploads/2021/11/ManKind-Conference-2021.pdf</url>
+</stat>
+<stat type="Domestic Violence" cn="United Kingdom" date="2025" org="Office for National Statistics">
+<h>ONS 2024/25 Combined Figures: 3.2 Million Women and 2 Million Men Affected</h>
+<text>The Office for National Statistics produced combined figures for sexual abuse, domestic abuse and stalking for 2024/25, covering 5.1 million people: 3.2 million women (12.8%) and 2 million men (8.4%).</text>
+<url>https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/developingacombinedmeasureofdomesticabusesexualassaultandstalkingenglandandwales/july2025</url>
+</stat>
+<stat type="Domestic Violence" cn="Denmark" date="2022" org="University of Southern Denmark">
+<h>University of Southern Denmark Estimates on Physical and Psychological Violence Victims</h>
+<text>The University of Southern Denmark estimates 5.5% (118,000) of women and 4.0% (83,000) of men are victims of physical and psychological violence.</text>
+<url>blank</url>
+</stat>
+<stat type="Domestic Violence" cn="Denmark" date="2018" org="blank">
+<h>2018 Study of Danish Adolescents: Boys Report Higher Dating Violence Victimization</h>
+<text>A 2018 study of Danish adolescents found 13.1% of males and 9.3% of females report being a victim of dating violence.</text>
+<url>https://sciendo.com/article/10.21307/sjcapp-2018-004</url>
+</stat>
+<stat type="Domestic Violence" cn="blank" date="2016" org="blank">
+<h>Teen Dating Violence Meta-Study: Girls Perpetrate More Physical Violence, Boys More Sexual Violence</h>
+<text>A teen dating violence meta-study found 25% of girls versus 13% of boys perpetrated physical violence, while 21% of boys and an equal percentage of girls were victims of physical violence. 3% of girls versus 10% of boys perpetrated sexual violence, while 8% of boys and 14% of girls were victims of sexual violence.</text>
+<url>https://psycnet.apa.org/record/2016-17686-001?doi=1</url>
+</stat>
+<stat type="Online Violence" cn="USA" date="2020" org="Pew Research">
+<h>US Pew Surveys (2014-2020): Men Consistently Report More Online Abuse Than Women</h>
+<text>Pew Research surveys show men consistently reporting more online abuse than women in the United States: 2014 - men 38%, women 32%; 2017 - men 44%, women 37%; 2020 - men 43%, women 38%. The pattern shows men reporting about 5-7 percentage points higher prevalence across all surveys.</text>
+<url>https://jameslnuzzo.substack.com/p/online-harassment-victimization</url>
+</stat>
+<stat type="Online Violence" cn="Australia" date="2022" org="RMIT/Norton/ANROWS/Australian Institute of Criminology">
+<h>Australian Surveys Show Near-Equal Online Abuse Rates Between Men and Women</h>
+<text>Australian surveys show little to no consistent sex difference in online abuse: RMIT 2015 - men 60%, women 60%; Norton 2016 - men 54%, women 50%; ANROWS 2022 - men 51%, women 51%. For the past 12 months, the Australian Institute of Criminology (2022) found men at 28% and women at 25%.</text>
+<url>https://jameslnuzzo.substack.com/p/online-harassment-victimization</url>
+</stat>
+<stat type="blank" cn="blank" date="blank" org="blank">
+<h>blank</h>
+<text>TODO</text>
+<url>blank</url>
+</stat>
+</stats>
