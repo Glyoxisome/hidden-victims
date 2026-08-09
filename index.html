@@ -223,12 +223,22 @@
 </nav>
 <div class="flex items-center">
 
-<button aria-label="Menu" class="md:hidden p-2 text-on-surface-variant ml-2">
+<button id="mobileMenuButton" aria-label="Menu" class="md:hidden p-2 text-on-surface-variant ml-2" onclick="toggleMobileMenu()">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
 </div>
 </header>
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="hidden md:hidden fixed top-[72px] left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-lg">
+    <nav class="flex flex-col">
+        <a href="stats.html" class="px-6 py-4 text-on-surface-variant border-b border-gray-100">Statistics</a>
+        <a href="#" class="px-6 py-4 text-on-surface-variant border-b border-gray-100">Law &amp; Policy</a>
+        <a href="experts.html" class="px-6 py-4 text-on-surface-variant border-b border-gray-100">Experts</a>
+        <a href="faq.html" class="px-6 py-4 text-on-surface-variant border-b border-gray-100">FAQs</a>
+        <a href="#" class="px-6 py-4 text-on-surface-variant">Communities</a>
+    </nav>
+</div>
 <main class="pt-[72px]">
 <!-- Hero Section -->
 <section class="max-w-container-max mx-auto px-margin py-16 md:py-24 min-h-[550px] flex flex-col md:flex-row items-center gap-12">
@@ -261,4 +271,14 @@
 </footer>
 
 
+<script>
+function toggleMobileMenu() {
+    var menu = document.getElementById("mobileMenu");
+    if (menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+    } else {
+        menu.classList.add("hidden");
+    }
+}
+</script>
 </body></html>

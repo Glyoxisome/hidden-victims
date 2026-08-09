@@ -141,6 +141,7 @@
     letter-spacing: 0.02em;
     transition: color 0.2s;
   }
+ nav a.active{color:var(--primary);border-bottom-color:var(--primary);}
   nav.main-nav a:hover { color: var(--primary); }
   @media (min-width: 768px) {
     nav.main-nav { display: flex; }
@@ -353,11 +354,12 @@
       <a class="brand" href="#">VIOLENCE AGAINST MEN EVIDENCE ARCHIVE</a>
     </div>
     <nav class="main-nav">
-      <a href="#">Statistics</a>
-      <a href="#">Law &amp; Policy</a>
-      <a href="#">News &amp; Judgments</a>
-      <a href="#">Countries</a>
-      <a href="#">About</a>
+      <a href="index.html">Home</a>
+      <a href="/statistics">Statistics</a>
+      <a href="/law-policy">Law &amp; Policy</a>
+      <a class="active" href="experts.html">Experts</a>
+      <a href="faq.html">FAQs</a>
+      <a href="/communities">Communities</a>
     </nav>
     <div class="header-actions">
       <button class="icon-btn" aria-label="Search">

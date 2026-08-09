@@ -248,6 +248,26 @@
   }
 
   // ---- Load & parse XML ----
+function fixUrl(href) {
+    if (!href) return href;
+
+    if (
+        href.startsWith("http://") ||
+        href.startsWith("https://") ||
+        href.startsWith("/") ||
+        href.startsWith("./") ||
+        href.startsWith("../") ||
+        href.startsWith("#") ||
+        href.endsWith(".html") ||
+        href.startsWith("mailto:") ||
+        href.startsWith("tel:")
+    ) {
+        return href;
+    }
+
+    return "https://" + href;
+}
+
   function loadData(){
     fetch(XML_PATH)
       .then(function(res){
@@ -272,7 +292,7 @@
             org: getAttr(s, "org"),
             heading: getChildText(s, "h"),
             text: getChildText(s, TEXT_TAG),
-            url: getChildText(s, "url")
+            url: fixUrl(getChildText(s, "url"))
           };
           allEntries.push(entry);
         }
