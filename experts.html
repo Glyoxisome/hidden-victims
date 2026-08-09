@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experts - VIOLENCE AGAINST MEN EVIDENCE ARCHIVE</title>
+<style>
+  :root {
+    --secondary-container: #e1d4fd;
+    --surface-bright: #fdf7ff;
+    --secondary: #63597c;
+    --background: #fdf7ff;
+    --on-primary: #ffffff;
+    --surface-container-lowest: #ffffff;
+    --on-surface-variant: #494551;
+    --tertiary-container: #c9a74d;
+    --on-surface: #1d1b20;
+    --surface-container: #f2ecf4;
+    --surface: #fdf7ff;
+    --outline-variant: #cbc4d2;
+    --primary: #4f378a;
+    --tertiary: #765b00;
+    --surface-container-highest: #e6e0e9;
+    --inverse-surface: #322f35;
+    --outline: #7a7582;
+    --surface-variant: #e6e0e9;
+    --error: #ba1a1a;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background-color: #F7F7F5;
+    color: var(--on-surface);
+    font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .serif {
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  }
+
+  a { text-decoration: none; }
+
+  /* Icon (drawn with CSS, no icon font dependency) */
+  .icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+  .icon-person { position: relative; }
+  .icon-person::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 0;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .icon-person::after {
+    content: "";
+    position: absolute;
+    left: 1px; top: 9px;
+    width: 14px; height: 7px;
+    border-radius: 7px 7px 0 0;
+    background: currentColor;
+  }
+  .icon-arrow { position: relative; }
+  .icon-arrow::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 7px;
+    width: 11px; height: 2px;
+    background: currentColor;
+  }
+  .icon-arrow::after {
+    content: "";
+    position: absolute;
+    right: 0; top: 3px;
+    width: 8px; height: 8px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+  }
+  .icon-search { position: relative; border: 2px solid currentColor; border-radius: 50%; width: 12px; height: 12px; top: -2px; left: -2px; }
+  .icon-search::after {
+    content: "";
+    position: absolute;
+    width: 2px; height: 7px;
+    background: currentColor;
+    right: -5px; bottom: -6px;
+    transform: rotate(-45deg);
+  }
+
+  /* Header */
+  header {
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--outline-variant);
+    height: 72px;
+    position: relative;
+    top: 0;
+    z-index: 50;
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 32px;
+  }
+  .brand {
+    font-family: "Source Serif 4", serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+  nav.main-nav {
+    display: none;
+    gap: 32px;
+    height: 100%;
+    align-items: center;
+  }
+  nav.main-nav a {
+    color: var(--on-surface-variant);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  nav.main-nav a:hover { color: var(--primary); }
+  @media (min-width: 768px) {
+    nav.main-nav { display: flex; }
+  }
+  .header-actions { display: flex; align-items: center; gap: 16px; }
+  .icon-btn {
+    color: var(--on-surface-variant);
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 9999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-btn:hover { background-color: var(--surface-variant); }
+
+  /* Main */
+  main {
+    flex-grow: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page-header {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .page-header h1 {
+    font-family: "Source Serif 4", serif;
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--on-surface);
+    margin: 0 0 24px 0;
+  }
+  @media (min-width: 640px) {
+    .page-header h1 { font-size: 48px; line-height: 56px; }
+  }
+  .page-header p {
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--on-surface-variant);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .entries {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  article.entry {
+    background-color: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    padding: 32px;
+    border-radius: 4px;
+    border-left: 4px solid var(--primary);
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  }
+  article.entry:hover {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  .entry-top {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  @media (min-width: 768px) {
+    .entry-top { flex-direction: row; align-items: baseline; }
+  }
+  .entry-title {
+    font-family: "Source Serif 4", serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 500;
+    color: var(--on-surface);
+    margin: 0;
+  }
+  .entry-author {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--on-surface-variant);
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .entry-type {
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--secondary);
+    background-color: var(--surface-container);
+    padding: 4px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    white-space: nowrap;
+  }
+  .entry-text {
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--on-surface);
+    margin-bottom: 24px;
+    padding-left: 16px;
+    border-left: 2px solid var(--outline-variant);
+    font-style: italic;
+    white-space: pre-line;
+  }
+  .entry-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--surface-variant);
+  }
+  .read-full {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .read-full:hover { text-decoration: underline; }
+
+  .status-msg {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    color: var(--on-surface-variant);
+    font-size: 16px;
+    padding: 48px 0;
+  }
+  .status-msg.error { color: var(--error); }
+
+  /* Footer */
+  footer {
+    background-color: var(--inverse-surface);
+    margin-top: auto;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 48px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) {
+    .footer-grid { grid-template-columns: repeat(4, 1fr); }
+    .footer-brand-col { grid-column: span 2; }
+  }
+  .footer-brand {
+    font-family: "Source Serif 4", serif;
+    font-size: 24px;
+    line-height: 32px;
+    color: #e9ddff;
+    margin-bottom: 16px;
+  }
+  .footer-desc {
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--surface-variant);
+    max-width: 420px;
+  }
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-col a {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--surface-variant);
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: #e9ddff; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <a class="brand" href="#">VIOLENCE AGAINST MEN EVIDENCE ARCHIVE</a>
+    </div>
+    <nav class="main-nav">
+      <a href="#">Statistics</a>
+      <a href="#">Law &amp; Policy</a>
+      <a href="#">News &amp; Judgments</a>
+      <a href="#">Countries</a>
+      <a href="#">About</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Search">
+        <span class="icon icon-search"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1>Expert Perspectives &amp; Field Insights</h1>
+    <p>
+      Qualitative evidence, practical observations, and direct commentary from researchers, legal professionals, and frontline practitioners working within the domain of violence against men. This archive compiles firsthand accounts to contextualize quantitative data. This also exposes the groups, peoples and ideologies obstructing the development of support system for male victims.
+    </p>
+  </div>
+
+  <div id="entries" class="entries">
+    <div class="status-msg" id="status-msg">Loading expert entries&hellip;</div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand-col">
+      <div class="footer-brand">VIOLENCE AGAINST MEN EVIDENCE ARCHIVE</div>
+      <p class="footer-desc">
+        &copy; 2024 Global Research Portal on Violence Against Men. All rights reserved. Institutional credibility through data-driven advocacy.
+      </p>
+    </div>
+    <div class="footer-col">
+      <a href="#">Explore</a>
+      <a href="#">Topics</a>
+      <a href="#">Resources</a>
+    </div>
+    <div class="footer-col">
+      <a href="#">Site Info</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Accessibility</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var BORDER_COLORS = ['#4f378a', '#c9a74d', '#63597c', '#765b00'];
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str == null ? '' : str;
+    return div.innerHTML;
+  }
+
+  function getText(parent, tagName) {
+    var el = parent.getElementsByTagName(tagName)[0];
+    return el ? el.textContent.trim() : '';
+  }
+
+  function renderError(msg) {
+    var statusEl = document.getElementById('status-msg');
+    if (statusEl) {
+      statusEl.textContent = msg;
+      statusEl.classList.add('error');
+    }
+  }
+
+  function renderEntries(pieces) {
+    var container = document.getElementById('entries');
+    container.innerHTML = '';
+
+    if (!pieces.length) {
+      var empty = document.createElement('div');
+      empty.className = 'status-msg';
+      empty.textContent = 'No expert entries found.';
+      container.appendChild(empty);
+      return;
+    }
+
+    pieces.forEach(function (piece, index) {
+      var type = piece.getAttribute('type') || '';
+      var head = getText(piece, 'head');
+      var author = getText(piece, 'author');
+      var text = getText(piece, 'text');
+      var url = getText(piece, 'url');
+
+      var color = BORDER_COLORS[index % BORDER_COLORS.length];
+
+      var article = document.createElement('article');
+      article.className = 'entry';
+      article.style.borderLeftColor = color;
+
+      var html = '';
+      html += '<div class="entry-top">';
+      html += '<div>';
+      html += '<h2 class="entry-title">' + escapeHtml(head) + '</h2>';
+      html += '<div class="entry-author"><span class="icon icon-person"></span>' + escapeHtml(author) + '</div>';
+      html += '</div>';
+      if (type) {
+        html += '<span class="entry-type">' + escapeHtml(type) + '</span>';
+      }
+      html += '</div>';
+      html += '<div class="entry-text">' + escapeHtml(text) + '</div>';
+      html += '<div class="entry-footer">';
+      if (url) {
+        html += '<a class="read-full" href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">Read Full <span class="icon icon-arrow"></span></a>';
+      }
+      html += '</div>';
+
+      article.innerHTML = html;
+      container.appendChild(article);
+    });
+  }
+
+  function loadExperts() {
+    fetch('experts.xml', { cache: 'no-cache' })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error('HTTP ' + response.status);
+        }
+        return response.text();
+      })
+      .then(function (xmlText) {
+        var parser = new DOMParser();
+        var xmlDoc = parser.parseFromString(xmlText, 'application/xml');
+
+        var parseError = xmlDoc.getElementsByTagName('parsererror')[0];
+        if (parseError) {
+          throw new Error('Could not parse experts.xml');
+        }
+
+        var pieces = xmlDoc.getElementsByTagName('piece');
+        renderEntries(Array.prototype.slice.call(pieces));
+      })
+      .catch(function (err) {
+        renderError('Unable to load expert entries (' + err.message + '). Please check that experts.xml is present in the same folder.');
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', loadExperts);
+})();
+</script>
+
+</body>
+</html>
