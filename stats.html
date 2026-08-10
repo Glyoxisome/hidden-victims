@@ -37,12 +37,44 @@
     border-bottom:1px solid var(--outline-variant);
     position:sticky;top:0;z-index:50;height:72px;
   }
-  header .container{display:flex;align-items:center;justify-content:space-between;height:100%;}
+  header{overflow:visible;}
+  header .container{display:flex;align-items:center;justify-content:space-between;height:100%;position:relative;gap:16px;}
   .logo{font-family:"Source Serif 4", serif;font-weight:700;font-size:20px;color:var(--primary);text-transform:uppercase;letter-spacing:0.02em;}
+  @media (max-width: 768px){
+    .logo{font-size:15px;line-height:19px;}
+  }
   nav{display:flex;gap:24px;}
   nav a{font-size:14px;font-weight:600;color:var(--on-surface-variant);padding-bottom:4px;border-bottom:2px solid transparent;}
   nav a.active{color:var(--primary);border-bottom-color:var(--primary);}
-  @media (max-width: 768px){ nav{display:none;} }
+
+  .nav-toggle{
+    display:none;align-items:center;justify-content:center;
+    width:40px;height:40px;background:none;border:1px solid var(--outline-variant);
+    border-radius:6px;cursor:pointer;padding:0;flex-shrink:0;
+  }
+  .nav-toggle span{display:block;width:20px;height:2px;background:var(--on-surface);position:relative;}
+  .nav-toggle span::before,.nav-toggle span::after{
+    content:"";position:absolute;left:0;width:20px;height:2px;background:var(--on-surface);transition:transform .2s ease;
+  }
+  .nav-toggle span::before{top:-6px;}
+  .nav-toggle span::after{top:6px;}
+
+  @media (max-width: 768px){
+    .nav-toggle{display:flex;}
+    nav{
+      display:flex;flex-direction:column;gap:0;
+      position:absolute;top:72px;left:0;right:0;
+      background:var(--surface);border-bottom:1px solid var(--outline-variant);
+      max-height:0;overflow:hidden;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+    nav.open{max-height:400px;}
+    nav a{
+      padding:14px 32px;border-bottom:1px solid var(--outline-variant);
+      width:100%;
+    }
+    nav a.active{border-bottom-color:var(--outline-variant);background:var(--surface-container-low);}
+  }
 
   main{flex:1;padding-bottom:96px;}
 
@@ -151,7 +183,7 @@
 <header>
   <div class="container">
     <a class="logo" href="/">Violence Against Men Evidence Archive</a>
-    <nav>
+    <nav id="mainNav">
 	<a href="index.html">Home</a>
       <a class="active" href="/statistics">Statistics</a>
       <a href="/law-policy">Law &amp; Policy</a>
@@ -159,6 +191,9 @@
       <a href="faq.html">FAQs</a>
       <a href="/communities">Communities</a>
     </nav>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span>
+    </button>
   </div>
 </header>
 
@@ -237,6 +272,30 @@
       return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
     });
   }
+
+  // ---- Mobile nav toggle ----
+  (function(){
+    var toggleBtn = document.getElementById("navToggle");
+    var mainNav = document.getElementById("mainNav");
+    if(!toggleBtn || !mainNav) return;
+    toggleBtn.addEventListener("click", function(e){
+      e.stopPropagation();
+      var isOpen = mainNav.classList.toggle("open");
+      toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+    mainNav.querySelectorAll("a").forEach(function(link){
+      link.addEventListener("click", function(){
+        mainNav.classList.remove("open");
+        toggleBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+    document.addEventListener("click", function(e){
+      if(!mainNav.contains(e.target) && e.target !== toggleBtn && !toggleBtn.contains(e.target)){
+        mainNav.classList.remove("open");
+        toggleBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  })();
 
   function getAttr(el, name){
     return el.getAttribute(name) ? el.getAttribute(name).trim() : "";

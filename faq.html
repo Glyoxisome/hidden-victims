@@ -28,16 +28,46 @@
 
   header{
     background:var(--surface); border-bottom:1px solid var(--outline-variant);
-    position:sticky; top:0; z-index:50; height:72px;
+    position:sticky; top:0; z-index:50; height:72px; overflow:visible;
   }
   .header-inner{
     display:flex; justify-content:space-between; align-items:center;
     max-width:1200px; margin:0 auto; padding:0 32px; height:100%;
+    position:relative; gap:12px;
   }
   .brand{ font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--primary); font-size:18px; }
+  @media (max-width: 767px){ .brand{ font-size:15px; } }
   nav.top-nav{ display:flex; gap:24px; }
   nav.top-nav a{ color:var(--on-surface-variant); font-size:14px; font-weight:600; font-family: Arial, sans-serif; }
   nav.top-nav a.active{ color:var(--primary); border-bottom:2px solid var(--primary); padding-bottom:2px; }
+
+  .nav-toggle{
+    display:none;align-items:center;justify-content:center;
+    width:40px;height:40px;background:none;border:1px solid var(--outline-variant);
+    border-radius:9999px;cursor:pointer;padding:0;flex-shrink:0;
+  }
+  .nav-toggle span{display:block;width:18px;height:2px;background:var(--on-surface);position:relative;}
+  .nav-toggle span::before,.nav-toggle span::after{
+    content:"";position:absolute;left:0;width:18px;height:2px;background:var(--on-surface);
+  }
+  .nav-toggle span::before{top:-6px;}
+  .nav-toggle span::after{top:6px;}
+
+  @media (max-width: 767px){
+    .nav-toggle{ display:flex; }
+    nav.top-nav{
+      display:flex;flex-direction:column;gap:0;
+      position:absolute;top:72px;left:0;right:0;
+      background:var(--surface);border-bottom:1px solid var(--outline-variant);
+      max-height:0;overflow:hidden;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+    nav.top-nav.open{ max-height:400px; }
+    nav.top-nav a{
+      padding:14px 32px;border-bottom:1px solid var(--outline-variant);width:100%;
+    }
+    nav.top-nav a.active{ border-bottom:1px solid var(--outline-variant); background:var(--surface-container-low); }
+  }
 
   main{ flex:1; width:100%; max-width:1200px; margin:0 auto; padding:64px 32px; }
   .intro{ max-width:720px; margin-bottom:64px; }
@@ -109,7 +139,7 @@
 <header>
   <div class="header-inner">
     <span class="brand">Violence Against Men Evidence Archive</span>
-    <nav class="top-nav">
+    <nav class="top-nav" id="mainNav">
  <a href="index.html">Home</a>
 
       <a href="stats.html">Statistics</a>
@@ -118,6 +148,9 @@
       <a href="#" class="active">FAQs</a>
       <a href="#">Communities</a>
     </nav>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span>
+    </button>
   </div>
 </header>
 
@@ -259,6 +292,30 @@
       sec.style.display = show ? '' : 'none';
     });
   }
+
+  // ---- Mobile nav toggle ----
+  (function(){
+    var toggleBtn = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    if(!toggleBtn || !mainNav) return;
+    toggleBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = mainNav.classList.toggle('open');
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    mainNav.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        mainNav.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('click', function(e){
+      if(!mainNav.contains(e.target) && e.target !== toggleBtn && !toggleBtn.contains(e.target)){
+        mainNav.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
 })();
 </script>
 
