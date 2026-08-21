@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <stats>
 <stat type="Resources" cn="USA" date="2024" org="blank">
 <h>Domestic Shelters: 2,500 for Women vs. 2 for Men</h>
@@ -540,5 +540,35 @@ g) Harass, threaten or penalize researchers who publish evidence on gender symme
 <h>Australian Surveys Show Near-Equal Online Abuse Rates Between Men and Women</h>
 <text>Australian surveys show little to no consistent sex difference in online abuse: RMIT 2015 - men 60%, women 60%; Norton 2016 - men 54%, women 50%; ANROWS 2022 - men 51%, women 51%. For the past 12 months, the Australian Institute of Criminology (2022) found men at 28% and women at 25%.</text>
 <url>https://jameslnuzzo.substack.com/p/online-harassment-victimization</url>
+</stat>
+
+<stat type="Online Violence" cn="UK" date="2025" org="Ofcom">
+<h>Online harm has no gender</h>
+<text>66% of men (65% women) had seen an online harm in the past four weeks</text>
+<url>https://www.ofcom.org.uk/siteassets/resources/documents/research-and-data/online-research/online-nation/2025/online-nations-report-2025.pdf?v=408963#:~:text=Only%2033%25%20felt%20the%20internet,from%2071%25%20in%20June%202023.</url>
+</stat>
+
+<stat type="Online Violence" cn="UK" date="2025" org="Ofcom">
+<h>Boys suffer similar amount of online harms as girls.</h>
+<text>Online Harm: Boys aged 11-17 see on average 4.28 of 9 types of different online harms in the past four weeks (3.9 for girls)</text>
+<url>https://www.ofcom.org.uk/media-use-and-attitudes/online-habits/childrens-experiences-of-using-online-services</url>
+</stat>
+
+<stat type="Online Violence" cn="UK" date="2024" org="The Alan Turing Institute">
+<h>Threats of real life violence in online medium</h>
+<text> 6% of men (3.5% women) have been threatened with physical violence online </text>
+<url>https://www.turing.ac.uk/sites/default/files/2024-03/understanding_gender_differences_in_experiences_and_concerns_surrounding_online_harms_-_a_nationally_representative_survey_of_uk_adults.pdf</url>
+</stat>
+
+<stat type="Sexual Violence" cn="UK" date="2026" org="Centre of expertise on child sexual abuse">
+<h>Underrporting of sexual violence by children</h>
+<text>70% of boys and over 50% of girls told no one about their abuse at the time, often because of embarrassment or shame, fear of not being believed, or self-blame.</text>
+<url>https://www.csacentre.org.uk/blog/new-scale-and-nature-report-announcement/</url>
+</stat>
+
+<stat type="Sexual Violence" cn="UK" date="2025" org="Office for National Statistics">
+<h>Underreporting of Child sexual abuse</h>
+<text>70% of male victims of child sexual abuse told no one compared to 55% of femlae victims who told no one</text>
+<url>ONS 2025</url>
 </stat>
 </stats>
