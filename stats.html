@@ -104,6 +104,16 @@
   #searchInput:focus{outline:none;border-color:var(--primary);}
   .result-count{margin-top:12px;font-size:13px;color:var(--on-surface-variant);text-align:center;}
 
+  /* Category tabs (hardcoded categories) */
+  .category-tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:0 auto 24px;padding:0 32px;max-width:1200px;}
+  .category-tab{
+    padding:10px 20px;border-radius:20px;font-size:14px;font-weight:600;
+    background:var(--surface);color:var(--on-surface-variant);
+    border:1px solid var(--outline-variant);cursor:pointer;font-family:inherit;
+  }
+  .category-tab:hover{border-color:var(--primary);color:var(--primary);}
+  .category-tab.active{background:var(--primary);color:var(--on-primary);border-color:var(--primary);}
+
   /* Filters */
   .filters{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:0 auto 48px;padding:0 32px;max-width:1200px;}
   .filter-group{position:relative;}
@@ -198,6 +208,9 @@
     .search-icon{left:12px;font-size:15px;}
     .result-count{font-size:12px;margin-top:8px;}
 
+    .category-tabs{gap:6px;margin-bottom:16px;padding:0 16px;}
+    .category-tab{padding:7px 14px;font-size:12px;}
+
     .filters{gap:8px;margin-bottom:28px;padding:0 16px;}
     .filter-btn{padding:7px 12px;font-size:12px;gap:5px;}
     .sort-group select{padding:7px 10px;font-size:12px;}
@@ -263,11 +276,9 @@
     <div class="result-count" id="resultCount"></div>
   </section>
 
+  <section class="category-tabs" id="categoryTabs"></section>
+
   <section class="filters">
-    <div class="filter-group" id="categoryGroup" data-key="type">
-      <button class="filter-btn" id="categoryBtn">Category <span class="chevron">&#9660;</span></button>
-      <div class="filter-menu" id="categoryMenu"></div>
-    </div>
     <div class="filter-group" id="countryGroup" data-key="cn">
       <button class="filter-btn" id="countryBtn">Country <span class="chevron">&#9660;</span></button>
       <div class="filter-menu" id="countryMenu"></div>
@@ -303,15 +314,24 @@
 (function(){
   "use strict";
 
-  // ---- Config ----
-  var XML_PATH = "dvstat.xml";
-  // Name of the child element holding the full body text of each entry.
-  // Change this single constant if the element name differs from "text".
-  var TEXT_TAG = "text";
+  // ---- Config: hardcoded categories ----
+  // Add / edit entries here as needed. Format: ["Display Name", "path/to/file.data"]
+  var CATEGORIES = [
+    ["Resources", "resources/stats.data"],
+    ["Systemic Response", "systemic-response/stats.data"],
+    ["Education", "education/stats.data"],
+    ["Health", "health/stats.data"]
+  ];
 
-  var allEntries = [];
-  var state = { type: "", cn: "", org: "", query: "", sort: "date-desc" };
+  // In-memory cache: path -> parsed entries array. Persists only for this page load;
+  // resets on refresh, reused when switching back to an already-loaded category.
+  var dataCache = {};
 
+  var allEntries = [];              // entries for the currently loaded category
+  var currentCategoryIndex = 0;     // index into CATEGORIES currently displayed
+  var state = { cn: "", org: "", query: "", sort: "date-desc" };
+
+  var categoryTabs = document.getElementById("categoryTabs");
   var cardsContainer = document.getElementById("cardsContainer");
   var statusMsg = document.getElementById("statusMsg");
   var resultCount = document.getElementById("resultCount");
@@ -349,19 +369,9 @@
     });
   })();
 
-  function getAttr(el, name){
-    return el.getAttribute(name) ? el.getAttribute(name).trim() : "";
-  }
-
-  function getChildText(el, tag){
-    var node = el.getElementsByTagName(tag)[0];
-    return node ? node.textContent.trim() : "";
-  }
-
-  // ---- Load & parse XML ----
-function fixUrl(href) {
+  function fixUrl(href) {
     if (!href) return href;
-
+    if (href.toLowerCase() === "blank") return href;
     if (
         href.startsWith("http://") ||
         href.startsWith("https://") ||
@@ -375,54 +385,136 @@ function fixUrl(href) {
     ) {
         return href;
     }
-
     return "https://" + href;
-}
+  }
 
-  function loadData(){
-    fetch(XML_PATH)
+  // ---- Parse the custom .data format ----
+  // Recognized line prefixes: "H:", "T:", "C:", "D:", "O:", "B:", "U:"
+  // Entries are separated by a line containing only "---".
+  // "B:" bodies can span multiple lines: everything up to the next recognized
+  // tag line or the "---" delimiter is treated as part of the body.
+  var TAG_RE = /^(H|T|C|D|O|B|U):\s?(.*)$/;
+
+  function parseDataFormat(raw){
+    var lines = raw.split(/\r\n|\r|\n/);
+    var entries = [];
+    var current = null;
+    var activeField = null; // which field is currently accumulating multiline text (only "B")
+
+    function pushCurrent(){
+      if(current){
+        entries.push({
+          type: (current.T || "").trim(),
+          cn: (current.C || "").trim(),
+          date: (current.D || "").trim(),
+          org: (current.O || "").trim(),
+          heading: (current.H || "").trim(),
+          text: (current.B || "").replace(/\s+$/,""),
+          url: fixUrl((current.U || "").trim())
+        });
+      }
+      current = null;
+      activeField = null;
+    }
+
+    for(var i=0;i<lines.length;i++){
+      var line = lines[i];
+
+      if(line.trim() === "---"){
+        pushCurrent();
+        continue;
+      }
+
+      var match = line.match(TAG_RE);
+      if(match){
+        if(!current) current = {};
+        var key = match[1];
+        var value = match[2];
+        current[key] = value;
+        activeField = (key === "B") ? "B" : null;
+      } else if(activeField === "B" && current){
+        // continuation line of a multiline body
+        current.B = (current.B || "") + "\n" + line;
+      }
+      // lines outside any entry / not matching a tag and not in a "B" continuation are ignored
+    }
+    // handle a trailing entry with no closing "---"
+    if(current && (current.H || current.T || current.B)){
+      pushCurrent();
+    }
+
+    return entries.filter(function(e){ return e.heading || e.text; });
+  }
+
+  // ---- Render category tabs ----
+  function renderCategoryTabs(){
+    categoryTabs.innerHTML = "";
+    CATEGORIES.forEach(function(cat, idx){
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "category-tab" + (idx === currentCategoryIndex ? " active" : "");
+      btn.textContent = cat[0];
+      btn.addEventListener("click", function(){
+        if(idx === currentCategoryIndex) return;
+        currentCategoryIndex = idx;
+        renderCategoryTabs();
+        loadCategory(idx);
+      });
+      categoryTabs.appendChild(btn);
+    });
+  }
+
+  // ---- Load a category's .data file (uses cache if already fetched) ----
+  function loadCategory(idx){
+    var cat = CATEGORIES[idx];
+    if(!cat) return;
+    var path = cat[1];
+
+    // Reset filters/search when switching categories (country/org lists are per-category)
+    state.cn = ""; state.org = ""; state.query = ""; 
+    searchInput.value = "";
+    updateFilterButtonLabel("cn","countryBtn","Country","");
+    updateFilterButtonLabel("org","orgBtn","Organization","");
+
+    if(dataCache[path]){
+      allEntries = dataCache[path];
+      buildFilterOptions();
+      render();
+      return;
+    }
+
+    statusMsg.textContent = "Loading statistics…";
+    cardsContainer.innerHTML = "";
+    cardsContainer.appendChild(statusMsg);
+
+    fetch(path)
       .then(function(res){
         if(!res.ok) throw new Error("HTTP " + res.status);
         return res.text();
       })
-      .then(function(xmlText){
-        var parser = new DOMParser();
-        var xmlDoc = parser.parseFromString(xmlText, "application/xml");
-        var parseError = xmlDoc.getElementsByTagName("parsererror");
-        if(parseError.length){
-          throw new Error("Malformed XML in " + XML_PATH);
-        }
-        var statNodes = xmlDoc.getElementsByTagName("stat");
-        allEntries = [];
-        for(var i=0;i<statNodes.length;i++){
-          var s = statNodes[i];
-          var entry = {
-            type: getAttr(s, "type"),
-            cn: getAttr(s, "cn"),
-            date: getAttr(s, "date"),
-            org: getAttr(s, "org"),
-            heading: getChildText(s, "h"),
-            text: getChildText(s, TEXT_TAG),
-            url: fixUrl(getChildText(s, "url"))
-          };
-          allEntries.push(entry);
-        }
+      .then(function(raw){
+        var entries = parseDataFormat(raw);
+        dataCache[path] = entries;
+        allEntries = entries;
         if(allEntries.length === 0){
-          statusMsg.textContent = "No entries found in " + XML_PATH + ".";
+          statusMsg.textContent = "No entries found in " + path + ".";
+          cardsContainer.innerHTML = "";
+          cardsContainer.appendChild(statusMsg);
           return;
         }
         buildFilterOptions();
         render();
       })
       .catch(function(err){
-        statusMsg.textContent = "Could not load statistics data (" + err.message + "). Make sure " + XML_PATH + " is in the same directory.";
+        statusMsg.textContent = "Could not load statistics data (" + err.message + "). Make sure " + path + " exists.";
+        cardsContainer.innerHTML = "";
+        cardsContainer.appendChild(statusMsg);
         console.error(err);
       });
   }
 
-  // ---- Filters: build options dynamically from loaded data ----
+  // ---- Filters: Country / Organization, built from the current category's entries ----
   function buildFilterOptions(){
-    buildOptionList("type", "categoryMenu", "categoryBtn", "Category");
     buildOptionList("cn", "countryMenu", "countryBtn", "Country");
     buildOptionList("org", "orgMenu", "orgBtn", "Organization");
   }
@@ -489,9 +581,8 @@ function fixUrl(href) {
   document.addEventListener("click", closeAllFilterMenus);
 
   clearFiltersBtn.addEventListener("click", function(){
-    state.type = ""; state.cn = ""; state.org = ""; state.query = "";
+    state.cn = ""; state.org = ""; state.query = "";
     searchInput.value = "";
-    updateFilterButtonLabel("type","categoryBtn","Category","");
     updateFilterButtonLabel("cn","countryBtn","Country","");
     updateFilterButtonLabel("org","orgBtn","Organization","");
     buildFilterOptions();
@@ -530,7 +621,6 @@ function fixUrl(href) {
 
   function getFiltered(){
     return allEntries.filter(function(e){
-      if(state.type && e.type !== state.type) return false;
       if(state.cn && e.cn !== state.cn) return false;
       if(state.org && e.org !== state.org) return false;
       if(!matchesQuery(e, state.query)) return false;
@@ -570,8 +660,10 @@ function fixUrl(href) {
       var metaParts = [];
       if(e.cn) metaParts.push(escapeHtml(e.cn));
       if(e.date) metaParts.push(escapeHtml(e.date));
-      if(e.org) metaParts.push(escapeHtml(e.org));
+      if(e.org && e.org.toLowerCase() !== "blank") metaParts.push(escapeHtml(e.org));
       var meta = metaParts.join(" &middot; ");
+
+      var hasUrl = e.url && e.url.toLowerCase() !== "blank";
 
       return '' +
       '<div class="card" data-idx="' + idx + '">' +
@@ -585,7 +677,7 @@ function fixUrl(href) {
             '<span class="chevron">&#9660;</span><span class="label">Expand</span>' +
           '</button>' +
           '<div class="card-text">' + escapeHtml(e.text) + '</div>' +
-          (e.url ? '<div class="card-url">&#128279; <a href="' + escapeHtml(e.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(e.url) + '</a></div>' : '') +
+          (hasUrl ? '<div class="card-url">&#128279; <a href="' + escapeHtml(e.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(e.url) + '</a></div>' : '') +
         '</div>' +
       '</div>';
     }).join("");
@@ -601,7 +693,9 @@ function fixUrl(href) {
     });
   }
 
-  loadData();
+  // ---- Init ----
+  renderCategoryTabs();
+  loadCategory(currentCategoryIndex);
 })();
 </script>
 </body>
