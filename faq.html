@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frequently Asked Questions | Violence Against Men Evidence Archive</title>
+<style>
+  :root{
+    --primary:#4f378a;
+    --on-primary:#ffffff;
+    --on-surface:#1d1b20;
+    --on-surface-variant:#494551;
+    --surface:#fdf7ff;
+    --surface-container-lowest:#ffffff;
+    --surface-container-low:#f8f2fa;
+    --outline-variant:#cbc4d2;
+    --inverse-surface:#322f35;
+    --primary-fixed:#e9ddff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:#F7F7F5; color:var(--on-surface);
+    font-family: Georgia, "Times New Roman", serif;
+    display:flex; flex-direction:column; min-height:100vh;
+  }
+  h1,h2,h3{ font-family: Georgia, "Times New Roman", serif; }
+  a{ text-decoration:none; }
+
+  header{
+    background:var(--surface); border-bottom:1px solid var(--outline-variant);
+    position:sticky; top:0; z-index:50; height:72px; overflow:visible;
+  }
+  .header-inner{
+    display:flex; justify-content:space-between; align-items:center;
+    max-width:1200px; margin:0 auto; padding:0 32px; height:100%;
+    position:relative; gap:12px;
+  }
+  .brand{ font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--primary); font-size:18px; }
+  @media (max-width: 767px){ .brand{ font-size:15px; } }
+  nav.top-nav{ display:flex; gap:24px; }
+  nav.top-nav a{ color:var(--on-surface-variant); font-size:14px; font-weight:600; font-family: Arial, sans-serif; }
+  nav.top-nav a.active{ color:var(--primary); border-bottom:2px solid var(--primary); padding-bottom:2px; }
+
+  .nav-toggle{
+    display:none;align-items:center;justify-content:center;
+    width:40px;height:40px;background:none;border:1px solid var(--outline-variant);
+    border-radius:9999px;cursor:pointer;padding:0;flex-shrink:0;
+  }
+  .nav-toggle span{display:block;width:18px;height:2px;background:var(--on-surface);position:relative;}
+  .nav-toggle span::before,.nav-toggle span::after{
+    content:"";position:absolute;left:0;width:18px;height:2px;background:var(--on-surface);
+  }
+  .nav-toggle span::before{top:-6px;}
+  .nav-toggle span::after{top:6px;}
+
+  @media (max-width: 767px){
+    .nav-toggle{ display:flex; }
+    nav.top-nav{
+      display:flex;flex-direction:column;gap:0;
+      position:absolute;top:72px;left:0;right:0;
+      background:var(--surface);border-bottom:1px solid var(--outline-variant);
+      max-height:0;overflow:hidden;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+    nav.top-nav.open{ max-height:400px; }
+    nav.top-nav a{
+      padding:14px 32px;border-bottom:1px solid var(--outline-variant);width:100%;
+    }
+    nav.top-nav a.active{ border-bottom:1px solid var(--outline-variant); background:var(--surface-container-low); }
+  }
+
+  main{ flex:1; width:100%; max-width:1200px; margin:0 auto; padding:64px 32px; }
+  .intro{ max-width:720px; margin-bottom:64px; }
+  .intro h1{ font-size:40px; margin:0 0 16px; }
+  .intro p{ font-size:18px; line-height:1.6; color:var(--on-surface-variant); font-family: Arial, sans-serif; }
+
+  .layout{ display:grid; grid-template-columns: 1fr; gap:24px; }
+  @media (min-width: 768px){
+    .layout{ grid-template-columns: 250px 1fr; }
+  }
+
+  aside{ display:none; }
+  @media (min-width: 768px){
+    aside{ display:block; }
+  }
+  aside nav{ position:sticky; top:96px; display:flex; flex-direction:column; gap:4px; }
+  .cat-link{
+    font-family: Arial, sans-serif; font-size:14px; font-weight:600;
+    color:var(--on-surface-variant); border-left:2px solid transparent;
+    padding:6px 0 6px 16px; cursor:pointer; background:none; text-align:left; width:100%;
+  }
+  .cat-link:hover{ border-left-color:var(--outline-variant); }
+  .cat-link.active{ color:var(--primary); border-left-color:var(--primary); }
+
+  .mobile-cats{ display:flex; gap:8px; overflow-x:auto; margin-bottom:32px; }
+  @media (min-width: 768px){ .mobile-cats{ display:none; } }
+  .mobile-cats button{
+    font-family: Arial, sans-serif; font-size:13px; font-weight:600; white-space:nowrap;
+    padding:8px 14px; border-radius:999px; border:1px solid var(--outline-variant);
+    background:var(--surface-container-lowest); color:var(--on-surface-variant); cursor:pointer;
+  }
+  .mobile-cats button.active{ background:var(--primary); color:var(--on-primary); border-color:var(--primary); }
+
+  section.cat-section{ margin-bottom:48px; }
+  section.cat-section h2{
+    font-size:26px; margin:0 0 24px; padding-bottom:12px; border-bottom:1px solid var(--outline-variant);
+  }
+  .qa-list{ display:flex; flex-direction:column; gap:16px; }
+
+  details{
+    background:var(--surface-container-lowest); border:1px solid var(--outline-variant);
+    border-radius:4px; overflow:hidden;
+  }
+  summary{
+    list-style:none; cursor:pointer; padding:20px 24px;
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+  }
+  summary::-webkit-details-marker{ display:none; }
+  summary h3{ font-size:17px; margin:0; font-weight:500; }
+  .chevron{ transition:transform 0.2s ease-in-out; flex-shrink:0; color:var(--on-surface-variant); }
+  details[open] .chevron{ transform:rotate(180deg); }
+  .answer{
+    padding:0 24px 20px; border-top:1px solid var(--outline-variant); margin-top:0;
+    font-family: Arial, sans-serif; color:var(--on-surface-variant); font-size:15px; line-height:1.7;
+  }
+  .answer p{ margin:16px 0 0; }
+
+  .empty-state{ font-family: Arial, sans-serif; color:var(--on-surface-variant); padding:32px 0; }
+
+  footer{ background:var(--inverse-surface); margin-top:auto; }
+  .footer-inner{
+    max-width:1200px; margin:0 auto; padding:48px 32px; color:#e6e0e9;
+    font-family: Arial, sans-serif; font-size:13px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="brand">Violence Against Men Evidence Archive</span>
+    <nav class="top-nav" id="mainNav">
+ <a href="index.html">Home</a>
+
+      <a href="stats.html">Statistics</a>
+      <a href="#">Law &amp; Policy</a>
+      <a href="experts.html">Experts</a>
+      <a href="#" class="active">FAQs</a>
+      <a href="#">Communities</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="intro">
+    <h1>Frequently Asked Questions</h1>
+    <p>Understanding the "claims" regarding male victims. Answering the most frequently asked questions with respect to male victimization.</p>
+  </div>
+
+  <div class="mobile-cats" id="mobileCats"></div>
+
+  <div class="layout">
+    <aside>
+      <nav id="sidebarNav"></nav>
+    </aside>
+    <div id="content">
+      <p class="empty-state">Loading FAQ content&hellip;</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    © 2024 Global Research Portal on Violence Against Men. All rights reserved.
+  </div>
+</footer>
+
+<script>
+(function(){
+  var content = document.getElementById('content');
+  var sidebarNav = document.getElementById('sidebarNav');
+  var mobileCats = document.getElementById('mobileCats');
+  var categories = []; // { id, name, questions:[{q,a}] }
+
+  fetch('qa.xml')
+    .then(function(res){
+      if(!res.ok) throw new Error('Failed to load qa.xml (' + res.status + ')');
+      return res.text();
+    })
+    .then(function(xmlText){
+      var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+      var parseError = xml.querySelector('parsererror');
+      if(parseError) throw new Error('qa.xml is not valid XML');
+
+      var catNodes = xml.getElementsByTagName('cat');
+      for(var i = 0; i < catNodes.length; i++){
+        var catNode = catNodes[i];
+        var name = catNode.getAttribute('name') || ('Category ' + (i+1));
+        var id = 'cat-' + (i+1) + '-' + slugify(name);
+        var questions = [];
+        var qNodes = catNode.getElementsByTagName('q');
+        for(var j = 0; j < qNodes.length; j++){
+          var qNode = qNodes[j];
+          var ansNode = qNode.getElementsByTagName('ans')[0];
+          var ansText = ansNode ? ansNode.textContent.trim() : '';
+          var qText = getDirectText(qNode).trim();
+          questions.push({ q: qText, a: ansText });
+        }
+        categories.push({ id: id, index: i + 1, name: name, questions: questions });
+      }
+
+      render();
+    })
+    .catch(function(err){
+      content.innerHTML = '<p class="empty-state">Could not load FAQ data: ' + escapeHtml(err.message) + '</p>';
+      console.error(err);
+    });
+
+  // Text directly inside <q>, excluding text inside child elements like <ans>
+  function getDirectText(node){
+    var text = '';
+    node.childNodes.forEach(function(child){
+      if(child.nodeType === Node.TEXT_NODE) text += child.textContent;
+    });
+    return text;
+  }
+
+  function slugify(str){
+    return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
+  function escapeHtml(str){
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function render(){
+    // Sidebar: "All" first, always
+    var sidebarHtml = '<button class="cat-link active" data-filter="all">All</button>';
+    var mobileHtml = '<button class="active" data-filter="all">All</button>';
+    categories.forEach(function(cat){
+      sidebarHtml += '<button class="cat-link" data-filter="' + cat.id + '">' + escapeHtml(cat.name) + '</button>';
+      mobileHtml += '<button data-filter="' + cat.id + '">' + escapeHtml(cat.name) + '</button>';
+    });
+    sidebarNav.innerHTML = sidebarHtml;
+    mobileCats.innerHTML = mobileHtml;
+
+    // Content sections
+    var contentHtml = '';
+    categories.forEach(function(cat){
+      contentHtml += '<section class="cat-section" id="' + cat.id + '" data-cat="' + cat.id + '">';
+      contentHtml += '<h2>' + escapeHtml(cat.name) + '</h2>';
+      contentHtml += '<div class="qa-list">';
+      cat.questions.forEach(function(item){
+        contentHtml += '<details>';
+        contentHtml += '<summary><h3>' + escapeHtml(item.q) + '</h3>';
+        contentHtml += '<svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+        contentHtml += '</summary>';
+        contentHtml += '<div class="answer"><p>' + escapeHtml(item.a) + '</p></div>';
+        contentHtml += '</details>';
+      });
+      contentHtml += '</div></section>';
+    });
+    content.innerHTML = contentHtml || '<p class="empty-state">No FAQ entries found.</p>';
+
+    // Click handling — event delegation
+    document.addEventListener('click', handleFilterClick);
+  }
+
+  function handleFilterClick(e){
+    var btn = e.target.closest('[data-filter]');
+    if(!btn) return;
+    e.preventDefault();
+    var filter = btn.getAttribute('data-filter');
+    setActiveButtons(filter);
+    filterSections(filter);
+  }
+
+  function setActiveButtons(filter){
+    document.querySelectorAll('[data-filter]').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-filter') === filter);
+    });
+  }
+
+  function filterSections(filter){
+    document.querySelectorAll('.cat-section').forEach(function(sec){
+      var show = filter === 'all' || sec.getAttribute('data-cat') === filter;
+      sec.style.display = show ? '' : 'none';
+    });
+  }
+
+  // ---- Mobile nav toggle ----
+  (function(){
+    var toggleBtn = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    if(!toggleBtn || !mainNav) return;
+    toggleBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = mainNav.classList.toggle('open');
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    mainNav.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        mainNav.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('click', function(e){
+      if(!mainNav.contains(e.target) && e.target !== toggleBtn && !toggleBtn.contains(e.target)){
+        mainNav.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+})();
+</script>
+
+</body>
+</html>
