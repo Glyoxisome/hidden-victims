@@ -273,6 +273,72 @@
     .page-header p { font-size: 18px; line-height: 28px; }
   }
 
+  .controls-bar {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .sort-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+  }
+  #sort-select {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--on-surface);
+    background-color: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  #sort-select:hover { border-color: var(--primary); }
+
+  .progress-wrap {
+    width: 100%;
+    max-width: 900px;
+    margin: 12px 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .progress-track {
+    width: 100%;
+    max-width: 320px;
+    height: 4px;
+    background-color: var(--surface-variant);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 30%;
+    background-color: var(--primary);
+    border-radius: 4px;
+    animation: progress-slide 1.1s ease-in-out infinite;
+  }
+  @keyframes progress-slide {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(400%); }
+  }
+  .progress-label {
+    font-size: 14px;
+    color: var(--on-surface-variant);
+  }
+  .progress-wrap.fade-out {
+    animation: fade-out 0.3s ease forwards;
+  }
+  @keyframes fade-out {
+    to { opacity: 0; height: 0; margin: 0; overflow: hidden; }
+  }
+
   .entries {
     width: 100%;
     max-width: 900px;
@@ -496,9 +562,23 @@
     </p>
   </div>
 
-  <div id="entries" class="entries">
-    <div class="status-msg" id="status-msg">Loading expert entries&hellip;</div>
+  <div class="controls-bar" id="controls-bar" style="display:none;">
+    <label class="sort-label" for="sort-select">Sort by Type</label>
+    <select id="sort-select">
+      <option value="none">Original order</option>
+      <option value="type-asc">Type (A&ndash;Z)</option>
+      <option value="type-desc">Type (Z&ndash;A)</option>
+    </select>
   </div>
+
+  <div class="progress-wrap" id="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="progress-label" id="progress-label">Fetching expert entries&hellip;</div>
+  </div>
+
+  <div id="entries" class="entries"></div>
 </main>
 
 <footer>
@@ -525,7 +605,13 @@
 
 <script>
 (function () {
+  "use strict";
+
+  var DATA_PATH = 'experts.data';
   var BORDER_COLORS = ['#4f378a', '#c9a74d', '#63597c', '#765b00'];
+
+  var allEntries = [];
+  var currentSort = 'none';
 
   function escapeHtml(str) {
     var div = document.createElement('div');
@@ -533,22 +619,86 @@
     return div.innerHTML;
   }
 
-  function getText(parent, tagName) {
-    var el = parent.getElementsByTagName(tagName)[0];
-    return el ? el.textContent.trim() : '';
+  // ---- Parse the custom .data format ----
+  // Recognized line prefixes: "H:", "T:", "A:", "B:", "U:"
+  // Entries are separated by a line containing only "---".
+  // "B:" (body text) can span multiple lines: everything up to the next
+  // recognized tag line or the "---" delimiter is treated as part of the body.
+  var TAG_RE = /^(H|T|A|B|U):\s?(.*)$/;
+
+  function parseDataFormat(raw) {
+    var lines = raw.split(/\r\n|\r|\n/);
+    var entries = [];
+    var current = null;
+    var activeField = null; // only "B" accumulates multiline text
+
+    function pushCurrent() {
+      if (current) {
+        entries.push({
+          head: (current.H || '').trim(),
+          type: (current.T || '').trim(),
+          author: (current.A || '').trim(),
+          text: (current.B || '').replace(/\s+$/, ''),
+          url: (current.U || '').trim()
+        });
+      }
+      current = null;
+      activeField = null;
+    }
+
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+
+      if (line.trim() === '---') {
+        pushCurrent();
+        continue;
+      }
+
+      var match = line.match(TAG_RE);
+      if (match) {
+        if (!current) current = {};
+        var key = match[1];
+        var value = match[2];
+        current[key] = value;
+        activeField = (key === 'B') ? 'B' : null;
+      } else if (activeField === 'B' && current) {
+        current.B = (current.B || '') + '\n' + line;
+      }
+      // lines outside any entry, or not matching a tag and not a "B"
+      // continuation, are ignored
+    }
+    if (current && (current.H || current.T || current.B)) {
+      pushCurrent();
+    }
+
+    return entries.filter(function (e) { return e.head || e.text; });
   }
 
   function renderError(msg) {
-    var statusEl = document.getElementById('status-msg');
-    if (statusEl) {
-      statusEl.textContent = msg;
-      statusEl.classList.add('error');
-    }
-  }
-
-  function renderEntries(pieces) {
+    hideProgress();
     var container = document.getElementById('entries');
     container.innerHTML = '';
+    var errEl = document.createElement('div');
+    errEl.className = 'status-msg error';
+    errEl.textContent = msg;
+    container.appendChild(errEl);
+  }
+
+  function getSortedEntries() {
+    var list = allEntries.slice();
+    if (currentSort === 'type-asc') {
+      list.sort(function (a, b) { return a.type.localeCompare(b.type); });
+    } else if (currentSort === 'type-desc') {
+      list.sort(function (a, b) { return b.type.localeCompare(a.type); });
+    }
+    return list;
+  }
+
+  function renderEntries() {
+    var container = document.getElementById('entries');
+    container.innerHTML = '';
+
+    var pieces = getSortedEntries();
 
     if (!pieces.length) {
       var empty = document.createElement('div');
@@ -559,11 +709,12 @@
     }
 
     pieces.forEach(function (piece, index) {
-      var type = piece.getAttribute('type') || '';
-      var head = getText(piece, 'head');
-      var author = getText(piece, 'author');
-      var text = getText(piece, 'text');
-      var url = getText(piece, 'url');
+      var type = piece.type || '';
+      var head = piece.head || '';
+      var author = piece.author || '';
+      var text = piece.text || '';
+      var url = piece.url || '';
+      var hasUrl = url && url.toLowerCase() !== 'blank';
 
       var color = BORDER_COLORS[index % BORDER_COLORS.length];
 
@@ -583,7 +734,7 @@
       html += '</div>';
       html += '<div class="entry-text">' + escapeHtml(text) + '</div>';
       html += '<div class="entry-footer">';
-      if (url) {
+      if (hasUrl) {
         html += '<a class="read-full" href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">Read Full <span class="icon icon-arrow"></span></a>';
       }
       html += '</div>';
@@ -593,29 +744,60 @@
     });
   }
 
+  function showProgress(label) {
+    var wrap = document.getElementById('progress-wrap');
+    var labelEl = document.getElementById('progress-label');
+    if (labelEl && label) labelEl.textContent = label;
+    if (wrap) {
+      wrap.classList.remove('fade-out');
+      wrap.style.display = 'flex';
+    }
+  }
+
+  function hideProgress() {
+    var wrap = document.getElementById('progress-wrap');
+    if (!wrap) return;
+    wrap.classList.add('fade-out');
+    // remove from layout after the fade-out animation finishes
+    setTimeout(function () {
+      wrap.style.display = 'none';
+    }, 320);
+  }
+
+  function showControls() {
+    var bar = document.getElementById('controls-bar');
+    if (bar) bar.style.display = 'flex';
+  }
+
   function loadExperts() {
-    fetch('experts.xml', { cache: 'no-cache' })
+    showProgress('Fetching expert entries\u2026');
+
+    fetch(DATA_PATH, { cache: 'no-cache' })
       .then(function (response) {
         if (!response.ok) {
           throw new Error('HTTP ' + response.status);
         }
+        showProgress('Parsing expert entries\u2026');
         return response.text();
       })
-      .then(function (xmlText) {
-        var parser = new DOMParser();
-        var xmlDoc = parser.parseFromString(xmlText, 'application/xml');
-
-        var parseError = xmlDoc.getElementsByTagName('parsererror')[0];
-        if (parseError) {
-          throw new Error('Could not parse experts.xml');
-        }
-
-        var pieces = xmlDoc.getElementsByTagName('piece');
-        renderEntries(Array.prototype.slice.call(pieces));
+      .then(function (rawText) {
+        allEntries = parseDataFormat(rawText);
+        renderEntries();
+        showControls();
+        hideProgress();
       })
       .catch(function (err) {
-        renderError('Unable to load expert entries (' + err.message + '). Please check that experts.xml is present in the same folder.');
+        renderError('Unable to load expert entries (' + err.message + '). Please check that ' + DATA_PATH + ' is present in the same folder.');
       });
+  }
+
+  function initSortControl() {
+    var select = document.getElementById('sort-select');
+    if (!select) return;
+    select.addEventListener('change', function () {
+      currentSort = select.value;
+      renderEntries();
+    });
   }
 
   function initMobileMenu() {
@@ -654,8 +836,9 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    loadExperts();
+    initSortControl();
     initMobileMenu();
+    loadExperts();
   });
 })();
 </script>
