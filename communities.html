@@ -1,0 +1,589 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Community Resources &amp; External Forums - Violence Against Men Evidence Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,400;1,600&amp;display=swap" rel="stylesheet">
+<style>
+        /* Base & Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --color-bg: #F7F7F5;
+            --color-surface: #FFFFFF;
+            --color-surface-container: #F2ECF4;
+            --color-text-primary: #1D1B20;
+            --color-text-secondary: #494551;
+            --color-text-muted: #7A7582;
+            --color-primary: #4F378A;
+            --color-primary-dark: #372365;
+            --color-primary-container: #6750A4;
+            --color-border: #D9DCDE;
+            --color-border-subtle: #E2E0E6;
+            --color-footer-bg: #2B282F;
+            --color-footer-text: #D0C9D6;
+            --color-footer-muted: #9E99A6;
+
+            --font-sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-serif: "Source Serif 4", Georgia, Cambria, "Times New Roman", Times, serif;
+
+            --max-width: 1120px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Top Navigation */
+        .site-header {
+            background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .site-brand {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .site-brand:hover {
+            color: var(--color-primary-dark);
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .nav-link {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            transition: color 0.15s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        .search-button {
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: color 0.15s ease, background 0.15s ease;
+        }
+
+        .search-button:hover {
+            color: var(--color-primary);
+            background: var(--color-surface-container);
+        }
+
+        .icon-svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Main Layout */
+        .main-content {
+            flex: 1;
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+            padding: 4.5rem 2rem 5.5rem;
+        }
+
+        /* Page Intro */
+        .page-intro {
+            max-width: 780px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: var(--font-serif);
+            font-size: 2.75rem;
+            line-height: 1.2;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: -0.015em;
+            margin-bottom: 1.125rem;
+        }
+
+        .page-description {
+            font-size: 1.125rem;
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            font-weight: 400;
+        }
+
+        /* Resource Sections */
+        .directory-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            border-bottom: 1.5px solid var(--color-border);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 1.65rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        /* Minimalist Resource List */
+        .resource-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--color-border-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            transition: background 0.15s ease;
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-link-wrapper {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            width: fit-content;
+        }
+
+        .resource-link {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            line-height: 1.4;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+
+        .resource-link:hover {
+            color: var(--color-primary-dark);
+            text-decoration-color: var(--color-primary-dark);
+        }
+
+        .external-icon {
+            width: 15px;
+            height: 15px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            display: inline-block;
+            vertical-align: middle;
+            opacity: 0.75;
+            transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+
+        .resource-link:hover .external-icon {
+            opacity: 1;
+            transform: translate(2px, -2px);
+        }
+
+        .resource-tag {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-left: 0.35rem;
+        }
+
+        .resource-description {
+            font-size: 1.05rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            max-width: 900px;
+        }
+
+        /* Site Footer */
+        .site-footer {
+            background-color: var(--color-footer-bg);
+            color: var(--color-footer-text);
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 3.5rem 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 840px) {
+            .footer-inner {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+        }
+
+        .footer-meta {
+            max-width: 440px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #E9DDFF;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--color-footer-muted);
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem 2rem;
+            align-items: center;
+        }
+
+        .footer-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-footer-text);
+            transition: color 0.15s ease;
+        }
+
+        .footer-link:hover {
+            color: #FFFFFF;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .site-nav {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 2.15rem;
+            }
+
+            .main-content {
+                padding: 3rem 1.25rem 4rem;
+            }
+
+            .resource-link {
+                font-size: 1.2rem;
+            }
+
+            .resource-description {
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Top Navigation -->
+<header class="site-header">
+<div class="header-inner" style="gap: 2.5rem; justify-content: space-between;">
+<a class="site-brand" href="#" style="flex-shrink: 0;">Violence Against Men Evidence Archive</a>
+<nav class="site-nav" style="gap: 1.5rem; flex-shrink: 0; align-items: center;"><a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="stats.html">Statistics</a>
+<a class="nav-link" href="#">Systematic Misandry</a>
+<a class="nav-link" href="experts.html">Experts</a>
+<a class="nav-link" href="faq.html">FAQs</a>
+<a class="nav-link" href="#" style="color: var(--color-primary); border-bottom: 2px solid var(--color-primary); padding-bottom: 4px;">Communities</a></nav>
+
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="main-content">
+<!-- Header / Intro -->
+<header class="page-intro">
+<h1 class="page-title">Community Resources &amp; External Forums</h1>
+<p class="page-description">A curated directory of external discussion platforms, literature, and media focused on issues affecting men and boys.</p>
+</header>
+<!-- Section 1: Forums & Discussions -->
+<section class="directory-section">
+<div class="section-header">
+<h2 class="section-title">Forums &amp; Websites</h2>
+</div>
+<ul class="resource-list">
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://www.reddit.com/r/MensRights/" rel="noopener noreferrer" target="_blank">
+                            The MensRights Subreddit
+          </a>
+</div>
+<p class="resource-description">A large online community dedicated to discussing men's rights, sharing news, and organizing advocacy efforts.</p>
+</li>
+
+<ul class="resource-list">
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://www.reddit.com/r/LeftWingMaleAdvocates/" rel="noopener noreferrer" target="_blank">
+                            The LeftWingMaleAdvocates subreddit
+          </a>
+</div>
+<p class="resource-description">A large online community dedicated to discussing men's rights, sharing news, and organizing advocacy efforts.</p>
+</li>
+
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://www.reddit.com/r/WomenAreViolentToo/" rel="noopener noreferrer" target="_blank">
+                           The WomenAreViolentToo subreddit
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+
+<ul class="resource-list">
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://mankind.org.uk/" rel="noopener noreferrer" target="_blank">
+                            ManKind Initiative
+          </a>
+</div>
+<p class="resource-description">A large online community dedicated to discussing men's rights, sharing news, and organizing advocacy efforts.</p>
+</li>
+
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://www.menandboys.net/" rel="noopener noreferrer" target="_blank">
+                            International Council for Men and Boys
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://endtodv.org/press-room/" rel="noopener noreferrer" target="_blank">
+                            Coalition to End Domestic Violence
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://menarehuman.com/" rel="noopener noreferrer" target="_blank">
+                            Men are Human
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://www.instagram.com/thetinmen/" rel="noopener noreferrer" target="_blank">
+                            TheTinMen - Instagram Advocacy Page
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://www.instagram.com/lisabritton/" rel="noopener noreferrer" target="_blank">
+                            Lisa Bitton - Instagram Advocacy Page
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://jameslnuzzo.substack.com/" rel="noopener noreferrer" target="_blank">
+                            The Nuzzo Letter - A substack Advocacy Page
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+
+
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://voiceformenindia.com/" rel="noopener noreferrer" target="_blank">
+                            Voice For Men India
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://j4mb.org.uk/" rel="noopener noreferrer" target="_blank">
+                            Justice for Men and Boys
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://mensrights.com.au/" rel="noopener noreferrer" target="_blank">
+                            Men's Rights Agency Australia
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="https://australianmensrights.com/" rel="noopener noreferrer" target="_blank">
+                            Australian Men's Rights Advocates - AustralianMRA
+                            </a>
+</div>
+<p class="resource-description">Global network exploring systemic disadvantages and advocating for evidence-based policy changes benefiting men and boys.</p>
+</li>
+</ul>
+
+
+
+
+</section>
+<!-- Section 2: Media & Platforms -->
+<section class="directory-section">
+<div class="section-header">
+<h2 class="section-title">Media &amp; Platforms</h2>
+</div>
+<ul class="resource-list">
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="#" rel="noopener noreferrer" target="_blank">
+                            YouTube Documentaries Archive
+                            <svg class="external-icon" viewBox="0 0 24 24">
+<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+<polyline points="15 3 21 3 21 9"></polyline>
+<line x1="10" x2="21" y1="14" y2="3"></line>
+</svg>
+</a>
+<span class="resource-tag">Video Archive</span>
+</div>
+<p class="resource-description">A curated index of full-length documentary films, investigative broadcasts, and academic presentations covering men's experiences.</p>
+</li>
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="#" rel="noopener noreferrer" target="_blank">
+                            Amazon Prime Selected Films
+                            <svg class="external-icon" viewBox="0 0 24 24">
+<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+<polyline points="15 3 21 3 21 9"></polyline>
+<line x1="10" x2="21" y1="14" y2="3"></line>
+</svg>
+</a>
+<span class="resource-tag">Film Library</span>
+</div>
+<p class="resource-description">Cinematic explorations, independent features, and educational titles focusing on contemporary male societal dynamics.</p>
+</li>
+<li class="resource-item">
+<div class="resource-link-wrapper">
+<a class="resource-link" href="#" rel="noopener noreferrer" target="_blank">
+                            Scribd Research &amp; Publications Library
+                            <svg class="external-icon" viewBox="0 0 24 24">
+<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+<polyline points="15 3 21 3 21 9"></polyline>
+<line x1="10" x2="21" y1="14" y2="3"></line>
+</svg>
+</a>
+<span class="resource-tag">Digital Library</span>
+</div>
+<p class="resource-description">Compendium of non-fiction literature, institutional whitepapers, and published monographs concerning men's well-being and health outcomes.</p>
+</li>
+</ul>
+</section>
+</main>
+<!-- Site Footer -->
+<footer class="site-footer">
+<div class="footer-inner">
+<div class="footer-meta">
+<div class="footer-logo">VAMEA</div>
+<p class="footer-copyright">
+                    © 2024 Global Research Portal on Violence Against Men. All rights reserved. Institutional credibility through data-driven advocacy.
+                </p>
+</div>
+<nav class="footer-nav">
+<a class="footer-link" href="#">Explore</a>
+<a class="footer-link" href="#">Topics</a>
+<a class="footer-link" href="#">Resources</a>
+<a class="footer-link" href="#">Site Info</a>
+<a class="footer-link" href="#">Privacy Policy</a>
+<a class="footer-link" href="#">Accessibility</a>
+<a class="footer-link" href="#">Contact</a>
+</nav>
+</div>
+</footer>
+
+
+</body></html>
