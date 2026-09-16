@@ -1,0 +1,520 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Community Resources &amp; External Forums - Violence Against Men Evidence Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,400;1,600&amp;display=swap" rel="stylesheet">
+<style>
+        /* Base & Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --color-bg: #F7F7F5;
+            --color-surface: #FFFFFF;
+            --color-surface-container: #F2ECF4;
+            --color-text-primary: #1D1B20;
+            --color-text-secondary: #494551;
+            --color-text-muted: #7A7582;
+            --color-primary: #4F378A;
+            --color-primary-dark: #372365;
+            --color-primary-container: #6750A4;
+            --color-border: #D9DCDE;
+            --color-border-subtle: #E2E0E6;
+            --color-footer-bg: #2B282F;
+            --color-footer-text: #D0C9D6;
+            --color-footer-muted: #9E99A6;
+
+            --font-sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-serif: "Source Serif 4", Georgia, Cambria, "Times New Roman", Times, serif;
+
+            --max-width: 1120px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Top Navigation */
+        .site-header {
+            background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .site-brand {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .site-brand:hover {
+            color: var(--color-primary-dark);
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .nav-link {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            transition: color 0.15s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        .search-button {
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: color 0.15s ease, background 0.15s ease;
+        }
+
+        .search-button:hover {
+            color: var(--color-primary);
+            background: var(--color-surface-container);
+        }
+
+        .icon-svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Main Layout */
+        .main-content {
+            flex: 1;
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+            padding: 4.5rem 2rem 5.5rem;
+        }
+
+        /* Page Intro */
+        .page-intro {
+            max-width: 780px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: var(--font-serif);
+            font-size: 2.75rem;
+            line-height: 1.2;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: -0.015em;
+            margin-bottom: 1.125rem;
+        }
+
+        .page-description {
+            font-size: 1.125rem;
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            font-weight: 400;
+        }
+
+        /* Resource Sections */
+        .directory-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            border-bottom: 1.5px solid var(--color-border);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 1.65rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        /* Minimalist Resource List */
+        .resource-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--color-border-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            transition: background 0.15s ease;
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-link-wrapper {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            width: fit-content;
+        }
+
+        .resource-link {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            line-height: 1.4;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+
+        .resource-link:hover {
+            color: var(--color-primary-dark);
+            text-decoration-color: var(--color-primary-dark);
+        }
+
+        .external-icon {
+            width: 15px;
+            height: 15px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            display: inline-block;
+            vertical-align: middle;
+            opacity: 0.75;
+            transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+
+        .resource-link:hover .external-icon {
+            opacity: 1;
+            transform: translate(2px, -2px);
+        }
+
+        .resource-tag {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-left: 0.35rem;
+        }
+
+        .resource-description {
+            font-size: 1.05rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            max-width: 900px;
+        }
+
+        /* Site Footer */
+        .site-footer {
+            background-color: var(--color-footer-bg);
+            color: var(--color-footer-text);
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 3.5rem 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 840px) {
+            .footer-inner {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+        }
+
+        .footer-meta {
+            max-width: 440px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #E9DDFF;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--color-footer-muted);
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem 2rem;
+            align-items: center;
+        }
+
+        .footer-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-footer-text);
+            transition: color 0.15s ease;
+        }
+
+        .footer-link:hover {
+            color: #FFFFFF;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .site-nav {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 2.15rem;
+            }
+
+            .main-content {
+                padding: 3rem 1.25rem 4rem;
+            }
+
+            .resource-link {
+                font-size: 1.2rem;
+            }
+
+            .resource-description {
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Top Navigation -->
+<header class="site-header">
+<div class="header-inner" style="gap: 2.5rem; justify-content: space-between;">
+<a class="site-brand" href="#" style="flex-shrink: 0;">Violence Against Men Evidence Archive</a>
+<nav class="site-nav" style="gap: 1.5rem; flex-shrink: 0; align-items: center;"><a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="stats.html">Statistics</a>
+<a class="nav-link" href="#" style="color: var(--color-primary); border-bottom: 2px solid var(--color-primary); padding-bottom: 4px;">Systematic Misandry</a></nav>
+<a class="nav-link" href="experts.html">Experts</a>
+<a class="nav-link" href="faq.html">FAQs</a>
+<a class="nav-link" href="#">Communities</a>
+
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="main-content">
+
+<p class="page-description">
+Misandry is systematic and perpetrated by institutions in the same manner as misogyny or sometimes even worse as is evident from the fact that it is not acknowledged or done away with, even in comparatively progressive societies as of today.
+The word ‘systematic’ in this context refers to prejudice, discrimination against a particular group and lack of equal opportunity and benefit that is offered to a particular demography, perpetrated in an automatic manner via policies, laws and stereotypes that shape the said societies beyond an individual’s actions. Another principle of this word states that this is perpetrated by individuals belonging to another demography who are in position of power in society.
+The statement that misandry is somehow not as bad as misogyny because the former is not systematic, is a blatant lie propagated by feminists. Below is a comprehensive list of all the issues which discriminate against men(Misandry) and are perpetrated by institutions of law, organizations with societal power and social stereotypes(Systematic) discussed in an overall manner. Although each point can be elaborated in detail, I will just discuss that portion of the problem which makes it a systematic issue.
+</p>
+<br><br>
+<ol>
+<li>
+Male victims aren’t legally recognised in 115 of 195 countries.
+</li>
+<li>
+83% of all children in prison are male in USA, of all juveniles reporting staff misconduct, 89% were boys reporting abuse by female staff, yet this was never a point of discussion. (SOURCE: The Sexual Victimization of Men in America: New Data Challenge Old Assumptions. Framing Health Matters)
+</li>
+<li>
+The Bureau of Justice Statistics found about 62% of staff sexual misconduct cases involved female staff abusing male inmates, only 8% involved male staff abusing female inmates. In the second NIS survey they found 86% of male victims and 91% of feamale victims reported abuse that happened outside of any search [as in prison check] context.
+But McGuire tried to reframe the abuse by stating: sexual abuse of men by women is neither likely nor harmful.  She also said, male victims of abuse were “qualitatively different” and less serious than male on female abuse, which she characterised as “confirmed instances of serious rape or forcible sexual assault”. She went on to say, male victims reported false occurrences of ‘inappropriate viewing’ as sexual abuse, but her words are unsupported as the survey only asked abut sexual abuse that involves touching.</li>
+<li>
+Despite over 1000 surveys and researches including the largest, PASK, concluding parity in IPV and the very latest ONS 2025 data from UK and Wales: 51% victims of current partner violence were men and about 40% of any domestic violence, the UK refuses to acknowledge male victims as “male”, who are instead classified as victims of violence against women and girls(VAWG). The VAWG strategy mentions about male victims only once, that too in its footnote. 
+</li>
+
+<li>
+Similarly multinational studies analysing varying samples from school students to adults found USA has near parity in DV, yet only 2 DV shelters exists for men only while 2.5K shelters exists for women only.
+</li>
+<li>
+Similarly, one Australian senator had outright called the latest ABS survey of 2025 as “peddling feminist propaganda at the expense of tax payers money”, as  it was found that surveyors had intentionally highlighted the claim that 1 in 3 men perpetrate abuse, which made media headlines, while making no mention that 1 in 3 men are also victims of same abuse.
+</li>
+
+<li>
+In India the picture is even more bleak with the Domestic Violence law recognizing only woman as a victim and man as a perpetrator and no survey or research on male victims at all.</li>
+<li>
+Researcher Murray Straus, who claimed gender parity was accused without proof by the chairperson of the Canadian Commission on Violence against Women that he was a wife beater and sexually abused his students. Similarly Professor Gelles stated that, after accepting the claims of parity, bomb threats were sent to the building where he was supposed to have his conference and libraries refused to keep his research books. 
+</li>
+
+<li>
+Erin Pizzey, a woman who setup the first shelter for women in Australia and tried to do one for men too, reports: she received abusive calls and bomb threats. In her lectures, she was continuously interrupted by feminists and at last her dog was shot on her property and she had to escape.
+</li>
+<li>
+The Feb 2026 data from Germany government survey(LeSuBiA-Studie 2025) found near parity or more male victimization in many of the categories of domestic violence, the injury and impact count also had small difference by gender for the last 5 yeras. Making no mention of that, German Police Chief, Dirk Peglow, advised women that most men are just abusers and women should stop getting into relationship with them. 
+</li>
+
+<li>
+A Canadian national sample found 26% women and 19% men could be categorised as 'intimate terrorists' yet a recent anti-feminist censoring discussion claimed domestic violence as gendered sports. (Domestic Violence in Canada,1999:Context, Consequences and Johnson’s Typology)
+
+</li>
+<li>
+The UK government rubs it in the face of male victims of circumcision that government has no responsibility for them: ‘The Government has no plans to make changes to the regulatory framework for unanaesthetized, non therapeutic circumcision of boys’ – Baroness Merron. Even when boys died, the CPS tried to place it in same category as breast flattening, virginity testing and exorcism but quickly walked back and grouped it as ‘Potentially harmful’.
+</li>
+
+<li>
+A Canadian national sample found 26% women and 19% men could be categorised as 'intimate terrorists' yet a recent anti-feminist censoring discussion claimed domestic violence as gendered sports. (Domestic Violence in Canada,1999:Context, Consequences and Johnson’s Typology)
+
+</li>
+<li>
+The UK government rubs it in the face of male victims of circumcision that government has no responsibility for them: ‘The Government has no plans to make changes to the regulatory framework for unanaesthetized, non therapeutic circumcision of boys’ – Baroness Merron. Even when boys died, the CPS tried to place it in same category as breast flattening, virginity testing and exorcism but quickly walked back and grouped it as ‘Potentially harmful’.
+</li>
+
+<li>
+All EU countries have banned circumcision only for women, even when 14 national medical organisations now publicly oppose male circumcision. Despite support of 400 Icelandic doctors and violation of 4 human rights documents, Iceland dumped a proposal to ban male circumcision.
+</li>
+
+<li> 
+The so called ‘medical benefits’ of circumcision especially in preventing HIV had long been debunked yet UN made plans to accelerate MGM in Africa. A study of 10k+ African men  across 6 countries showed almost no difference in HIV rates between intact and circumcised men(traditionally and scientifically).
+
+</li>
+
+<li>
+Examiners showed grading bias against boys regardless of their sex, according to a study in 2004. A Swiss study of 2020 showed a bias against boys by 23% of a standard deviation.
+</li>
+
+<li>Global report from OCED spanning 60 countries found girls were given higher marks compared to boys of same ability. If school assessment shifted from ‘exam only’ to ‘teacher based assessment’ this gap was exposed. Statistically in 1986, this gender gap appears in UK, when the system changed from 0-level(heavily exam based) to GCSE(teacher assessment based with exams). This was described as ‘systematic bias’ by Mary Curnock Cook CBE, Former CEO of UCAS. Over 80% of teachers in school are female, and thus it becomes a norm to promote characters which helps girls succeed than boys.
+</li>
+
+<li>Due to gendered behavioural norms which schools reinforce, boys receive on average higher suspension, expulsion, and retention than girls with same ability. In Singapore, Malaysia, Zimbabwe only boys can be caned and subjected to many other corporal punishment but not girls.
+</li>
+
+<li>In some countries in Asia like India, Bangladesh, etc... A girl will be given cash, cycle and many other facilities irrespective of her socio-economic conditions to facilitate education but even a poor boy can not get that same facility. These countries have also noted higher dropout rates in boys than girls in recent years.
+</li>
+
+<li>Despite men underperforming at a progressively declining rate, the US has 92% women’s scholarship and only 8% men’s scholarship.
+</li>
+  <li>There are 63 women’s health journals in the US National Library of Medicine compared to only 6 for men, despite men falling behind women in every race and ethnicity regarding health outcomes.</li>
+  <li>The US Federal government maintains 10 offices dedicated to women’s health and zero for men.</li>
+  <li>The NIH consistently allocates twice as much funding to women’s health as to men’s health; the Australian government similarly spends more on women’s health than men’s.</li>
+  <li>The US government’s ‘Healthy People 2030’ initiative includes over 20 targets for women (the second highest category) but only 4 for men (the lowest).</li>
+  <li>An analysis of PubMed papers from 1970–2018 shows that publications titled ‘Men’s health’ remain dangerously low annually and are vanishingly small in most years compared to ‘Women’s health’.</li>
+  <li>Sex-specific terms in UN and WHO health databases reveal significant disparities: 12,117 papers for women versus 769 for men in one dataset, and 1,184 for women versus 283 for men in another.</li>
+  <li>NIH-funded clinical trials over the past 30 years have demonstrated female participation rates exceeding male rates, surpassing parity.</li>
+  <li>The Framingham Heart Study found that men face higher risks of heart disease at every age group and experience their first heart attack at an average age of 65 compared to 72 for women, even when controlling for risk factors, yet funding for men remains low.</li>
+  <li>Although men account for half of all infertility-related issues, only 1% of reproductive specialists are andrologists.</li>
+  <li>Scholars have criticized men’s mental health research for victim-blaming tendencies unlike those in women’s research; nevertheless, a recent US government suicide awareness campaign utilized billboards stating, “This year thousands of men will die from stubbornness.”</li>
+  <li>The Norwegian Commission on Men and Boys’ report “Equality’s Next Step” identified that men have a five-year shorter life expectancy than women.</li>
+  <li>In 2022, the European Court of Human Rights ruled that the Swiss government discriminated against men by providing lifelong pensions to widowed women while restricting widowed men to receiving pensions only if they had children under 18.</li>
+  <li>Cypriot law permits women to receive a deceased spouse's pension but prohibits men from doing so.</li>
+  <li>In Poland, Georgia, and Argentina, the retirement age is 60 for women and 65 for men, despite women having significantly longer life expectancies in these nations.</li>
+  <li>The official UN World Food Programme procedure deliberately directs food aid exclusively to women rather than men.</li>
+  <li>During the Ebola crisis in Africa, the UN explicitly prioritized medical supplies, food, care, societal protection, and psychological services for women.</li>
+  <li>The UN published research claiming COVID-19 disproportionately impacted women, despite data showing men were 40% more likely to die and nearly three times as likely to require intensive care.</li>
+  <li>UN Women advocated against targeting women journalists despite statistics indicating that 89% of journalists killed were men.</li>
+  <li>The UN recognizes nine international days celebrating women and girls, including days against FGM and violence against women, but remains silent on male genital mutilation (often performed without anesthesia) and male survivors of domestic violence and sexual assault.</li>
+  <li>The UN operates 69 social media accounts dedicated to supporting women and none dedicated to men.</li>
+  <li>UN Women campaigns against gendered language while simultaneously encouraging the use of terms such as ‘mansplaining’ and ‘manterrupting’.</li>
+  <li>Despite men having shorter lifespans and poorer health outcomes globally, the UN and WHO have conducted approximately 15 times more research on women’s health than men’s.</li>
+  <li>The UN and UN Women post about the harms of the ‘Manosphere,’ whereas a 2025 OFCOM study found that most participants sought equal treatment and fairness, concluding that the risks associated with the Manosphere are overestimated.</li>
+  <li>Males arrested for murder are six times more likely to face the death penalty than females due to chivalric biases.</li>
+  <li>A three-year French study found that men received prison sentences 33% longer than women for comparable offenses, a disparity dependent on the judge's gender.</li>
+  <li>In England and Wales, men are 88% more likely to be imprisoned for similar crimes compared to women, including a 35% higher likelihood for non-violent offenses like shoplifting; UK policy allows female criminals (4%) to access community support instead of prison, a benefit unavailable to male criminals (96%).</li>
+  <li>Women of all races in the USA receive sentences that are on average 63% shorter than men's; they are also significantly more likely to avoid charges and twice as likely to avoid incarceration upon conviction.</li>
+  <li>Russian law prohibits the death penalty and life imprisonment for women but not for men.</li>
+  <li>India’s BNSS prohibits the arrest of women between sunset and sunrise and mandates that female officers conduct medical examinations and handcuffing of female convicts; no equivalent protections exist for men.</li>
+  <li>The UN’s Bangkok Rules (2010) state that non-custodial sentences should be preferred specifically for women.</li>
+  <li>Less than 10% of scientific studies on parenting include fathers, and parenting literature focuses predominantly on mothers.</li>
+  <li>A 2025 meta-analysis revealed that parents reported favoring daughters over sons.</li>
+  <li>Gay men face greater difficulties in adopting children compared to lesbians.</li>
+  <li>Fatherhood is not mentioned in the UN Universal Declaration of Human Rights, unlike motherhood.</li>
+  <li>Indian law prohibits single males from adopting girl children (though single females may adopt boys) and requires fathers to maintain sons only until age 18, whereas maintenance for daughters continues until marriage.</li>
+  <li>UK law provides 18 months of redundancy protection for maternity leave but not paternity leave, resulting in thousands of fathers being dismissed for taking leave; consequently, only 2% of British fathers have benefited from paternity provisions.</li>
+  <li>Despite documentation showing mothers perpetrate 45.5% of emotional abuse (vs. 40.6% by fathers) and 30.1% of physical abuse (vs. 37.5% by fathers), an all-female feminist lobby in the UK seeks to abolish shared parental involvement and minimize maternal alienation as a legal factor; UK law has established that fathers are not legally essential to family life, despite evidence linking fatherlessness to 5x higher poverty rates, 9x higher dropout rates, and 20x higher incarceration rates.</li>
+  <li>Gender equality indices, such as those produced by the WEF, intentionally exclude peacetime military conscription to align with specific narratives.</li>
+  <li>The USA mandates Selective Service registration for all men over 18; failure to comply can result in denial of benefits, student loans, five years imprisonment, and a $250,000 fine, with no equivalent requirement for women.</li>
+  <li>Selective Service obligations extract time, youth, and energy from men that could otherwise be invested voluntarily, potentially restricting rights such as voting and travel, reducing men to conscripts while women face no mandatory service obligations to prove loyalty, creating career setbacks and potential trauma for men.</li>
+  <li>Fifty-seven countries worldwide enforce male-only conscription, including 12 in Europe.</li>
+  <li>Ukraine enforces male-only conscription for ages 18–60 and restricts departure; the EU lifted protections specifically from Ukrainian men, effectively rendering them disposable.</li>
+<li> Despite male victims having little resources or even no legal recognition in many countries, WAVE (Women Against Violence Europe) created a "WAVE Handbook 2020' which they describe as 'How Gender Neutral Policy and Practice Is Dismantling Women's Specialist Support Services and...'  also suggested 'Ways to Counteract it'.</li>
+<li> Feminists in UK had opened a petition on petition.parliament.uk on 5th September 2021, where they mentioned that they were 'concered'that 'local authorities are commissioning services with a 'gender neutral' approach', which collected 12.9k signatures. </li>
+<li> The feminist organisations in India have opposed gender neutral rape laws twice from passing in the parliament </li>
+<li> The gender equality index, published by WEF, uses two hidden methodologies which intentionally are used to make sure male victims are never captured: 1) They mark all those countries in all those parameters where men perform worse as equality achieved. 2) They set the scaes of equal life expectatncy as "women must outlive men by 5 years, otherwise it is marked as women are disadvantaged." So if a woman live 4 years more than a man she was a 'victim' and even if she otlive her male peers by 20years, it is 'equality'.</li>
+</ol>
+</header>
+
+</section>
+</main>
+<!-- Site Footer -->
+<footer class="site-footer">
+<div class="footer-inner">
+<div class="footer-meta">
+<div class="footer-logo">VAMEA</div>
+<p class="footer-copyright">
+                    © 2024 Global Research Portal on Violence Against Men. All rights reserved. Institutional credibility through data-driven advocacy.
+                </p>
+</div>
+<nav class="footer-nav">
+<a class="footer-link" href="#">Explore</a>
+<a class="footer-link" href="#">Topics</a>
+<a class="footer-link" href="#">Resources</a>
+<a class="footer-link" href="#">Site Info</a>
+<a class="footer-link" href="#">Privacy Policy</a>
+<a class="footer-link" href="#">Accessibility</a>
+<a class="footer-link" href="#">Contact</a>
+</nav>
+</div>
+</footer>
+
+
+</body></html>
