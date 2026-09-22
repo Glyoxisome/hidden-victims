@@ -254,7 +254,7 @@
 <a class="btn-primary font-label-md text-label-md px-6 py-3 rounded inline-flex items-center gap-2" href="#explore">
                         Explore the evidence <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
-<a class="btn-secondary font-label-md text-label-md px-6 py-3 rounded inline-flex items-center gap-2" href="#countries">What is this?</a>
+<a class="btn-secondary font-label-md text-label-md px-6 py-3 rounded inline-flex items-center gap-2" href="#" id="contributorLoginBtn">Contributor login</a>
 </div>
 </div>
 <div class="w-full md:w-[45%] relative flex justify-center md:justify-end">
@@ -271,6 +271,7 @@
 </footer>
 
 
+<script src="auth.js"></script>
 <script>
 function toggleMobileMenu() {
     var menu = document.getElementById("mobileMenu");
@@ -280,5 +281,10 @@ function toggleMobileMenu() {
         menu.classList.add("hidden");
     }
 }
+
+document.getElementById("contributorLoginBtn").addEventListener("click", function(e){
+    e.preventDefault();
+    Auth.login();
+});
 </script>
 </body></html>

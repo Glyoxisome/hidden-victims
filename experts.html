@@ -521,9 +521,41 @@
     transition: color 0.2s;
   }
   .footer-col a:hover { color: #e9ddff; }
+
+  /* ---- Editor additions ---- */
+  .login-bar{display:flex;justify-content:center;gap:12px;padding:12px 16px;font-size:13px;font-family:"Source Sans 3",Arial,sans-serif;}
+  .login-btn{
+    padding:8px 16px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;
+    background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);font-family:inherit;
+  }
+  .login-btn.logout{background:none;color:var(--on-surface-variant);border-color:var(--outline-variant);}
+  .add-entry-bar{width:100%;max-width:900px;text-align:center;margin:0 0 24px;}
+  .add-entry-btn{
+    padding:10px 20px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;
+    background:none;color:var(--primary);border:1px dashed var(--primary);font-family:inherit;
+  }
+  .entry-edit-controls{display:flex;justify-content:flex-end;gap:4px;margin-bottom:8px;}
+  .pencil-btn, .tick-btn, .cancel-btn, .delete-btn{
+    background:none;border:none;cursor:pointer;font-size:16px;padding:4px 8px;font-family:inherit;
+  }
+  article.entry.editing .entry-title,
+  article.entry.editing .entry-author,
+  article.entry.editing .entry-type,
+  article.entry.editing .entry-text{display:none;}
+  .edit-field{
+    width:100%;font-family:inherit;font-size:15px;padding:8px;margin-bottom:8px;
+    border:1px solid var(--outline-variant);border-radius:4px;box-sizing:border-box;
+  }
+  textarea.edit-field{min-height:100px;resize:vertical;}
+  .edit-form{display:none;}
+  article.entry.editing .edit-form{display:block;}
+  .save-error{color:var(--error);font-size:13px;margin-top:8px;}
+  .save-status{color:var(--on-surface-variant);font-size:13px;margin-top:8px;}
 </style>
 </head>
 <body>
+
+<div class="login-bar" id="loginBar"></div>
 
 <header>
   <div class="header-inner">
@@ -571,6 +603,10 @@
     </select>
   </div>
 
+  <div class="add-entry-bar" id="addEntryBar" style="display:none;">
+    <button class="add-entry-btn" id="addEntryBtn" type="button">+ Add new entry</button>
+  </div>
+
   <div class="progress-wrap" id="progress-wrap">
     <div class="progress-track">
       <div class="progress-bar" id="progress-bar"></div>
@@ -603,6 +639,8 @@
   </div>
 </footer>
 
+<script src="auth.js"></script>
+<script src="github.js"></script>
 <script>
 (function () {
   "use strict";
@@ -612,6 +650,37 @@
 
   var allEntries = [];
   var currentSort = 'none';
+
+  // ---- Data format: this page's own serializer (inline, not shared) ----
+  // Mirrors parseDataFormat() below, but in reverse.
+  function serializeEntry(entry){
+    var lines = [];
+    if(entry.head)   lines.push("H:" + entry.head);
+    if(entry.type)   lines.push("T:" + entry.type);
+    if(entry.author) lines.push("A:" + entry.author);
+    if(entry.text)   lines.push("B:" + entry.text);
+    if(entry.url)    lines.push("U:" + entry.url);
+    lines.push("---");
+    return lines.join("\n");
+  }
+
+  function rebuildFile(list, index, edited){
+    var updated = list.slice();
+    updated[index] = edited;
+    return updated.map(serializeEntry).join("\n\n") + "\n";
+  }
+
+  function rebuildFileWithout(list, index){
+    var updated = list.slice();
+    updated.splice(index, 1);
+    return updated.map(serializeEntry).join("\n\n") + "\n";
+  }
+
+  function rebuildFileWithNew(list, newEntry){
+    var updated = list.slice();
+    updated.push(newEntry);
+    return updated.map(serializeEntry).join("\n\n") + "\n";
+  }
 
   function escapeHtml(str) {
     var div = document.createElement('div');
@@ -685,13 +754,16 @@
   }
 
   function getSortedEntries() {
-    var list = allEntries.slice();
+    // Attach each entry's REAL index in allEntries before sorting, since
+    // sorting reorders the array and we need the original index to save
+    // edits back to the right position in the file.
+    var withIdx = allEntries.map(function(e, i){ return { entry: e, realIdx: i }; });
     if (currentSort === 'type-asc') {
-      list.sort(function (a, b) { return a.type.localeCompare(b.type); });
+      withIdx.sort(function (a, b) { return a.entry.type.localeCompare(b.entry.type); });
     } else if (currentSort === 'type-desc') {
-      list.sort(function (a, b) { return b.type.localeCompare(a.type); });
+      withIdx.sort(function (a, b) { return b.entry.type.localeCompare(a.entry.type); });
     }
-    return list;
+    return withIdx;
   }
 
   function renderEntries() {
@@ -708,7 +780,9 @@
       return;
     }
 
-    pieces.forEach(function (piece, index) {
+    pieces.forEach(function (pair, index) {
+      var piece = pair.entry;
+      var realIdx = pair.realIdx;
       var type = piece.type || '';
       var head = piece.head || '';
       var author = piece.author || '';
@@ -720,9 +794,15 @@
 
       var article = document.createElement('article');
       article.className = 'entry';
+      article.dataset.realIdx = realIdx;
       article.style.borderLeftColor = color;
 
       var html = '';
+      html += '<div class="entry-edit-controls">';
+      html += '<button class="pencil-btn" type="button" title="Edit">\u270F\uFE0F</button>';
+      html += '<button class="cancel-btn" type="button" title="Cancel" style="display:none;">\u2715</button>';
+      html += '<button class="delete-btn" type="button" title="Delete">\uD83D\uDDD1\uFE0F</button>';
+      html += '</div>';
       html += '<div class="entry-top">';
       html += '<div>';
       html += '<h2 class="entry-title">' + escapeHtml(head) + '</h2>';
@@ -738,10 +818,177 @@
         html += '<a class="read-full" href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">Read Full <span class="icon icon-arrow"></span></a>';
       }
       html += '</div>';
+      html += '<div class="edit-form"></div>';
 
       article.innerHTML = html;
       container.appendChild(article);
     });
+
+    wireEditControls();
+  }
+
+  // ---- Editor: login bar ----
+  function renderLoginBar(){
+    var loginBar = document.getElementById('loginBar');
+    var addEntryBar = document.getElementById('addEntryBar');
+    loginBar.innerHTML = '';
+    if(Auth.isLoggedIn()){
+      var span = document.createElement('span');
+      span.textContent = 'Editing enabled';
+      var btn = document.createElement('button');
+      btn.className = 'login-btn logout';
+      btn.type = 'button';
+      btn.textContent = 'Log out';
+      btn.addEventListener('click', Auth.logout);
+      loginBar.appendChild(span);
+      loginBar.appendChild(btn);
+      addEntryBar.style.display = 'block';
+    } else {
+      var loginBtn = document.createElement('button');
+      loginBtn.className = 'login-btn';
+      loginBtn.type = 'button';
+      loginBtn.textContent = 'Collaborator login';
+      loginBtn.addEventListener('click', Auth.login);
+      loginBar.appendChild(loginBtn);
+      addEntryBar.style.display = 'none';
+    }
+  }
+
+  function wireEditControls(){
+    document.querySelectorAll('article.entry').forEach(function(article){
+      var realIdx = parseInt(article.dataset.realIdx, 10);
+      var entry = allEntries[realIdx];
+      var pencilBtn = article.querySelector('.pencil-btn');
+      var deleteBtn = article.querySelector('.delete-btn');
+
+      if(!Auth.isLoggedIn()){
+        pencilBtn.style.display = 'none';
+        deleteBtn.style.display = 'none';
+        return;
+      }
+
+      pencilBtn.onclick = function(){ enterEditMode(article, entry, realIdx); };
+      deleteBtn.onclick = function(){ deleteEntry(article, realIdx, entry); };
+    });
+  }
+
+  function fieldsHtml(entry){
+    return '' +
+      '<input class="edit-field" data-field="head" value="' + escapeHtml(entry.head) + '" placeholder="Heading">' +
+      '<input class="edit-field" data-field="type" value="' + escapeHtml(entry.type) + '" placeholder="Type">' +
+      '<input class="edit-field" data-field="author" value="' + escapeHtml(entry.author) + '" placeholder="Author">' +
+      '<textarea class="edit-field" data-field="text" placeholder="Quote / commentary">' + escapeHtml(entry.text) + '</textarea>' +
+      '<input class="edit-field" data-field="url" value="' + escapeHtml(entry.url) + '" placeholder="Source URL">';
+  }
+
+  function readFormFields(form){
+    var entry = {};
+    form.querySelectorAll('[data-field]').forEach(function(el){ entry[el.dataset.field] = el.value; });
+    return entry;
+  }
+
+  function enterEditMode(article, entry, realIdx){
+    article.classList.add('editing');
+    var form = article.querySelector('.edit-form');
+    form.innerHTML = fieldsHtml(entry);
+
+    var pencilBtn = article.querySelector('.pencil-btn');
+    pencilBtn.textContent = '\u2713';
+    pencilBtn.title = 'Save';
+    pencilBtn.onclick = function(){ saveEdit(article, realIdx, form); };
+
+    var cancelBtn = article.querySelector('.cancel-btn');
+    cancelBtn.style.display = 'inline-block';
+    cancelBtn.onclick = function(){ renderEntries(); };
+  }
+
+  function showSaving(article){
+    clearMessages(article);
+    var el = document.createElement('div');
+    el.className = 'save-status';
+    el.textContent = 'Saving\u2026';
+    article.querySelector('.edit-form').appendChild(el);
+  }
+
+  function showSaveError(article, message){
+    clearMessages(article);
+    var el = document.createElement('div');
+    el.className = 'save-error';
+    el.textContent = 'Could not save: ' + message;
+    article.querySelector('.edit-form').appendChild(el);
+  }
+
+  function clearMessages(article){
+    article.querySelectorAll('.save-status, .save-error').forEach(function(el){ el.remove(); });
+  }
+
+  function saveEdit(article, realIdx, form){
+    var edited = readFormFields(form);
+    showSaving(article);
+
+    GitHubEditor.getFile(DATA_PATH)
+      .then(function(file){
+        var freshEntries = parseDataFormat(file.text);
+        var newText = rebuildFile(freshEntries, realIdx, edited);
+        return GitHubEditor.updateFile(DATA_PATH, newText, file.sha, 'Edit expert entry: ' + (edited.head || 'untitled'));
+      })
+      .then(function(){
+        allEntries[realIdx] = edited;
+        renderEntries();
+      })
+      .catch(function(err){ showSaveError(article, err.message); });
+  }
+
+  function deleteEntry(article, realIdx, entry){
+    if(!confirm('Delete "' + entry.head + '"? This cannot be undone from the site.')) return;
+    showSaving(article);
+
+    GitHubEditor.getFile(DATA_PATH)
+      .then(function(file){
+        var freshEntries = parseDataFormat(file.text);
+        var newText = rebuildFileWithout(freshEntries, realIdx);
+        return GitHubEditor.updateFile(DATA_PATH, newText, file.sha, 'Delete expert entry: ' + (entry.head || 'untitled'));
+      })
+      .then(function(){ loadExperts(); })
+      .catch(function(err){ showSaveError(article, err.message); });
+  }
+
+  function startAddNewEntry(){
+    var blank = { head:'', type:'', author:'', text:'', url:'' };
+    var container = document.getElementById('entries');
+    var article = document.createElement('article');
+    article.className = 'entry editing';
+    article.style.borderLeftColor = BORDER_COLORS[0];
+    article.innerHTML =
+      '<div class="entry-edit-controls">' +
+        '<button class="pencil-btn" type="button" title="Save">\u2713</button>' +
+        '<button class="cancel-btn" type="button" title="Cancel">\u2715</button>' +
+        '<button class="delete-btn" type="button" title="Delete" style="display:none;">\uD83D\uDDD1\uFE0F</button>' +
+      '</div>' +
+      '<div class="entry-top"><div><h2 class="entry-title"></h2><div class="entry-author"></div></div></div>' +
+      '<div class="entry-text"></div>' +
+      '<div class="edit-form"></div>';
+    container.insertBefore(article, container.firstChild);
+
+    var form = article.querySelector('.edit-form');
+    form.innerHTML = fieldsHtml(blank);
+
+    article.querySelector('.pencil-btn').onclick = function(){ saveNewEntry(article, form); };
+    article.querySelector('.cancel-btn').onclick = function(){ article.remove(); };
+  }
+
+  function saveNewEntry(article, form){
+    var newEntry = readFormFields(form);
+    showSaving(article);
+
+    GitHubEditor.getFile(DATA_PATH)
+      .then(function(file){
+        var freshEntries = parseDataFormat(file.text);
+        var newText = rebuildFileWithNew(freshEntries, newEntry);
+        return GitHubEditor.updateFile(DATA_PATH, newText, file.sha, 'Add expert entry: ' + (newEntry.head || 'untitled'));
+      })
+      .then(function(){ loadExperts(); })
+      .catch(function(err){ showSaveError(article, err.message); });
   }
 
   function showProgress(label) {
@@ -839,6 +1086,9 @@
     initSortControl();
     initMobileMenu();
     loadExperts();
+    renderLoginBar();
+    var addEntryBtn = document.getElementById('addEntryBtn');
+    if(addEntryBtn) addEntryBtn.addEventListener('click', startAddNewEntry);
   });
 })();
 </script>

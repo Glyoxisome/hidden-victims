@@ -132,9 +132,41 @@
     max-width:1200px; margin:0 auto; padding:48px 32px; color:#e6e0e9;
     font-family: Arial, sans-serif; font-size:13px;
   }
+
+  /* ---- Editor additions ---- */
+  .login-bar{display:flex;justify-content:center;gap:12px;padding:12px 16px;font-size:13px;font-family:Arial,sans-serif;}
+  .login-btn{
+    padding:8px 16px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;
+    background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);font-family:inherit;
+  }
+  .login-btn.logout{background:none;color:var(--on-surface-variant);border-color:var(--outline-variant);}
+  .add-cat-bar{margin-bottom:32px;}
+  .add-cat-btn, .add-q-btn{
+    padding:8px 16px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;
+    background:none;color:var(--primary);border:1px dashed var(--primary);font-family:Arial,sans-serif;
+  }
+  .cat-header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--outline-variant);padding-bottom:12px;margin-bottom:24px;}
+  .cat-header-row h2{ border:none; margin:0; padding:0; }
+  .cat-edit-controls{display:flex;gap:4px;flex-shrink:0;}
+  .pencil-btn, .tick-btn, .cancel-btn, .delete-btn{
+    background:none;border:none;cursor:pointer;font-size:15px;padding:4px 6px;font-family:inherit;
+  }
+  .qa-edit-controls{display:flex;justify-content:flex-end;gap:4px;padding:8px 24px 0;}
+  .edit-field{
+    width:100%;font-family:Arial,sans-serif;font-size:15px;padding:8px;margin-bottom:8px;
+    border:1px solid var(--outline-variant);border-radius:4px;box-sizing:border-box;
+  }
+  textarea.edit-field{min-height:80px;resize:vertical;}
+  .edit-form{padding:0 24px 16px;}
+  .save-error{color:#ba1a1a;font-size:13px;margin-top:4px;}
+  .save-status{color:var(--on-surface-variant);font-size:13px;margin-top:4px;}
+  .cat-name-edit{display:flex;align-items:center;gap:8px;flex:1;}
+  .cat-name-edit input{font-size:22px;font-family:Georgia,serif;padding:4px 8px;border:1px solid var(--outline-variant);border-radius:4px;flex:1;}
 </style>
 </head>
 <body>
+
+<div class="login-bar" id="loginBar"></div>
 
 <header>
   <div class="header-inner">
@@ -162,6 +194,10 @@
 
   <div class="mobile-cats" id="mobileCats"></div>
 
+  <div class="add-cat-bar" id="addCatBar" style="display:none;">
+    <button class="add-cat-btn" id="addCatBtn" type="button">+ Add new category</button>
+  </div>
+
   <div class="layout">
     <aside>
       <nav id="sidebarNav"></nav>
@@ -178,41 +214,74 @@
   </div>
 </footer>
 
+<script src="auth.js"></script>
+<script src="github.js"></script>
 <script>
 (function(){
+  var DATA_PATH = 'qa.xml';
   var content = document.getElementById('content');
   var sidebarNav = document.getElementById('sidebarNav');
   var mobileCats = document.getElementById('mobileCats');
   var categories = []; // { id, name, questions:[{q,a}] }
 
-  fetch('qa.xml')
+  // ---- XML serialization (inline, not shared - this page's format differs
+  // from the H:/T:/... tag format used on stats.html and experts.html) ----
+  function escapeXml(str){
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
+  }
+
+  function serializeCategories(cats){
+    var xml = '<?xml version="1.0" encoding="UTF-8"?>\n<faq>\n';
+    cats.forEach(function(cat){
+      xml += '  <cat name="' + escapeXml(cat.name) + '">\n';
+      cat.questions.forEach(function(item){
+        xml += '    <q>' + escapeXml(item.q) + '<ans>' + escapeXml(item.a) + '</ans></q>\n';
+      });
+      xml += '  </cat>\n';
+    });
+    xml += '</faq>\n';
+    return xml;
+  }
+
+  function parseQaXml(xmlText){
+    var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+    var parseError = xml.querySelector('parsererror');
+    if(parseError) throw new Error('qa.xml is not valid XML');
+
+    var cats = [];
+    var catNodes = xml.getElementsByTagName('cat');
+    for(var i = 0; i < catNodes.length; i++){
+      var catNode = catNodes[i];
+      var name = catNode.getAttribute('name') || ('Category ' + (i+1));
+      var id = 'cat-' + (i+1) + '-' + slugify(name);
+      var questions = [];
+      var qNodes = catNode.getElementsByTagName('q');
+      for(var j = 0; j < qNodes.length; j++){
+        var qNode = qNodes[j];
+        var ansNode = qNode.getElementsByTagName('ans')[0];
+        var ansText = ansNode ? ansNode.textContent.trim() : '';
+        var qText = getDirectText(qNode).trim();
+        questions.push({ q: qText, a: ansText });
+      }
+      cats.push({ id: id, index: i + 1, name: name, questions: questions });
+    }
+    return cats;
+  }
+
+  fetch(DATA_PATH)
     .then(function(res){
-      if(!res.ok) throw new Error('Failed to load qa.xml (' + res.status + ')');
+      if(!res.ok) throw new Error('Failed to load ' + DATA_PATH + ' (' + res.status + ')');
       return res.text();
     })
     .then(function(xmlText){
-      var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
-      var parseError = xml.querySelector('parsererror');
-      if(parseError) throw new Error('qa.xml is not valid XML');
-
-      var catNodes = xml.getElementsByTagName('cat');
-      for(var i = 0; i < catNodes.length; i++){
-        var catNode = catNodes[i];
-        var name = catNode.getAttribute('name') || ('Category ' + (i+1));
-        var id = 'cat-' + (i+1) + '-' + slugify(name);
-        var questions = [];
-        var qNodes = catNode.getElementsByTagName('q');
-        for(var j = 0; j < qNodes.length; j++){
-          var qNode = qNodes[j];
-          var ansNode = qNode.getElementsByTagName('ans')[0];
-          var ansText = ansNode ? ansNode.textContent.trim() : '';
-          var qText = getDirectText(qNode).trim();
-          questions.push({ q: qText, a: ansText });
-        }
-        categories.push({ id: id, index: i + 1, name: name, questions: questions });
-      }
-
+      categories = parseQaXml(xmlText);
       render();
+      renderLoginBar();
     })
     .catch(function(err){
       content.innerHTML = '<p class="empty-state">Could not load FAQ data: ' + escapeHtml(err.message) + '</p>';
@@ -251,24 +320,250 @@
 
     // Content sections
     var contentHtml = '';
-    categories.forEach(function(cat){
-      contentHtml += '<section class="cat-section" id="' + cat.id + '" data-cat="' + cat.id + '">';
-      contentHtml += '<h2>' + escapeHtml(cat.name) + '</h2>';
+    categories.forEach(function(cat, catIdx){
+      contentHtml += '<section class="cat-section" id="' + cat.id + '" data-cat="' + cat.id + '" data-cat-idx="' + catIdx + '">';
+      contentHtml += '<div class="cat-header-row">';
+      contentHtml += '<h2 class="cat-name-display">' + escapeHtml(cat.name) + '</h2>';
+      contentHtml += '<div class="cat-edit-controls">';
+      contentHtml += '<button class="pencil-btn cat-rename-btn" type="button" title="Rename category">\u270F\uFE0F</button>';
+      contentHtml += '<button class="delete-btn cat-delete-btn" type="button" title="Delete category">\uD83D\uDDD1\uFE0F</button>';
+      contentHtml += '</div></div>';
       contentHtml += '<div class="qa-list">';
-      cat.questions.forEach(function(item){
-        contentHtml += '<details>';
+      cat.questions.forEach(function(item, qIdx){
+        contentHtml += '<details data-q-idx="' + qIdx + '">';
         contentHtml += '<summary><h3>' + escapeHtml(item.q) + '</h3>';
         contentHtml += '<svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>';
         contentHtml += '</summary>';
         contentHtml += '<div class="answer"><p>' + escapeHtml(item.a) + '</p></div>';
+        contentHtml += '<div class="qa-edit-controls">';
+        contentHtml += '<button class="pencil-btn qa-edit-btn" type="button" title="Edit">\u270F\uFE0F</button>';
+        contentHtml += '<button class="delete-btn qa-delete-btn" type="button" title="Delete">\uD83D\uDDD1\uFE0F</button>';
+        contentHtml += '</div>';
         contentHtml += '</details>';
       });
+      contentHtml += '<button class="add-q-btn" type="button" data-add-q-cat="' + catIdx + '">+ Add question</button>';
       contentHtml += '</div></section>';
     });
     content.innerHTML = contentHtml || '<p class="empty-state">No FAQ entries found.</p>';
 
-    // Click handling — event delegation
     document.addEventListener('click', handleFilterClick);
+    wireEditControls();
+  }
+
+  // ---- Editor: login bar ----
+  function renderLoginBar(){
+    var loginBar = document.getElementById('loginBar');
+    var addCatBar = document.getElementById('addCatBar');
+    loginBar.innerHTML = '';
+    if(Auth.isLoggedIn()){
+      var span = document.createElement('span');
+      span.textContent = 'Editing enabled';
+      var btn = document.createElement('button');
+      btn.className = 'login-btn logout';
+      btn.type = 'button';
+      btn.textContent = 'Log out';
+      btn.addEventListener('click', Auth.logout);
+      loginBar.appendChild(span);
+      loginBar.appendChild(btn);
+      addCatBar.style.display = 'block';
+    } else {
+      var loginBtn = document.createElement('button');
+      loginBtn.className = 'login-btn';
+      loginBtn.type = 'button';
+      loginBtn.textContent = 'Collaborator login';
+      loginBtn.addEventListener('click', Auth.login);
+      loginBar.appendChild(loginBtn);
+      addCatBar.style.display = 'none';
+    }
+  }
+
+  function wireEditControls(){
+    var loggedIn = Auth.isLoggedIn();
+
+    document.querySelectorAll('.cat-section').forEach(function(section){
+      var catIdx = parseInt(section.dataset.catIdx, 10);
+
+      var renameBtn = section.querySelector('.cat-rename-btn');
+      var catDeleteBtn = section.querySelector('.cat-delete-btn');
+      var addQBtn = section.querySelector('.add-q-btn');
+
+      if(!loggedIn){
+        renameBtn.style.display = 'none';
+        catDeleteBtn.style.display = 'none';
+        addQBtn.style.display = 'none';
+      } else {
+        renameBtn.onclick = function(){ renameCategory(section, catIdx); };
+        catDeleteBtn.onclick = function(){ deleteCategory(section, catIdx); };
+        addQBtn.onclick = function(){ addQuestion(section, catIdx); };
+      }
+
+      section.querySelectorAll('details').forEach(function(details){
+        var qIdx = parseInt(details.dataset.qIdx, 10);
+        var editBtn = details.querySelector('.qa-edit-btn');
+        var deleteBtn = details.querySelector('.qa-delete-btn');
+
+        if(!loggedIn){
+          editBtn.style.display = 'none';
+          deleteBtn.style.display = 'none';
+          return;
+        }
+
+        editBtn.onclick = function(e){
+          e.preventDefault();
+          editQuestion(details, catIdx, qIdx);
+        };
+        deleteBtn.onclick = function(e){
+          e.preventDefault();
+          deleteQuestion(details, catIdx, qIdx);
+        };
+      });
+    });
+  }
+
+  function showSaving(el){
+    clearMessages(el);
+    var msg = document.createElement('div');
+    msg.className = 'save-status';
+    msg.textContent = 'Saving\u2026';
+    el.appendChild(msg);
+  }
+
+  function showSaveError(el, message){
+    clearMessages(el);
+    var msg = document.createElement('div');
+    msg.className = 'save-error';
+    msg.textContent = 'Could not save: ' + message;
+    el.appendChild(msg);
+  }
+
+  function clearMessages(el){
+    el.querySelectorAll('.save-status, .save-error').forEach(function(m){ m.remove(); });
+  }
+
+  // Every save re-fetches the LATEST qa.xml, re-applies the one change, and
+  // commits - this avoids clobbering another collaborator's more recent edit.
+  function saveCategories(newCats, commitMessage, targetEl, onDone){
+    showSaving(targetEl);
+    GitHubEditor.getFile(DATA_PATH)
+      .then(function(file){
+        var newXml = serializeCategories(newCats);
+        return GitHubEditor.updateFile(DATA_PATH, newXml, file.sha, commitMessage);
+      })
+      .then(function(){
+        categories = newCats;
+        render();
+        if(onDone) onDone();
+      })
+      .catch(function(err){ showSaveError(targetEl, err.message); });
+  }
+
+  // ---- Category rename ----
+  function renameCategory(section, catIdx){
+    var header = section.querySelector('.cat-header-row');
+    var nameEl = section.querySelector('.cat-name-display');
+    var oldName = categories[catIdx].name;
+
+    header.querySelector('.cat-edit-controls').style.display = 'none';
+    var wrap = document.createElement('div');
+    wrap.className = 'cat-name-edit';
+    wrap.innerHTML =
+      '<input type="text" value="' + escapeHtml(oldName) + '">' +
+      '<button class="tick-btn" type="button" title="Save">\u2713</button>' +
+      '<button class="cancel-btn" type="button" title="Cancel">\u2715</button>';
+    nameEl.replaceWith(wrap);
+
+    var input = wrap.querySelector('input');
+    wrap.querySelector('.cancel-btn').onclick = function(){ render(); };
+    wrap.querySelector('.tick-btn').onclick = function(){
+      var newCats = categories.map(function(c, i){
+        return i === catIdx ? Object.assign({}, c, { name: input.value }) : c;
+      });
+      saveCategories(newCats, 'Rename FAQ category: ' + oldName + ' -> ' + input.value, wrap);
+    };
+  }
+
+  function deleteCategory(section, catIdx){
+    var cat = categories[catIdx];
+    if(!confirm('Delete category "' + cat.name + '" and all ' + cat.questions.length + ' question(s) in it? This cannot be undone from the site.')) return;
+    var newCats = categories.slice();
+    newCats.splice(catIdx, 1);
+    saveCategories(newCats, 'Delete FAQ category: ' + cat.name, section);
+  }
+
+  function addQuestion(section, catIdx){
+    var list = section.querySelector('.qa-list');
+    var addBtn = section.querySelector('.add-q-btn');
+    var form = document.createElement('div');
+    form.className = 'edit-form';
+    form.innerHTML =
+      '<input class="edit-field" data-field="q" placeholder="Question">' +
+      '<textarea class="edit-field" data-field="a" placeholder="Answer"></textarea>' +
+      '<button class="tick-btn" type="button" title="Save">\u2713</button>' +
+      '<button class="cancel-btn" type="button" title="Cancel">\u2715</button>';
+    list.insertBefore(form, addBtn);
+
+    form.querySelector('.cancel-btn').onclick = function(){ form.remove(); };
+    form.querySelector('.tick-btn').onclick = function(){
+      var q = form.querySelector('[data-field="q"]').value;
+      var a = form.querySelector('[data-field="a"]').value;
+      var newCats = categories.map(function(c, i){
+        if(i !== catIdx) return c;
+        var newQuestions = c.questions.concat([{ q: q, a: a }]);
+        return Object.assign({}, c, { questions: newQuestions });
+      });
+      saveCategories(newCats, 'Add FAQ question to ' + categories[catIdx].name, form);
+    };
+  }
+
+  function editQuestion(details, catIdx, qIdx){
+    var item = categories[catIdx].questions[qIdx];
+    var answerDiv = details.querySelector('.answer');
+    var summary = details.querySelector('summary h3');
+
+    details.setAttribute('open', '');
+    var form = document.createElement('div');
+    form.className = 'edit-form';
+    form.innerHTML =
+      '<input class="edit-field" data-field="q" value="' + escapeHtml(item.q) + '" placeholder="Question">' +
+      '<textarea class="edit-field" data-field="a" placeholder="Answer">' + escapeHtml(item.a) + '</textarea>' +
+      '<button class="tick-btn" type="button" title="Save">\u2713</button>' +
+      '<button class="cancel-btn" type="button" title="Cancel">\u2715</button>';
+    answerDiv.style.display = 'none';
+    details.querySelector('.qa-edit-controls').style.display = 'none';
+    details.appendChild(form);
+
+    form.querySelector('.cancel-btn').onclick = function(){ render(); };
+    form.querySelector('.tick-btn').onclick = function(){
+      var q = form.querySelector('[data-field="q"]').value;
+      var a = form.querySelector('[data-field="a"]').value;
+      var newCats = categories.map(function(c, i){
+        if(i !== catIdx) return c;
+        var newQuestions = c.questions.map(function(item2, j){
+          return j === qIdx ? { q: q, a: a } : item2;
+        });
+        return Object.assign({}, c, { questions: newQuestions });
+      });
+      saveCategories(newCats, 'Edit FAQ question: ' + (q || item.q), form);
+    };
+  }
+
+  function deleteQuestion(details, catIdx, qIdx){
+    var item = categories[catIdx].questions[qIdx];
+    if(!confirm('Delete this question? This cannot be undone from the site.')) return;
+    var newCats = categories.map(function(c, i){
+      if(i !== catIdx) return c;
+      var newQuestions = c.questions.slice();
+      newQuestions.splice(qIdx, 1);
+      return Object.assign({}, c, { questions: newQuestions });
+    });
+    saveCategories(newCats, 'Delete FAQ question: ' + item.q, details);
+  }
+
+  function addCategory(){
+    var name = prompt('New category name:');
+    if(!name) return;
+    var newCats = categories.concat([{ id: 'cat-new-' + slugify(name), name: name, questions: [] }]);
+    saveCategories(newCats, 'Add FAQ category: ' + name, document.getElementById('addCatBar'));
   }
 
   function handleFilterClick(e){
@@ -316,6 +611,9 @@
       }
     });
   })();
+
+  var addCatBtn = document.getElementById('addCatBtn');
+  if(addCatBtn) addCatBtn.addEventListener('click', addCategory);
 })();
 </script>
 
