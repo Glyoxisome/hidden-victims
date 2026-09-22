@@ -190,6 +190,34 @@
 
   .status-msg{text-align:center;padding:48px 16px;color:var(--on-surface-variant);font-size:16px;}
 
+  /* ---- Editor additions ---- */
+  .login-bar{display:flex;justify-content:center;gap:12px;padding:12px 32px;font-size:13px;}
+  .login-btn{
+    padding:8px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;
+    background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);font-family:inherit;
+  }
+  .login-btn.logout{background:none;color:var(--on-surface-variant);border-color:var(--outline-variant);}
+  .add-entry-bar{text-align:center;margin:0 auto 24px;padding:0 32px;max-width:1200px;}
+  .add-entry-btn{
+    padding:10px 20px;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;
+    background:none;color:var(--primary);border:1px dashed var(--primary);font-family:inherit;
+  }
+  .pencil-btn, .tick-btn, .cancel-btn, .delete-btn{
+    background:none;border:none;cursor:pointer;font-size:16px;padding:4px 8px;font-family:inherit;
+  }
+  .card-edit-controls{display:flex;justify-content:flex-end;gap:4px;margin-bottom:8px;}
+  .card.editing .card-heading,
+  .card.editing .card-text{display:none;}
+  .edit-field{
+    width:100%;font-family:inherit;font-size:15px;padding:8px;margin-bottom:8px;
+    border:1px solid var(--outline-variant);border-radius:6px;box-sizing:border-box;
+  }
+  textarea.edit-field{min-height:100px;resize:vertical;}
+  .edit-form{display:none;}
+  .card.editing .edit-form{display:block;}
+  .save-error{color:#b3261e;font-size:13px;margin-top:8px;}
+  .save-status{color:var(--on-surface-variant);font-size:13px;margin-top:8px;}
+
   footer{background:#322f35;color:#e6e0e9;padding:48px 32px;}
   footer .container{max-width:1200px;margin:0 auto;}
   footer h2{font-size:20px;color:#cfbcff;margin-bottom:12px;}
@@ -245,6 +273,8 @@
 </head>
 <body>
 
+<div class="login-bar" id="loginBar"></div>
+
 <header>
   <div class="container">
     <a class="logo" href="/">Violence Against Men Evidence Archive</a>
@@ -277,6 +307,10 @@
   </section>
 
   <section class="category-tabs" id="categoryTabs"></section>
+
+  <div class="add-entry-bar" id="addEntryBar" style="display:none;">
+    <button class="add-entry-btn" id="addEntryBtn" type="button">+ Add new entry</button>
+  </div>
 
   <section class="filters">
     <div class="filter-group" id="typeGroup" data-key="type">
@@ -314,6 +348,9 @@
   </div>
 </footer>
 
+<script src="auth.js"></script>
+<script src="github.js"></script>
+<script src="data-format.js"></script>
 <script>
 (function(){
   "use strict";
@@ -656,38 +693,30 @@
   }
 
   function render(){
-    var filtered = getSorted(getFiltered());
-    resultCount.textContent = filtered.length + " result" + (filtered.length === 1 ? "" : "s");
+    // Keep each filtered entry's REAL index into allEntries - this is what
+    // matters for saving, since "filtered" is a reordered/reduced subset and
+    // its own array position is meaningless for writing back to the file.
+    var filteredWithRealIdx = allEntries
+      .map(function(e, realIdx){ return { entry: e, realIdx: realIdx }; })
+      .filter(function(pair){
+        if(state.type && pair.entry.type !== state.type) return false;
+        if(state.cn && pair.entry.cn !== state.cn) return false;
+        if(state.org && pair.entry.org !== state.org) return false;
+        if(!matchesQuery(pair.entry, state.query)) return false;
+        return true;
+      });
 
-    if(filtered.length === 0){
+    var sortedPairs = sortPairsBySameRule(filteredWithRealIdx);
+
+    resultCount.textContent = sortedPairs.length + " result" + (sortedPairs.length === 1 ? "" : "s");
+
+    if(sortedPairs.length === 0){
       cardsContainer.innerHTML = '<div class="status-msg">No entries match your search or filters.</div>';
       return;
     }
 
-    var html = filtered.map(function(e, idx){
-      var metaParts = [];
-      if(e.cn) metaParts.push(escapeHtml(e.cn));
-      if(e.date) metaParts.push(escapeHtml(e.date));
-      if(e.org && e.org.toLowerCase() !== "blank") metaParts.push(escapeHtml(e.org));
-      var meta = metaParts.join(" &middot; ");
-
-      var hasUrl = e.url && e.url.toLowerCase() !== "blank";
-
-      return '' +
-      '<div class="card" data-idx="' + idx + '">' +
-        '<div class="card-top">' +
-          '<span class="card-type">' + escapeHtml(e.type) + '</span>' +
-          '<h3 class="card-heading">' + escapeHtml(e.heading) + '</h3>' +
-          '<p class="card-meta">' + meta + '</p>' +
-        '</div>' +
-        '<div class="card-actions">' +
-          '<button class="expand-btn" type="button">' +
-            '<span class="chevron">&#9660;</span><span class="label">Expand</span>' +
-          '</button>' +
-          '<div class="card-text">' + escapeHtml(e.text) + '</div>' +
-          (hasUrl ? '<div class="card-url">&#128279; <a href="' + escapeHtml(e.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(e.url) + '</a></div>' : '') +
-        '</div>' +
-      '</div>';
+    var html = sortedPairs.map(function(pair){
+      return '<div class="card" data-real-idx="' + pair.realIdx + '">' + cardShell(pair.entry, pair.realIdx) + '</div>';
     }).join("");
 
     cardsContainer.innerHTML = html;
@@ -699,11 +728,275 @@
         btn.querySelector(".label").textContent = expanded ? "Collapse" : "Expand";
       });
     });
+
+    // Wire up pencil / delete for each card, only meaningful once logged in.
+    cardsContainer.querySelectorAll(".card").forEach(function(card){
+      var realIdx = parseInt(card.dataset.realIdx, 10);
+      var entry = allEntries[realIdx];
+
+      var pencilBtn = card.querySelector(".pencil-btn");
+      var deleteBtn = card.querySelector(".delete-btn");
+
+      if(!Auth.isLoggedIn()){
+        pencilBtn.style.display = "none";
+        deleteBtn.style.display = "none";
+        return;
+      }
+
+      pencilBtn.onclick = function(){ enterEditMode(card, entry, realIdx); };
+      deleteBtn.onclick = function(){ deleteEntry(card, realIdx, entry); };
+    });
+  }
+
+  // Sorts an array of {entry, realIdx} pairs using the same comparison rules
+  // as getSorted(), but keeping realIdx attached to each entry.
+  function sortPairsBySameRule(pairs){
+    var sorted = pairs.slice();
+    switch(state.sort){
+      case "date-asc":
+        sorted.sort(function(a,b){ return parseDateVal(a.entry.date) - parseDateVal(b.entry.date); });
+        break;
+      case "heading-asc":
+        sorted.sort(function(a,b){ return a.entry.heading.localeCompare(b.entry.heading); });
+        break;
+      case "heading-desc":
+        sorted.sort(function(a,b){ return b.entry.heading.localeCompare(a.entry.heading); });
+        break;
+      case "date-desc":
+      default:
+        sorted.sort(function(a,b){ return parseDateVal(b.entry.date) - parseDateVal(a.entry.date); });
+    }
+    return sorted;
+  }
+
+  // ---- Editor: login bar ----
+  var loginBar = document.getElementById("loginBar");
+  var addEntryBar = document.getElementById("addEntryBar");
+  var addEntryBtn = document.getElementById("addEntryBtn");
+
+  function renderLoginBar(){
+    loginBar.innerHTML = "";
+    if(Auth.isLoggedIn()){
+      var span = document.createElement("span");
+      span.textContent = "Editing enabled";
+      var btn = document.createElement("button");
+      btn.className = "login-btn logout";
+      btn.type = "button";
+      btn.textContent = "Log out";
+      btn.addEventListener("click", Auth.logout);
+      loginBar.appendChild(span);
+      loginBar.appendChild(btn);
+      addEntryBar.style.display = "block";
+    } else {
+      var loginBtn = document.createElement("button");
+      loginBtn.className = "login-btn";
+      loginBtn.type = "button";
+      loginBtn.textContent = "Collaborator login";
+      loginBtn.addEventListener("click", Auth.login);
+      loginBar.appendChild(loginBtn);
+      addEntryBar.style.display = "none";
+    }
+  }
+
+  addEntryBtn.addEventListener("click", function(){
+    startAddNewEntry();
+  });
+
+  // ---- Editor: current category's file path (needed for save calls) ----
+  function currentFilePath(){
+    return CATEGORIES[currentCategoryIndex][1];
+  }
+
+  // ---- Editor: turn one card into its edit form ----
+  function enterEditMode(card, entry, realIdx){
+    card.classList.add("editing");
+    var form = card.querySelector(".edit-form");
+    form.innerHTML =
+      '<input class="edit-field" data-field="heading" value="' + escapeHtml(entry.heading) + '" placeholder="Heading">' +
+      '<input class="edit-field" data-field="type" value="' + escapeHtml(entry.type) + '" placeholder="Type">' +
+      '<input class="edit-field" data-field="cn" value="' + escapeHtml(entry.cn) + '" placeholder="Country">' +
+      '<input class="edit-field" data-field="date" value="' + escapeHtml(entry.date) + '" placeholder="Date">' +
+      '<input class="edit-field" data-field="org" value="' + escapeHtml(entry.org) + '" placeholder="Organization">' +
+      '<textarea class="edit-field" data-field="text" placeholder="Details">' + escapeHtml(entry.text) + '</textarea>' +
+      '<input class="edit-field" data-field="url" value="' + escapeHtml(entry.url) + '" placeholder="Source URL">';
+
+    var pencilBtn = card.querySelector(".pencil-btn");
+    pencilBtn.textContent = "\u2713"; // tick
+    pencilBtn.title = "Save";
+    pencilBtn.onclick = function(){ saveEdit(card, realIdx, form); };
+
+    var cancelBtn = card.querySelector(".cancel-btn");
+    cancelBtn.style.display = "inline-block";
+    cancelBtn.onclick = function(){ render(); };
+  }
+
+  function readFormFields(form){
+    var entry = {};
+    form.querySelectorAll("[data-field]").forEach(function(el){
+      entry[el.dataset.field] = el.value;
+    });
+    return entry;
+  }
+
+  function saveEdit(card, realIdx, form){
+    var edited = readFormFields(form);
+    var statusEl = card.querySelector(".save-status") || card.querySelector(".save-error");
+    showSaving(card);
+
+    GitHubEditor.getFile(currentFilePath())
+      .then(function(file){
+        var freshEntries = parseDataFormat(file.text); // re-parse the LATEST version from GitHub, not our possibly-stale in-memory copy
+        var newText = DataFormat.rebuildFile(freshEntries, realIdx, edited);
+        return GitHubEditor.updateFile(
+          currentFilePath(),
+          newText,
+          file.sha,
+          "Edit entry: " + (edited.heading || "untitled")
+        );
+      })
+      .then(function(){
+        allEntries[realIdx] = edited;
+        dataCache[currentFilePath()] = allEntries;
+        render();
+      })
+      .catch(function(err){
+        showSaveError(card, err.message);
+      });
+  }
+
+  function startAddNewEntry(){
+    var blank = { heading:"", type:"", cn:"", date:"", org:"", text:"", url:"" };
+    var card = document.createElement("div");
+    card.className = "card editing";
+    card.innerHTML = cardShell(blank, "new");
+    cardsContainer.insertBefore(card, cardsContainer.firstChild);
+
+    var form = card.querySelector(".edit-form");
+    enterEditModeFields(form, blank);
+
+    var pencilBtn = card.querySelector(".pencil-btn");
+    pencilBtn.textContent = "\u2713";
+    pencilBtn.title = "Save";
+    pencilBtn.onclick = function(){ saveNewEntry(card, form); };
+
+    var cancelBtn = card.querySelector(".cancel-btn");
+    cancelBtn.style.display = "inline-block";
+    cancelBtn.onclick = function(){ card.remove(); };
+  }
+
+  function enterEditModeFields(form, entry){
+    form.innerHTML =
+      '<input class="edit-field" data-field="heading" value="' + escapeHtml(entry.heading) + '" placeholder="Heading">' +
+      '<input class="edit-field" data-field="type" value="' + escapeHtml(entry.type) + '" placeholder="Type">' +
+      '<input class="edit-field" data-field="cn" value="' + escapeHtml(entry.cn) + '" placeholder="Country">' +
+      '<input class="edit-field" data-field="date" value="' + escapeHtml(entry.date) + '" placeholder="Date">' +
+      '<input class="edit-field" data-field="org" value="' + escapeHtml(entry.org) + '" placeholder="Organization">' +
+      '<textarea class="edit-field" data-field="text" placeholder="Details">' + escapeHtml(entry.text) + '</textarea>' +
+      '<input class="edit-field" data-field="url" value="' + escapeHtml(entry.url) + '" placeholder="Source URL">';
+  }
+
+  function saveNewEntry(card, form){
+    var newEntry = readFormFields(form);
+    showSaving(card);
+
+    GitHubEditor.getFile(currentFilePath())
+      .then(function(file){
+        var freshEntries = parseDataFormat(file.text);
+        var newText = DataFormat.rebuildFileWithNew(freshEntries, newEntry);
+        return GitHubEditor.updateFile(
+          currentFilePath(),
+          newText,
+          file.sha,
+          "Add entry: " + (newEntry.heading || "untitled")
+        );
+      })
+      .then(function(){
+        delete dataCache[currentFilePath()]; // force a clean refetch so indices stay correct
+        loadCategory(currentCategoryIndex);
+      })
+      .catch(function(err){
+        showSaveError(card, err.message);
+      });
+  }
+
+  function deleteEntry(card, realIdx, entry){
+    if(!confirm('Delete "' + entry.heading + '"? This cannot be undone from the site.')) return;
+    showSaving(card);
+
+    GitHubEditor.getFile(currentFilePath())
+      .then(function(file){
+        var freshEntries = parseDataFormat(file.text);
+        var newText = DataFormat.rebuildFileWithout(freshEntries, realIdx);
+        return GitHubEditor.updateFile(
+          currentFilePath(),
+          newText,
+          file.sha,
+          "Delete entry: " + (entry.heading || "untitled")
+        );
+      })
+      .then(function(){
+        delete dataCache[currentFilePath()];
+        loadCategory(currentCategoryIndex);
+      })
+      .catch(function(err){
+        showSaveError(card, err.message);
+      });
+  }
+
+  function showSaving(card){
+    clearCardMessages(card);
+    var el = document.createElement("div");
+    el.className = "save-status";
+    el.textContent = "Saving\u2026";
+    card.querySelector(".edit-form").appendChild(el);
+  }
+
+  function showSaveError(card, message){
+    clearCardMessages(card);
+    var el = document.createElement("div");
+    el.className = "save-error";
+    el.textContent = "Could not save: " + message;
+    card.querySelector(".edit-form").appendChild(el);
+  }
+
+  function clearCardMessages(card){
+    card.querySelectorAll(".save-status, .save-error").forEach(function(el){ el.remove(); });
+  }
+
+  function cardShell(e, realIdx){
+    var metaParts = [];
+    if(e.cn) metaParts.push(escapeHtml(e.cn));
+    if(e.date) metaParts.push(escapeHtml(e.date));
+    if(e.org && e.org.toLowerCase() !== "blank") metaParts.push(escapeHtml(e.org));
+    var meta = metaParts.join(" &middot; ");
+    var hasUrl = e.url && e.url.toLowerCase() !== "blank";
+
+    return (
+      '<div class="card-edit-controls">' +
+        '<button class="pencil-btn" type="button" title="Edit">\u270F\uFE0F</button>' +
+        '<button class="cancel-btn" type="button" title="Cancel" style="display:none;">\u2715</button>' +
+        '<button class="delete-btn" type="button" title="Delete">\uD83D\uDDD1\uFE0F</button>' +
+      '</div>' +
+      '<div class="card-top">' +
+        '<span class="card-type">' + escapeHtml(e.type) + '</span>' +
+        '<h3 class="card-heading">' + escapeHtml(e.heading) + '</h3>' +
+        '<p class="card-meta">' + meta + '</p>' +
+      '</div>' +
+      '<div class="card-actions">' +
+        '<button class="expand-btn" type="button">' +
+          '<span class="chevron">&#9660;</span><span class="label">Expand</span>' +
+        '</button>' +
+        '<div class="card-text">' + escapeHtml(e.text) + '</div>' +
+        (hasUrl ? '<div class="card-url">&#128279; <a href="' + escapeHtml(e.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(e.url) + '</a></div>' : '') +
+      '</div>' +
+      '<div class="edit-form"></div>'
+    );
   }
 
   // ---- Init ----
   renderCategoryTabs();
   loadCategory(currentCategoryIndex);
+  renderLoginBar();
 })();
 </script>
 </body>
