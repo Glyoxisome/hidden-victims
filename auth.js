@@ -15,7 +15,7 @@ var Auth = (function () {
   "use strict";
 
   // CHANGE THIS to your deployed Worker's URL.
-  var WORKER_URL = "https://auth-worker.YOUR-SUBDOMAIN.workers.dev";
+  var WORKER_URL = "https://auth-worker.evidence.workers.dev";
 
   var STORAGE_KEY = "gh_token";
 

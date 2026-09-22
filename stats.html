@@ -350,10 +350,44 @@
 
 <script src="auth.js"></script>
 <script src="github.js"></script>
-<script src="data-format.js"></script>
 <script>
 (function(){
   "use strict";
+
+  // ---- Data format: this page's own serializer ----
+  // Mirrors parseDataFormat() below, but in reverse - turns an entry object
+  // back into a "---"-terminated "H:/T:/C:/D:/O:/B:/U:" text block. Kept
+  // inline here (not a shared file) since each page's field set differs.
+  function serializeEntry(entry){
+    var lines = [];
+    if(entry.heading) lines.push("H:" + entry.heading);
+    if(entry.type)    lines.push("T:" + entry.type);
+    if(entry.cn)      lines.push("C:" + entry.cn);
+    if(entry.date)    lines.push("D:" + entry.date);
+    if(entry.org)     lines.push("O:" + entry.org);
+    if(entry.text)    lines.push("B:" + entry.text);
+    if(entry.url)     lines.push("U:" + entry.url);
+    lines.push("---");
+    return lines.join("\n");
+  }
+
+  function rebuildFile(allEntriesList, index, editedEntry){
+    var updated = allEntriesList.slice();
+    updated[index] = editedEntry;
+    return updated.map(serializeEntry).join("\n\n") + "\n";
+  }
+
+  function rebuildFileWithout(allEntriesList, index){
+    var updated = allEntriesList.slice();
+    updated.splice(index, 1);
+    return updated.map(serializeEntry).join("\n\n") + "\n";
+  }
+
+  function rebuildFileWithNew(allEntriesList, newEntry){
+    var updated = allEntriesList.slice();
+    updated.push(newEntry);
+    return updated.map(serializeEntry).join("\n\n") + "\n";
+  }
 
   // ---- Config: hardcoded categories ----
   // Add / edit entries here as needed. Format: ["Display Name", "path/to/file.data"]
@@ -846,7 +880,7 @@
     GitHubEditor.getFile(currentFilePath())
       .then(function(file){
         var freshEntries = parseDataFormat(file.text); // re-parse the LATEST version from GitHub, not our possibly-stale in-memory copy
-        var newText = DataFormat.rebuildFile(freshEntries, realIdx, edited);
+        var newText = rebuildFile(freshEntries, realIdx, edited);
         return GitHubEditor.updateFile(
           currentFilePath(),
           newText,
@@ -902,7 +936,7 @@
     GitHubEditor.getFile(currentFilePath())
       .then(function(file){
         var freshEntries = parseDataFormat(file.text);
-        var newText = DataFormat.rebuildFileWithNew(freshEntries, newEntry);
+        var newText = rebuildFileWithNew(freshEntries, newEntry);
         return GitHubEditor.updateFile(
           currentFilePath(),
           newText,
@@ -926,7 +960,7 @@
     GitHubEditor.getFile(currentFilePath())
       .then(function(file){
         var freshEntries = parseDataFormat(file.text);
-        var newText = DataFormat.rebuildFileWithout(freshEntries, realIdx);
+        var newText = rebuildFileWithout(freshEntries, realIdx);
         return GitHubEditor.updateFile(
           currentFilePath(),
           newText,

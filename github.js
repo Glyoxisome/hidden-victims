@@ -14,8 +14,8 @@ var GitHubEditor = (function () {
   "use strict";
 
   // CHANGE THESE to your actual repo.
-  var OWNER = "YOUR-GITHUB-USERNAME";
-  var REPO = "YOUR-REPO-NAME";
+  var OWNER = "Glyoxisome";
+  var REPO = "hidden-victims";
   var BRANCH = "main";
 
   function apiHeaders() {
