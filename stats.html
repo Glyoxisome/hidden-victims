@@ -563,7 +563,10 @@
     cardsContainer.innerHTML = "";
     cardsContainer.appendChild(statusMsg);
 
-    fetch(path)
+    // Cache-bust: append a changing query param so the BROWSER's own HTTP
+    // cache never serves a stale copy of this file, separate from our own
+    // in-memory dataCache above (which we already know to clear/skip when needed).
+    fetch(path + "?_=" + Date.now(), { cache: "no-store" })
       .then(function(res){
         if(!res.ok) throw new Error("HTTP " + res.status);
         return res.text();

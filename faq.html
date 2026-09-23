@@ -273,7 +273,7 @@
     return cats;
   }
 
-  fetch(DATA_PATH)
+  fetch(DATA_PATH + '?_=' + Date.now(), { cache: 'no-store' })
     .then(function(res){
       if(!res.ok) throw new Error('Failed to load ' + DATA_PATH + ' (' + res.status + ')');
       return res.text();

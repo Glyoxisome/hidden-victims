@@ -1019,7 +1019,7 @@
   function loadExperts() {
     showProgress('Fetching expert entries\u2026');
 
-    fetch(DATA_PATH, { cache: 'no-cache' })
+    fetch(DATA_PATH + '?_=' + Date.now(), { cache: 'no-store' })
       .then(function (response) {
         if (!response.ok) {
           throw new Error('HTTP ' + response.status);

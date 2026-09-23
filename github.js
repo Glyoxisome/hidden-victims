@@ -39,7 +39,7 @@ var GitHubEditor = (function () {
       "?ref=" +
       BRANCH;
 
-    return fetch(url, { headers: apiHeaders() })
+    return fetch(url, { headers: apiHeaders(), cache: "no-store" })
       .then(function (res) {
         if (!res.ok) throw new Error("Could not load " + path + " (HTTP " + res.status + ")");
         return res.json();
