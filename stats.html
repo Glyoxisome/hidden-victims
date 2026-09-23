@@ -218,6 +218,17 @@
   .save-error{color:#b3261e;font-size:13px;margin-top:8px;}
   .save-status{color:var(--on-surface-variant);font-size:13px;margin-top:8px;}
 
+  /* ---- Save toast: floats above the card being edited ---- */
+  .save-toast{
+    position:absolute; z-index:100; transform:translate(-50%,-100%);
+    margin-top:-10px; padding:8px 14px; border-radius:6px; font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.18); pointer-events:none;
+    background:var(--surface-container-lowest,#fff); color:var(--on-surface-variant,#494551);
+    border:1px solid var(--outline-variant,#cbc4d2); white-space:nowrap;
+  }
+  .save-toast.error{ background:#fdecea; color:#b3261e; border-color:#f2b8b5; pointer-events:auto; white-space:normal; max-width:280px; }
+  .save-toast .toast-dismiss{ margin-left:10px; cursor:pointer; font-weight:700; }
+
   footer{background:#322f35;color:#e6e0e9;padding:48px 32px;}
   footer .container{max-width:1200px;margin:0 auto;}
   footer h2{font-size:20px;color:#cfbcff;margin-bottom:12px;}
@@ -877,11 +888,11 @@
 
   function saveEdit(card, realIdx, form){
     var edited = readFormFields(form);
-    var statusEl = card.querySelector(".save-status") || card.querySelector(".save-error");
-    showSaving(card);
+    var toast = showToast(card, "Checking for conflicts\u2026");
 
     GitHubEditor.getFile(currentFilePath())
       .then(function(file){
+        updateToast(toast, "Saving to GitHub\u2026");
         var freshEntries = parseDataFormat(file.text); // re-parse the LATEST version from GitHub, not our possibly-stale in-memory copy
         var newText = rebuildFile(freshEntries, realIdx, edited);
         return GitHubEditor.updateFile(
@@ -894,10 +905,11 @@
       .then(function(){
         allEntries[realIdx] = edited;
         dataCache[currentFilePath()] = allEntries;
-        render();
+        toast.textContent = "Saved";
+        setTimeout(function(){ render(); }, 700);
       })
       .catch(function(err){
-        showSaveError(card, err.message);
+        toastError(card, err.message);
       });
   }
 
@@ -934,10 +946,11 @@
 
   function saveNewEntry(card, form){
     var newEntry = readFormFields(form);
-    showSaving(card);
+    var toast = showToast(card, "Checking for conflicts\u2026");
 
     GitHubEditor.getFile(currentFilePath())
       .then(function(file){
+        updateToast(toast, "Saving to GitHub\u2026");
         var freshEntries = parseDataFormat(file.text);
         var newText = rebuildFileWithNew(freshEntries, newEntry);
         return GitHubEditor.updateFile(
@@ -948,20 +961,22 @@
         );
       })
       .then(function(){
+        toast.textContent = "Saved";
         delete dataCache[currentFilePath()]; // force a clean refetch so indices stay correct
-        loadCategory(currentCategoryIndex);
+        setTimeout(function(){ loadCategory(currentCategoryIndex); }, 700);
       })
       .catch(function(err){
-        showSaveError(card, err.message);
+        toastError(card, err.message);
       });
   }
 
   function deleteEntry(card, realIdx, entry){
     if(!confirm('Delete "' + entry.heading + '"? This cannot be undone from the site.')) return;
-    showSaving(card);
+    var toast = showToast(card, "Checking for conflicts\u2026");
 
     GitHubEditor.getFile(currentFilePath())
       .then(function(file){
+        updateToast(toast, "Saving to GitHub\u2026");
         var freshEntries = parseDataFormat(file.text);
         var newText = rebuildFileWithout(freshEntries, realIdx);
         return GitHubEditor.updateFile(
@@ -972,32 +987,52 @@
         );
       })
       .then(function(){
+        toast.textContent = "Deleted";
         delete dataCache[currentFilePath()];
-        loadCategory(currentCategoryIndex);
+        setTimeout(function(){ loadCategory(currentCategoryIndex); }, 700);
       })
       .catch(function(err){
-        showSaveError(card, err.message);
+        toastError(card, err.message);
       });
   }
 
-  function showSaving(card){
-    clearCardMessages(card);
-    var el = document.createElement("div");
-    el.className = "save-status";
-    el.textContent = "Saving\u2026";
-    card.querySelector(".edit-form").appendChild(el);
+  // ---- Save toast: floats near the card, shows the real step happening ----
+  function showToast(anchorEl, message, isError){
+    hideToast(anchorEl);
+    var container = anchorEl.closest(".card") || anchorEl;
+    container.style.position = container.style.position || "relative";
+
+    var toast = document.createElement("div");
+    toast.className = "save-toast" + (isError ? " error" : "");
+    toast.style.left = "50%";
+    toast.style.top = "0";
+    toast.textContent = message;
+
+    if(isError){
+      var x = document.createElement("span");
+      x.className = "toast-dismiss";
+      x.textContent = "\u2715";
+      x.onclick = function(){ toast.remove(); };
+      toast.appendChild(x);
+    }
+
+    container.appendChild(toast);
+    return toast;
   }
 
-  function showSaveError(card, message){
-    clearCardMessages(card);
-    var el = document.createElement("div");
-    el.className = "save-error";
-    el.textContent = "Could not save: " + message;
-    card.querySelector(".edit-form").appendChild(el);
+  function updateToast(toast, message){
+    if(!toast || !toast.isConnected) return;
+    toast.textContent = message;
   }
 
-  function clearCardMessages(card){
-    card.querySelectorAll(".save-status, .save-error").forEach(function(el){ el.remove(); });
+  function hideToast(anchorEl){
+    var container = anchorEl.closest(".card") || anchorEl;
+    container.querySelectorAll(".save-toast").forEach(function(t){ t.remove(); });
+  }
+
+  function toastError(anchorEl, message){
+    hideToast(anchorEl);
+    showToast(anchorEl, "Could not save: " + message, true);
   }
 
   function cardShell(e, realIdx){

@@ -160,6 +160,17 @@
   .edit-form{padding:0 24px 16px;}
   .save-error{color:#ba1a1a;font-size:13px;margin-top:4px;}
   .save-status{color:var(--on-surface-variant);font-size:13px;margin-top:4px;}
+
+  /* ---- Save toast: floats above whichever element triggered the save ---- */
+  .save-toast{
+    position:absolute; z-index:100; transform:translate(-50%,-100%);
+    margin-top:-10px; padding:8px 14px; border-radius:6px; font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.18); pointer-events:none;
+    background:var(--surface-container-lowest,#fff); color:var(--on-surface-variant,#494551);
+    border:1px solid var(--outline-variant,#cbc4d2); white-space:nowrap;
+  }
+  .save-toast.error{ background:#fdecea; color:#ba1a1a; border-color:#f2b8b5; pointer-events:auto; white-space:normal; max-width:280px; }
+  .save-toast .toast-dismiss{ margin-left:10px; cursor:pointer; font-weight:700; }
   .cat-name-edit{display:flex;align-items:center;gap:8px;flex:1;}
   .cat-name-edit input{font-size:22px;font-family:Georgia,serif;padding:4px 8px;border:1px solid var(--outline-variant);border-radius:4px;flex:1;}
 </style>
@@ -420,41 +431,61 @@
     });
   }
 
-  function showSaving(el){
-    clearMessages(el);
-    var msg = document.createElement('div');
-    msg.className = 'save-status';
-    msg.textContent = 'Saving\u2026';
-    el.appendChild(msg);
+  // ---- Save toast: floats above whichever element triggered the save ----
+  function showToast(anchorEl, message, isError){
+    hideToast(anchorEl);
+    anchorEl.style.position = anchorEl.style.position || 'relative';
+
+    var toast = document.createElement('div');
+    toast.className = 'save-toast' + (isError ? ' error' : '');
+    toast.style.left = '50%';
+    toast.style.top = '0';
+    toast.textContent = message;
+
+    if(isError){
+      var x = document.createElement('span');
+      x.className = 'toast-dismiss';
+      x.textContent = '\u2715';
+      x.onclick = function(){ toast.remove(); };
+      toast.appendChild(x);
+    }
+
+    anchorEl.appendChild(toast);
+    return toast;
   }
 
-  function showSaveError(el, message){
-    clearMessages(el);
-    var msg = document.createElement('div');
-    msg.className = 'save-error';
-    msg.textContent = 'Could not save: ' + message;
-    el.appendChild(msg);
+  function updateToast(toast, message){
+    if(!toast || !toast.isConnected) return;
+    toast.textContent = message;
   }
 
-  function clearMessages(el){
-    el.querySelectorAll('.save-status, .save-error').forEach(function(m){ m.remove(); });
+  function hideToast(anchorEl){
+    anchorEl.querySelectorAll('.save-toast').forEach(function(t){ t.remove(); });
   }
 
   // Every save re-fetches the LATEST qa.xml, re-applies the one change, and
   // commits - this avoids clobbering another collaborator's more recent edit.
   function saveCategories(newCats, commitMessage, targetEl, onDone){
-    showSaving(targetEl);
+    var toast = showToast(targetEl, 'Checking for conflicts\u2026');
     GitHubEditor.getFile(DATA_PATH)
       .then(function(file){
+        updateToast(toast, 'Saving to GitHub\u2026');
         var newXml = serializeCategories(newCats);
         return GitHubEditor.updateFile(DATA_PATH, newXml, file.sha, commitMessage);
       })
       .then(function(){
         categories = newCats;
-        render();
-        if(onDone) onDone();
+        // Show "Saved" before re-rendering replaces targetEl, so it's actually visible.
+        toast.textContent = 'Saved';
+        setTimeout(function(){
+          render();
+          if(onDone) onDone();
+        }, 700);
       })
-      .catch(function(err){ showSaveError(targetEl, err.message); });
+      .catch(function(err){
+        hideToast(targetEl);
+        showToast(targetEl, 'Could not save: ' + err.message, true);
+      });
   }
 
   // ---- Category rename ----

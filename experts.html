@@ -551,6 +551,17 @@
   article.entry.editing .edit-form{display:block;}
   .save-error{color:var(--error);font-size:13px;margin-top:8px;}
   .save-status{color:var(--on-surface-variant);font-size:13px;margin-top:8px;}
+
+  /* ---- Save toast: floats above the entry being edited ---- */
+  .save-toast{
+    position:absolute; z-index:100; transform:translate(-50%,-100%);
+    margin-top:-10px; padding:8px 14px; border-radius:4px; font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.18); pointer-events:none;
+    background:#fff; color:var(--on-surface-variant,#494551);
+    border:1px solid var(--outline-variant,#cbc4d2); white-space:nowrap;
+  }
+  .save-toast.error{ background:#fdecea; color:#b3261e; border-color:#f2b8b5; pointer-events:auto; white-space:normal; max-width:280px; }
+  .save-toast .toast-dismiss{ margin-left:10px; cursor:pointer; font-weight:700; }
 </style>
 </head>
 <body>
@@ -902,55 +913,80 @@
     cancelBtn.onclick = function(){ renderEntries(); };
   }
 
-  function showSaving(article){
-    clearMessages(article);
-    var el = document.createElement('div');
-    el.className = 'save-status';
-    el.textContent = 'Saving\u2026';
-    article.querySelector('.edit-form').appendChild(el);
+  // ---- Save toast: floats near the entry, shows the real step happening ----
+  function showToast(anchorEl, message, isError){
+    hideToast(anchorEl);
+    var container = anchorEl.closest('article.entry') || anchorEl;
+    container.style.position = container.style.position || 'relative';
+
+    var toast = document.createElement('div');
+    toast.className = 'save-toast' + (isError ? ' error' : '');
+    toast.style.left = '50%';
+    toast.style.top = '0';
+    toast.textContent = message;
+
+    if(isError){
+      var x = document.createElement('span');
+      x.className = 'toast-dismiss';
+      x.textContent = '\u2715';
+      x.onclick = function(){ toast.remove(); };
+      toast.appendChild(x);
+    }
+
+    container.appendChild(toast);
+    return toast;
   }
 
-  function showSaveError(article, message){
-    clearMessages(article);
-    var el = document.createElement('div');
-    el.className = 'save-error';
-    el.textContent = 'Could not save: ' + message;
-    article.querySelector('.edit-form').appendChild(el);
+  function updateToast(toast, message){
+    if(!toast || !toast.isConnected) return;
+    toast.textContent = message;
   }
 
-  function clearMessages(article){
-    article.querySelectorAll('.save-status, .save-error').forEach(function(el){ el.remove(); });
+  function hideToast(anchorEl){
+    var container = anchorEl.closest('article.entry') || anchorEl;
+    container.querySelectorAll('.save-toast').forEach(function(t){ t.remove(); });
+  }
+
+  function toastError(anchorEl, message){
+    hideToast(anchorEl);
+    showToast(anchorEl, 'Could not save: ' + message, true);
   }
 
   function saveEdit(article, realIdx, form){
     var edited = readFormFields(form);
-    showSaving(article);
+    var toast = showToast(article, 'Checking for conflicts\u2026');
 
     GitHubEditor.getFile(DATA_PATH)
       .then(function(file){
+        updateToast(toast, 'Saving to GitHub\u2026');
         var freshEntries = parseDataFormat(file.text);
         var newText = rebuildFile(freshEntries, realIdx, edited);
         return GitHubEditor.updateFile(DATA_PATH, newText, file.sha, 'Edit expert entry: ' + (edited.head || 'untitled'));
       })
       .then(function(){
         allEntries[realIdx] = edited;
-        renderEntries();
+        toast.textContent = 'Saved';
+        setTimeout(function(){ renderEntries(); }, 700);
       })
-      .catch(function(err){ showSaveError(article, err.message); });
+      .catch(function(err){ toastError(article, err.message); });
   }
 
   function deleteEntry(article, realIdx, entry){
     if(!confirm('Delete "' + entry.head + '"? This cannot be undone from the site.')) return;
-    showSaving(article);
+    var toast = showToast(article, 'Checking for conflicts\u2026');
 
     GitHubEditor.getFile(DATA_PATH)
       .then(function(file){
+        updateToast(toast, 'Saving to GitHub\u2026');
         var freshEntries = parseDataFormat(file.text);
         var newText = rebuildFileWithout(freshEntries, realIdx);
         return GitHubEditor.updateFile(DATA_PATH, newText, file.sha, 'Delete expert entry: ' + (entry.head || 'untitled'));
       })
-      .then(function(){ loadExperts(); })
-      .catch(function(err){ showSaveError(article, err.message); });
+      .then(function(){
+        toast.textContent = 'Deleted';
+        setTimeout(function(){ loadExperts(); }, 700);
+      })
+      .catch(function(err){ toastError(article, err.message); });
   }
 
   function startAddNewEntry(){
@@ -979,16 +1015,20 @@
 
   function saveNewEntry(article, form){
     var newEntry = readFormFields(form);
-    showSaving(article);
+    var toast = showToast(article, 'Checking for conflicts\u2026');
 
     GitHubEditor.getFile(DATA_PATH)
       .then(function(file){
+        updateToast(toast, 'Saving to GitHub\u2026');
         var freshEntries = parseDataFormat(file.text);
         var newText = rebuildFileWithNew(freshEntries, newEntry);
         return GitHubEditor.updateFile(DATA_PATH, newText, file.sha, 'Add expert entry: ' + (newEntry.head || 'untitled'));
       })
-      .then(function(){ loadExperts(); })
-      .catch(function(err){ showSaveError(article, err.message); });
+      .then(function(){
+        toast.textContent = 'Saved';
+        setTimeout(function(){ loadExperts(); }, 700);
+      })
+      .catch(function(err){ toastError(article, err.message); });
   }
 
   function showProgress(label) {
