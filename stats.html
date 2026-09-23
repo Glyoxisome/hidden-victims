@@ -409,10 +409,6 @@
     ["Job", "stats/jobstats.data"]
   ];
 
-  // In-memory cache: path -> parsed entries array. Persists only for this page load;
-  // resets on refresh, reused when switching back to an already-loaded category.
-  var dataCache = {};
-
   var allEntries = [];              // entries for the currently loaded category
   var currentCategoryIndex = 0;     // index into CATEGORIES currently displayed
   var state = { type: "", cn: "", org: "", query: "", sort: "date-desc" };
@@ -563,20 +559,14 @@
     updateFilterButtonLabel("cn","countryBtn","Country","");
     updateFilterButtonLabel("org","orgBtn","Organization","");
 
-    if(dataCache[path]){
-      allEntries = dataCache[path];
-      buildFilterOptions();
-      render();
-      return;
-    }
-
+    // Always fetch fresh from the network - no in-memory cache shortcut.
+    // Every load (page refresh or switching tabs) hits GitHub directly, so
+    // collaborator edits are always visible immediately, at the cost of a
+    // small amount of extra latency per load.
     statusMsg.textContent = "Loading statistics…";
     cardsContainer.innerHTML = "";
     cardsContainer.appendChild(statusMsg);
 
-    // Cache-bust: append a changing query param so the BROWSER's own HTTP
-    // cache never serves a stale copy of this file, separate from our own
-    // in-memory dataCache above (which we already know to clear/skip when needed).
     fetch(path + "?_=" + Date.now(), { cache: "no-store" })
       .then(function(res){
         if(!res.ok) throw new Error("HTTP " + res.status);
@@ -584,7 +574,6 @@
       })
       .then(function(raw){
         var entries = parseDataFormat(raw);
-        dataCache[path] = entries;
         allEntries = entries;
         if(allEntries.length === 0){
           statusMsg.textContent = "No entries found in " + path + ".";
@@ -904,7 +893,6 @@
       })
       .then(function(){
         allEntries[realIdx] = edited;
-        dataCache[currentFilePath()] = allEntries;
         toast.textContent = "Saved";
         setTimeout(function(){ render(); }, 700);
       })
@@ -962,7 +950,6 @@
       })
       .then(function(){
         toast.textContent = "Saved";
-        delete dataCache[currentFilePath()]; // force a clean refetch so indices stay correct
         setTimeout(function(){ loadCategory(currentCategoryIndex); }, 700);
       })
       .catch(function(err){
@@ -988,7 +975,6 @@
       })
       .then(function(){
         toast.textContent = "Deleted";
-        delete dataCache[currentFilePath()];
         setTimeout(function(){ loadCategory(currentCategoryIndex); }, 700);
       })
       .catch(function(err){
