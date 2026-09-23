@@ -403,11 +403,11 @@
   // ---- Config: hardcoded categories ----
   // Add / edit entries here as needed. Format: ["Display Name", "path/to/file.data"]
   var CATEGORIES = [
-  ["Violence", "https://raw.githubusercontent.com/Glyoxisome/hidden-victims/main/stats/dvstats.data"],
-  ["Education", "https://raw.githubusercontent.com/Glyoxisome/hidden-victims/main/stats/edustats.data"],
-  ["Health", "https://raw.githubusercontent.com/Glyoxisome/hidden-victims/main/stats/hlstats.data"],
-  ["Job", "https://raw.githubusercontent.com/Glyoxisome/hidden-victims/main/stats/jobstats.data"]
-];
+    ["Violence", "https://raw.githubusercontent.com/Glyoxisome/hidden-victims/main/stats/dvstats.data", "stats/dvstats.data"],
+    ["Education", "https://raw.githubusercontent.com/Glyoxisome/hidden-victims/main/stats/edustats.data", "stats/edustats.data"],
+    ["Health", "https://raw.githubusercontent.com/Glyoxisome/hidden-victims/main/stats/hlstats.data", "stats/hlstats.data"],
+    ["Job", "https://raw.githubusercontent.com/Glyoxisome/hidden-victims/main/stats/jobstats.data", "stats/jobstats.data"]
+  ];
 
   var allEntries = [];              // entries for the currently loaded category
   var currentCategoryIndex = 0;     // index into CATEGORIES currently displayed
@@ -840,8 +840,12 @@
   });
 
   // ---- Editor: current category's file path (needed for save calls) ----
-  function currentFilePath(){
+  function currentFileUrl(){
     return CATEGORIES[currentCategoryIndex][1];
+  }
+
+  function currentFilePath(){
+    return CATEGORIES[currentCategoryIndex][2];
   }
 
   // ---- Editor: turn one card into its edit form ----
